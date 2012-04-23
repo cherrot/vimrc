@@ -61,3 +61,6 @@ let VIMPRESS = [{'username':'cherrot',
                 \}]
 map <leader>P :BlogPreview<CR>
 " }}}
+
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect()
