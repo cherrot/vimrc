@@ -13,7 +13,7 @@ filetype on
 "背景使用黑色 
 "set background=dark 
 
-"语法高亮度显示 
+"语法高亮显示 
 syntax on 
 
 "第一行，vim使用自动对齐，也就是把当前行的对起格式应用到下一行； 
@@ -45,7 +45,7 @@ set ruler
 "个b开头的单词，当输入到/bo时，会自动找到第一个bo开头的单词，依 
 "次类推，进行查找时，使用此设置会快速找到答案，当你找要匹配的单词 
 "时，别忘记回车 
-set incsearch 
+"set incsearch 
 
 "修改一个文件后，自动进行备份，备份的文件名为原文件名加“~“后缀 
 "if has(“vms”) 
@@ -54,13 +54,12 @@ set incsearch
 "	set backup 
 "endif 
 
-" VimRepress {{{
+"vim-pathogen plugin 该插件可以将每个github的vim plugin工程单独放到bundle目录下
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect()
+
 " see https://github.com/vim-scripts/VimRepress
 let VIMPRESS = [{'username':'cherrot',
                 \'blog_url':'http://www.cherrot.com/'
                 \}]
 map <leader>P :BlogPreview<CR>
-" }}}
-
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
