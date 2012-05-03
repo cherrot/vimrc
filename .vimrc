@@ -84,27 +84,13 @@ let VIMPRESS = [{'username':'cherrot',
                 \}]
 map <leader>P :BlogPreview<CR>
 
+
 "代码折叠
 :set fdm=syntax
 
 
-"自动更改到当前文件所在的目录
+"自动cd到当前文件所在的目录
 autocmd BufEnter * lcd %:p:h 
-
-"cscope 函数定义  用cscope生成数据库，并添加到vim中
-function Do_CsTag()
-    if(executable('cscope') && has("cscope") )
-"        if(g:iswindows!=1)
-            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
-"        else
-"            silent! execute "!dir /b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
-"        endif
-        silent! execute "!cscope -b"
-        if filereadable("cscope.out")
-            execute "cs add cscope.out"
-        endif
-    endif
-endf
 
 "映射cscope命令： cs find c|d|e|f|g|i|s|t name
 nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR> "0或s:查找本C符号(可以跳过注释)
@@ -181,6 +167,32 @@ nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>:copen<CR>
 nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:copen<CR>
 nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>:copen<CR>
 
+"添加ctags自动搜索路径，以支持STL
+set tags+=/home/cherrot/.vim/stl_ctags
+
+"此方法见http://xwz.me/blog/2010/11/29/01-23/
+"if(executable('ctags'))
+"    silent! execute "!g++ -E % -o tmpcpp -I./include"
+"    silent! execute "!ctags -R --c++-kinds=+p --fields=+ialS --extra=+q --language-force=C++ ."
+"    silent! execute "!unlink tmpcpp"
+"endif
+
+"cscope 函数定义  用cscope生成数据库，并添加到vim中
+"function Do_CsTag()
+"    if(executable('cscope') && has("cscope") )
+"        if(g:iswindows!=1)
+"            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
+"        else
+"            silent! execute "!dir /b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
+"        endif
+"        silent! execute "!cscope -b"
+"        if filereadable("cscope.out")
+"            execute "cs add cscope.out"
+"        endif
+"    endif
+"endf
+
+"ctags 函数定义
 function Do_CsTag()
     let dir = getcwd()
     if filereadable("tags")
@@ -258,6 +270,7 @@ function AddTitle()
     ==================================*/")
     echohl WarningMsg | echo "Successful in adding the copyright." | echohl None
 endf
+
 "更新最近修改时间和文件名
 function UpdateTitle()
     normal m'
@@ -269,6 +282,7 @@ function UpdateTitle()
     normal 'k
     echohl WarningMsg | echo "Successful in updating the copy right." | echohl None
 endfunction
+
 "判断前10行代码里面，是否有Last modified这个单词，
 "如果没有的话，代表没有添加过作者信息，需要新添加；
 "如果有的话，那么只需要更新即可
