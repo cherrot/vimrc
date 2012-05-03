@@ -169,7 +169,25 @@ let Tlist_Exit_OnlyWindow=1 "当taglist是最后一个分割窗口时，自动�
 let Tlist_Process_File_Always=0 "是否一直处理tags.1:处理;0:不处理。不是一直实时更新tags，因为没有必要
 let Tlist_Inc_Winwidth=0
 
+"OmniCppComplete Plugin
+set nocp
+filetype plugin on
 
+"对NERD_commenter的设置,在光标所在行上，按ctrl+h变换注释,cm是多行注释,cu是取消注释
+let NERDShutUp=1
+
+"DoxygenToolkit插件配置
+map fg : Dox<cr>
+let g:DoxygenToolkit_authorName="Cherrot Luo"
+let g:DoxygenToolkit_licenseTag="GPLv3\<enter>"
+let g:DoxygenToolkit_undocTag="DOXIGEN_SKIP_BLOCK"
+let g:DoxygenToolkit_briefTag_pre = "@brief\t"
+let g:DoxygenToolkit_paramTag_pre = "@param\t"
+let g:DoxygenToolkit_returnTag = "@return\t"
+let g:DoxygenToolkit_briefTag_funcName = "no"
+let g:DoxygenToolkit_maxFunctionProtoLines = 30
+
+"a.vim插件 :A，打开.cpp和.h对应的文件，:AV，分屏显示.cpp和.h对应的文件
 
 "neocomplcache 代码补全插件
 let g:acp_enableAtStartup = 0
