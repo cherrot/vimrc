@@ -91,6 +91,39 @@ map <leader>P :BlogPreview<CR>
 "自动更改到当前文件所在的目录
 autocmd BufEnter * lcd %:p:h 
 
+"cscope 函数定义  用cscope生成数据库，并添加到vim中
+function Do_CsTag()
+    if(executable('cscope') && has("cscope") )
+"        if(g:iswindows!=1)
+            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
+"        else
+"            silent! execute "!dir /b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
+"        endif
+        silent! execute "!cscope -b"
+        if filereadable("cscope.out")
+            execute "cs add cscope.out"
+        endif
+    endif
+endf
+
+"映射cscope命令： cs find c|d|e|f|g|i|s|t name
+nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR> "0或s:查找本C符号(可以跳过注释)
+nmap <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR> "1或g:查找本定义
+nmap <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>:copen<CR> "3或c:查找调用本函数的函数
+nmap <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR>:copen<CR> "4或t:查找本字符串
+nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>:copen<CR> "6或e: 查找本 egrep 模式
+nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>:copen<CR> "7或f: 查找本文件
+nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:copen<CR> "8或i:查找包含本文件的文件
+nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>:copen<CR> "2或d:查找本函数调用的函数
+
+"同时搜索ctags和cscope的标签，并且cscope优先
+if has("cscope")
+    set cscopequickfix=s-,c-,d-,i-,t-,e-
+    set csto=0
+    set cst
+    set csverb
+endif
+
 
 "taglist插件，进行Tlist的设置
 "TlistUpdate可以更新tags
@@ -103,12 +136,15 @@ let Tlist_Exit_OnlyWindow=1 "当taglist是最后一个分割窗口时，自动�
 let Tlist_Process_File_Always=0 "是否一直处理tags.1:处理;0:不处理。不是一直实时更新tags，因为没有必要
 let Tlist_Inc_Winwidth=0
 
-"OmniCppComplete Plugin
-set nocp
-filetype plugin on
+
+"OmniCppComplete Plugin 目前用neocomplcache
+"set nocp
+"filetype plugin on
+
 
 "对NERD_commenter的设置,在光标所在行上，按ctrl+h变换注释,cm是多行注释,cu是取消注释
 let NERDShutUp=1
+
 
 "DoxygenToolkit插件配置
 map fg : Dox<cr>
@@ -129,7 +165,6 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_enable_camel_case_completion = 1
-
 let g:neocomplcache_auto_completion_start_length = 2
 let g:neocomplcache_min_keyword_length = 1
 let g:neocomplcache_min_syntax_length = 1
@@ -145,6 +180,7 @@ nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>:copen<CR>
 nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>:copen<CR>
 nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:copen<CR>
 nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+
 function Do_CsTag()
     let dir = getcwd()
     if filereadable("tags")
