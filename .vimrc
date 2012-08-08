@@ -273,8 +273,7 @@ endfunction
 "添加或更新头
 map <F4> :call TitleDet()<cr>'s
 function AddTitle()
-    call append(0,"/*============================================
-    =================================")
+    call append(0,"/*=============================================================================")
     call append(1,"#")
     call append(2,"# Author: Cherrot Luo - admin@cherrot.com")
     call append(3,"#")
@@ -285,8 +284,7 @@ function AddTitle()
     call append(8,"#")
     call append(9,"# Description: ")
     call append(10,"#")
-    call append(11,"===========================================
-    ==================================*/")
+    call append(11,"=============================================================================*/")
     echohl WarningMsg | echo "Successful in adding the copyright." | echohl None
 endf
 
