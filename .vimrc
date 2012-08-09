@@ -92,6 +92,8 @@ endif " has("autocmd")
 set tabstop=4 
 set shiftwidth=4 
 set softtabstop=4
+set smarttab
+set expandtab
 
 "设置匹配模式，类似当输入一个左括号时会匹配相应的那个右括号 
 set showmatch 
@@ -187,7 +189,7 @@ nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:copen<CR>
 nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>:copen<CR>
 
 "添加ctags自动搜索路径，以支持STL
-set tags+=/data/cherrotluo/.vim/stl_ctags
+set tags+=$HOME/.vim/stl_ctags
 
 "此方法见http://xwz.me/blog/2010/11/29/01-23/
 "if(executable('ctags'))
@@ -275,7 +277,7 @@ map <F4> :call TitleDet()<cr>'s
 function AddTitle()
     call append(0,"/*=============================================================================")
     call append(1,"#")
-    call append(2,"# Author: Cherrot Luo - admin@cherrot.com")
+    call append(2,"# Author: Cherrot Luo - cherrot+vim@cherrot.com")
     call append(3,"#")
     call append(4,"#")
     call append(5,"# Last modified: ".strftime("%Y-%m-%d %H:%M"))
