@@ -16,7 +16,7 @@ set encoding=utf-8
 
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
-  finish
+    finish
 endif
 
 " Use Vim settings, rather then Vi settings (much better!).
@@ -24,14 +24,16 @@ endif
 set nocompatible
 
 " allow backspacing over everything in insert mode
-set backspace=indent,eol,start
+"set backspace=indent,eol,start
+set backspace=indent,start
 
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+    set nobackup		" do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file
+    set backup		" keep a backup file
 endif
-set history=50		" keep 50 lines of command line history
+
+set history=512		" keep 512 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
@@ -51,49 +53,54 @@ map Q gq
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
+    syntax on
+    set hlsearch
 endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
+    " Enable file type detection.
+    " Use the default filetype settings, so that mail gets 'tw' set to 72,
+    " 'cindent' is on in C files, etc.
+    " Also load indent files, to automatically do language-dependent indenting.
+    filetype on
+    filetype plugin indent on
 
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
+    " Put these in an autocmd group, so that we can delete them easily.
+    augroup vimrcEx
+        au!
 
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
+        " For all text files set 'textwidth' to 78 characters.
+        autocmd FileType text setlocal textwidth=78
 
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
+        " When editing a file, always jump to the last known cursor position.
+        " Don't do it when the position is invalid or when inside an event handler
+        " (happens when dropping a file on gvim).
+        autocmd BufReadPost *
+                    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                    \   exe "normal g`\"" |
+                    \ endif
 
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
-
-  augroup END
+    augroup END
 
 else
-
-  set autoindent		" always set autoindenting on
+    set autoindent		" always set autoindenting on
+    set smartindent     " 根据上面的对齐方式智能对齐
 
 endif " has("autocmd")
 
-"Cherrot Start
 "第一行设置tab键为4个空格，第二行设置当行之间交错时使用4个空格 
 set tabstop=4 
 set shiftwidth=4 
 set softtabstop=4
 set smarttab
 set expandtab
+
+"当vim进行编辑时，如果命令错误，会发出一个响声，该设置去掉响声 
+"set vb t_vb= 
+
+"背景使用黑色 
+"set background=dark 
 
 "设置匹配模式，类似当输入一个左括号时会匹配相应的那个右括号 
 set showmatch 
@@ -108,10 +115,21 @@ set showmatch
 "set nohls 
 
 "代码折叠
-:set fdm=syntax
+set fdm=syntax
 
 "自动cd到当前文件所在的目录
 "autocmd BufEnter * lcd %:p:h 
+
+"vim-pathogen plugin 该插件可以将每个github的vim plugin工程单独放到bundle目录下
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+call pathogen#infect()
+
+"vim-repress插件 see https://github.com/vim-scripts/VimRepress
+let VIMPRESS = [{'username':'cherrot',
+                \'blog_url':'http://www.cherrot.com/'
+                \}]
+map <leader>P :BlogPreview<CR>
+
 
 "映射cscope命令： cs find c|d|e|f|g|i|s|t name
 nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR> "0或s:查找本C符号(可以跳过注释)
@@ -145,9 +163,6 @@ let Tlist_Inc_Winwidth=0
 
 
 "OmniCppComplete Plugin 目前用neocomplcache
-"set nocp
-"filetype plugin on
-
 
 "对NERD_commenter的设置,在光标所在行上，按ctrl+h变换注释,cm是多行注释,cu是取消注释
 let NERDShutUp=1
@@ -318,3 +333,6 @@ function TitleDet()
     endwhile
     call AddTitle()
 endfunction
+
+"去除vim的GUI版本中的toolbar 
+"set guioptions-=T 
