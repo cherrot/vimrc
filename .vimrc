@@ -115,7 +115,8 @@ set showmatch
 "set nohls 
 
 "代码折叠
-set fdm=syntax
+"set fdm=syntax
+set fdm=indent
 
 "自动cd到当前文件所在的目录
 "autocmd BufEnter * lcd %:p:h 
