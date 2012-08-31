@@ -76,7 +76,7 @@ colorscheme desert
 syntax on
 
 "Use black background 
-set background=dark 
+"set background=dark 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Interface
