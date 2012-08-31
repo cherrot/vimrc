@@ -1,3 +1,15 @@
+/*=============================================================================
+#
+# Author: Cherrot Luo - cherrot+vim@cherrot.com
+#
+#
+# Last modified: 2012-08-31 17:01
+#
+# Filename: .vimrc
+#
+# Description: 
+#
+=============================================================================*/
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -38,6 +50,19 @@ set autochdir
 " Use absolute paths in sessions
 set sessionoptions-=curdir
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Backup
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Enable backup
+set backup
+
+" Set backup directory
+set backupdir=~/.vim/backup
+
+" Set swap file directory
+set directory=~/.vim/swap,/tmp
+
 " Keep more backups for one file
 autocmd BufWritePre * let &backupext = strftime(".%m-%d-%H-%M")
 
@@ -53,19 +78,6 @@ autocmd BufReadPost *
 	\ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Backup
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Enable backup
-set backup
-
-" Set backup directory
-set backupdir=~/.vim/backup
-
-" Set swap file directory
-set directory=~/.vim/swap,/tmp
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -75,7 +87,7 @@ colorscheme desert
 " Enable syntax highlight
 syntax on
 
-"Use black background 
+"背景使用黑色 
 set background=dark 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -181,8 +193,7 @@ set cscopetagorder=1
 set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-
 
 "添加ctags自动搜索路径，以支持STL
-"set tags+=$HOME/.vim/stl_ctags
-set tags+=~/.vim/stl_ctags
+set tags+=$HOME/.vim/stl_ctags
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
@@ -443,7 +454,7 @@ function AddTitle()
     call append(8,"#")
     call append(9,"# Description: ")
     call append(10,"#")
-    call append(11,"=============================================================================*")
+    call append(11,"=============================================================================*/")
     echohl WarningMsg | echo "Successful in adding the copyright." | echohl None
 endf
 

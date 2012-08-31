@@ -14,6 +14,7 @@ set foldnestmax=1
 set foldmethod=syntax
 
 " Enable filetypes
+"filetype on
 filetype plugin indent on
 
 " Set fileencodings
@@ -38,20 +39,6 @@ set autochdir
 " Use absolute paths in sessions
 set sessionoptions-=curdir
 
-" Keep more backups for one file
-autocmd BufWritePre * let &backupext = strftime(".%m-%d-%H-%M")
-
-" keep 512 lines of command line history
-set history=512		
-
-" When editing a file, always jump to the last known cursor position.
-" Don't do it when the position is invalid or when inside an event handler
-" (happens when dropping a file on gvim).
-autocmd BufReadPost *
-	\ if line("'\"") > 0 && line("'\"") <= line("$") |
-	\   exe "normal g`\"" |
-	\ endif
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Backup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -65,6 +52,11 @@ set backupdir=~/.vim/backup
 " Set swap file directory
 set directory=~/.vim/swap,/tmp
 
+" Keep more backups for one file
+autocmd BufWritePre * let &backupext = strftime(".%m-%d-%H-%M")
+
+"set history=512		" keep 512 lines of command line history
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -75,7 +67,7 @@ colorscheme desert
 " Enable syntax highlight
 syntax on
 
-"Use black background 
+"背景使用黑色 
 set background=dark 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -181,8 +173,7 @@ set cscopetagorder=1
 set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-
 
 "添加ctags自动搜索路径，以支持STL
-"set tags+=$HOME/.vim/stl_ctags
-set tags+=~/.vim/stl_ctags
+set tags+=$HOME/.vim/stl_ctags
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
@@ -437,13 +428,13 @@ function AddTitle()
     call append(2,"# Author: Cherrot Luo - cherrot+vim@cherrot.com")
     call append(3,"#")
     call append(4,"#")
-    call append(5,"# Last modified:	2012-08-31 17:02
+    call append(5,"# Last modified: ".strftime("%Y-%m-%d %H:%M"))
     call append(6,"#")
-    call append(7,"# Filename:		.vimrc
+    call append(7,"# Filename: ".expand("%:t"))
     call append(8,"#")
     call append(9,"# Description: ")
     call append(10,"#")
-    call append(11,"=============================================================================*")
+    call append(11,"=============================================================================*/")
     echohl WarningMsg | echo "Successful in adding the copyright." | echohl None
 endf
 
