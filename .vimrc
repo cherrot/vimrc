@@ -10,7 +10,7 @@ set backspace=eol,start,indent
 
 " Lines folding
 set foldenable
-set foldnestmax=1
+set foldnestmax=2
 set foldmethod=syntax
 
 " Enable filetypes
@@ -137,11 +137,15 @@ set autoindent
 set smartindent
 
 " Use hard tabs
-set tabstop=8
-set noexpandtab
-set shiftwidth=8
+"set tabstop=8
+"set noexpandtab
+"set shiftwidth=8
+
+" expand tabs
+set shiftwidth=4
 set softtabstop=4
-"set smarttab
+set expandtab
+set smarttab
 
 " Break long lines
 "set textwidth=78
