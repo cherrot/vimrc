@@ -148,7 +148,7 @@ set expandtab
 set smarttab
 
 " Break long lines
-"set textwidth=78
+set textwidth=80 " wrap text for 78 letters
 
 " Set auto-formating
 set formatoptions+=mM
@@ -160,7 +160,11 @@ set cinoptions=:0,l1,t0,g0
 autocmd FileType mail set textwidth=72
 
 " Use soft tabs for python
-autocmd FileType python set et sw=4 sts=4
+autocmd FileType python set expandtab shiftwidth=4 softtabstop=4
+
+autocmd FileType ruby set shiftwidth=2 softtabstop=2
+
+autocmd FileType javascript set shiftwidth=2 softtabstop=2
 
 " Use extension to set filetype
 autocmd BufNewFile,BufRead *.md set filetype=markdown
@@ -276,7 +280,7 @@ endif
 
 map <F11> :silent! Tlist<CR>
 map <F12> :call Do_CsTag()<CR>
-map <F4> :call TitleDet()<cr>'s
+"map <F4> :call TitleDet()<cr>'s
 map <leader>P :BlogPreview<CR>
 map fg : Dox<cr>
 
