@@ -250,24 +250,24 @@ noremap <Down> gj
 nnoremap <silent> <F2> :TagbarToggle<CR>
 
 " Grep search tools
-" nnoremap <F3> :Rgrep<CR>
+ nnoremap <F3> :Rgrep<CR>
 
 " Paste toggle
 set pastetoggle=<F4>
 
 " Save & Make 
-nnoremap <F3> :w<CR>:make!<CR>
-nnoremap <F5> :w<CR>:make! %< CC=gcc CFLAGS="-g -Wall"<CR>:!./%<<CR>
+nnoremap <F5> :w<CR>:make!<CR>
+nnoremap <F6> :w<CR>:make! %< CC=gcc CFLAGS="-g -Wall"<CR>:!./%<<CR>
 
 " Quickfix window
-nnoremap <silent> <F6> :botright copen<CR>
-nnoremap <silent> <F7> :cclose<CR>
+nnoremap <silent> <F7> :botright copen<CR>
+nnoremap <silent> <F8> :cclose<CR>
 
 " NERDTreeToggle
 " nnoremap <silent> <F9> :NERDTreeToggle<CR>
 
 " Toggle display line number
-nnoremap <silent> <F8> :set number!<CR>
+nnoremap <silent> <F10> :set number!<CR>
 
 " Use <space> to toggle fold
 nnoremap <silent> <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
