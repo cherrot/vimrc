@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/home/cherrot/code/C++'
-let g:netrw_dirhist_2='/home/cherrot/.vim'
-let g:netrw_dirhist_3='/media'
-let g:netrw_dirhist_4='/home/cherrot/dev/wx-bae/0/wechat/wechat'

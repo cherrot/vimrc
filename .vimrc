@@ -169,6 +169,8 @@ autocmd FileType javascript set shiftwidth=4 softtabstop=4 foldmethod=indent fol
 " Use extension to set filetype
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 
+autocmd FileType markdown set textwidth=0
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ctags & Cscope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
