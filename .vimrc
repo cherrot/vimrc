@@ -76,9 +76,11 @@ autocmd BufReadPost *
 set backup
 
 " Set backup directory
+" TODO add windows settings
 set backupdir=~/.vim/backup
 
 " Set swap file directory
+" TODO add windows settings
 set directory=~/.vim/swap,/tmp
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -206,6 +208,7 @@ set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-
 
 "添加ctags自动搜索路径，以支持STL
 "set tags+=$HOME/.vim/stl_ctags
+" TODO add windows settings
 set tags+=~/.vim/stl_ctags
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
