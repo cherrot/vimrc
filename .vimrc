@@ -445,9 +445,9 @@ function Do_CsTag()
     endif
     if(executable('cscope') && has("cscope") )
         if(g:iswindows!=1)
-            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
+            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.php' -o -name '*.java' -o -name '*.cs' > cscope.files"
         else
-            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
+            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.php,*.java,*.cs >> cscope.files"
         endif
         silent! execute "!cscope -b"
         execute "normal :"
@@ -455,6 +455,9 @@ function Do_CsTag()
             execute "cs add cscope.out"
         endif
     endif
+
+    "解决白屏问题
+    execute "redraw!"
 endfunction
 
 
