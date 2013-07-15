@@ -280,7 +280,9 @@ nnoremap <F6> :w<CR>:make! %< CC=gcc CFLAGS="-g -Wall"<CR>:!./%<<CR>
 nnoremap <silent> <F7> :botright copen<CR>
 nnoremap <silent> <F8> :cclose<CR>
 
-" NERDTreeToggle
+" NERDTreeTabsToggle
+" This need nerdtree and nerdtreetabs both installed, press t to open the file
+" in a new tab, press ENTER to open in the current window.
 nnoremap <silent> <F9> :NERDTreeTabsToggle<CR>
 
 " Toggle display line number
