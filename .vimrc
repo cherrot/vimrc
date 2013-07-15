@@ -1,4 +1,20 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Platform related settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if(has("win32") || has("win64"))
+    let g:iswindows=1
+else
+    let g:iswindows=0
+endif
+
+if(g:iswindows==1)
+    source $VIMRUNTIME/vimrc_example.vim
+    source $VIMRUNTIME/mswin.vim
+    behave mswin
+    set guifont=Consolas:h14:cANSI
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
