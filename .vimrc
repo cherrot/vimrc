@@ -281,7 +281,7 @@ nnoremap <silent> <F7> :botright copen<CR>
 nnoremap <silent> <F8> :cclose<CR>
 
 " NERDTreeToggle
-nnoremap <silent> <F9> :NERDTreeToggle<CR>
+nnoremap <silent> <F9> :NERDTreeTabsToggle<CR>
 
 " Toggle display line number
 nnoremap <silent> <F10> :set number!<CR>
