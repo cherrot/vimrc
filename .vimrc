@@ -49,7 +49,7 @@ set wildmode=longest:full,full
 set ttimeoutlen=100
 
 " Auto change current directory
-set autochdir
+" set autochdir
 
 " Use absolute paths in sessions
 set sessionoptions-=curdir
