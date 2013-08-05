@@ -403,7 +403,7 @@ let g:neocomplcache_min_syntax_length = 1
 "ctags 函数定义
 "cscope使用绝对路径的两个方法：
 "1，直接find绝对路径，文件列表全部以绝对路径表示；
-"2. :cscope add /path/to/cscope.out /path/to/src/code, TODO: $PWD有时和pwd命令不符
+"2. :cscope add /path/to/cscope.out /path/to/src/code
 function Do_CsTag()
     let dir = getcwd()
     if filereadable("tags")
