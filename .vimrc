@@ -3,8 +3,10 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if(has("win32") || has("win64"))
     let g:iswindows=1
+    let g:separator="\\"
 else
     let g:iswindows=0
+    let g:separator="/"
 endif
 
 if(g:iswindows==1)
@@ -402,16 +404,12 @@ let g:neocomplcache_min_syntax_length = 1
 
 "ctags 函数定义
 "cscope使用绝对路径的两个方法：
-"1，直接find绝对路径，文件列表全部以绝对路径表示；
+"1，直接find绝对路径或添加cscope -P /path 参数，使文件列表全部以绝对路径表示；
 "2. :cscope add /path/to/cscope.out /path/to/src/code
 function Do_CsTag()
     let dir = getcwd()
-    if filereadable("tags")
-        if(g:iswindows==1)
-            let tagsdeleted=delete(dir."\\"."tags")
-        else
-            let tagsdeleted=delete("./"."tags")
-        endif
+    if filereadable($PWD.g:separator."tags")
+        let tagsdeleted=delete($PWD.g:separator."tags")
         if(tagsdeleted!=0)
             echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
             return
@@ -420,23 +418,15 @@ function Do_CsTag()
     if has("cscope")
         silent! execute "cs kill -1"
     endif
-    if filereadable("cscope.files")
-        if(g:iswindows==1)
-            let csfilesdeleted=delete(dir."\\"."cscope.files")
-        else
-            let csfilesdeleted=delete("./"."cscope.files")
-        endif
+    if filereadable($PWD.g:separator."cscope.files")
+        let csfilesdeleted=delete($PWD.g:separator."cscope.files")
         if(csfilesdeleted!=0)
             echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.files" | echohl None
             return
         endif
     endif
-    if filereadable("cscope.out")
-        if(g:iswindows==1)
-            let csoutdeleted=delete(dir."\\"."cscope.out")
-        else
-            let csoutdeleted=delete("./"."cscope.out")
-        endif
+    if filereadable($PWD.g:separator."cscope.out")
+        let csoutdeleted=delete($PWD.g:separator."cscope.out")
         if(csoutdeleted!=0)
             echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.out" | echohl None
             return
@@ -444,18 +434,19 @@ function Do_CsTag()
     endif
     if(executable('ctags'))
         "silent! execute "!ctags -R --c-types=+p --fields=+S *"
-        silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
+        silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f " .$PWD.g:separator ."tags ."
     endif
     if(executable('cscope') && has("cscope") )
         if(g:iswindows!=1)
-            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.php' -o -name '*.py' -o -name '*.java' -o -name '*.cs' > cscope.files"
+            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.php' -o -name '*.py' -o -name '*.java' -o -name '*.cs' > " .$PWD.g:separator ."cscope.files"
         else
-            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.php,*.py,*.java,*.cs >> cscope.files"
+            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.php,*.py,*.java,*.cs >> " .$PWD.g:separator ."cscope.files"
         endif
-        silent! execute "!cscope -b"
+        "cscope -b or cscope -bq ?
+        silent! execute "!cscope -b -i" .$PWD.g:separator ."cscope.files -f " .$PWD.g:separator ."cscope.out"
         execute "normal :"
-        if filereadable("cscope.out")
-            execute "cs add cscope.out $PWD"
+        if filereadable($PWD.g:separator."cscope.out")
+            execute "cs add " .$PWD.g:separator ."cscope.out " .$PWD
         endif
     endif
 
