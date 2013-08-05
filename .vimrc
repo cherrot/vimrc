@@ -436,12 +436,13 @@ function Do_CsTag()
     endif
     if(executable('ctags'))
         "silent! execute "!ctags -R --c-types=+p --fields=+S *"
-        silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f " .$PWD.g:separator ."tags ."
+        silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f " .$PWD.g:separator ."tags " .$PWD.g:separator
     endif
     if(executable('cscope') && has("cscope") )
         if(g:iswindows!=1)
-            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.php' -o -name '*.py' -o -name '*.java' -o -name '*.cs' > " .$PWD.g:separator ."cscope.files"
+            silent! execute "!find " .$PWD.g:separator ." -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.php' -o -name '*.py' -o -name '*.java' -o -name '*.cs' > " .$PWD.g:separator ."cscope.files"
         else
+            "FIXME　windows下从$PWD.g:separator扫描
             silent! execute "!dir /s/b *.c,*.cpp,*.h,*.php,*.py,*.java,*.cs >> " .$PWD.g:separator ."cscope.files"
         endif
         "cscope -b or cscope -bq ?
