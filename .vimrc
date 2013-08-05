@@ -473,7 +473,7 @@ function AddTitle()
     call append(10,"#")
     call append(11,"=============================================================================*")
     echohl WarningMsg | echo "Successful in adding the copyright." | echohl None
-endf
+endfunction
 
 "更新最近修改时间和文件名
 function UpdateTitle()
