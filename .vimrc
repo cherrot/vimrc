@@ -182,6 +182,8 @@ autocmd FileType mail set textwidth=72
 " Use soft tabs for python
 autocmd FileType python set expandtab shiftwidth=4 softtabstop=4 foldmethod=indent
 
+autocmd FileType php set foldmethod=indent
+
 autocmd FileType ruby set shiftwidth=2 softtabstop=2
 
 autocmd FileType javascript set shiftwidth=4 softtabstop=4 foldmethod=indent foldnestmax=4 textwidth=120
