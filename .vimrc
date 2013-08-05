@@ -449,7 +449,7 @@ function Do_CsTag()
         silent! execute "!cscope -b -i" .$PWD.g:separator ."cscope.files -f " .$PWD.g:separator ."cscope.out"
         execute "normal :"
         if filereadable($PWD.g:separator."cscope.out")
-            execute "cs add " .$PWD.g:separator ."cscope.out " .$PWD
+            execute "cs add " .$PWD.g:separator ."cscope.out"
         endif
     endif
 
