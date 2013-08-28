@@ -233,15 +233,15 @@ noremap <C-k> <C-W>k
 noremap <C-l> <C-W>l
 
 " Cscope mappings
-nnoremap <C-w>\ :scs find c <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-w>\ :scs find c <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+nnoremap <C-\>s :scs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR>
 nnoremap <C-\>g :scs find g <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>d :scs find d <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>c :scs find c <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>t :scs find t <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>e :scs find e <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
-nnoremap <C-\>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nnoremap <C-\>d :scs find d <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+nnoremap <C-\>c :scs find c <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+nnoremap <C-\>t :scs find t <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+nnoremap <C-\>e :scs find e <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+nnoremap <C-\>f :scs find f <C-R>=expand("<cfile>")<CR><CR>:copen<CR>
+nnoremap <C-\>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:copen<CR>
 
 "映射cscope命令： cs find c|d|e|f|g|i|s|t name
 "nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR> "0或s:查找本C符号(可以跳过注释)
