@@ -1,4 +1,22 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Platform related settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if(has("win32") || has("win64"))
+    let g:iswindows=1
+    let g:separator="\\"
+else
+    let g:iswindows=0
+    let g:separator="/"
+endif
+
+if(g:iswindows==1)
+    source $VIMRUNTIME/vimrc_example.vim
+    source $VIMRUNTIME/mswin.vim
+    behave mswin
+    set guifont=Consolas:h14:cANSI
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -60,9 +78,11 @@ autocmd BufReadPost *
 set backup
 
 " Set backup directory
+" TODO add windows settings
 set backupdir=~/.vim/backup
 
 " Set swap file directory
+" TODO add windows settings
 set directory=~/.vim/swap,/tmp
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -104,7 +124,10 @@ set display=lastline
 "set vb t_vb= 
 
 "设置匹配模式，类似当输入一个左括号时会匹配相应的那个右括号 
-set showmatch 
+set showmatch
+
+"Split the new window on the right instead of the left
+"set splitright
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Search
@@ -162,14 +185,14 @@ autocmd FileType mail set textwidth=72
 " Use soft tabs for python
 autocmd FileType python set expandtab shiftwidth=4 softtabstop=4 foldmethod=indent
 
+autocmd FileType php set foldmethod=indent
+
 autocmd FileType ruby set shiftwidth=2 softtabstop=2
 
 autocmd FileType javascript set shiftwidth=4 softtabstop=4 foldmethod=indent foldnestmax=4 textwidth=120
 
 " Use extension to set filetype
 autocmd BufNewFile,BufRead *.md set filetype=markdown
-
-autocmd FileType markdown set textwidth=0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ctags & Cscope
@@ -182,40 +205,38 @@ autocmd FileType markdown set textwidth=0
 if has("cscope")
 
     """"""""""""" Standard cscope/vim boilerplate
-
-    " Auto finding
+    "
+    " Auto finding. The last semicolon is the key here. When Vim tries to locate
+    " the 'tags' file, it first looks at the current directory, then the parent
+    " directory, then the parent of the parent, and so on.
     set tags=tags;
     "添加ctags自动搜索路径，以支持STL
+    "TODO Windows兼容
     "set tags+=$HOME/.vim/stl_ctags
     set tags+=~/.vim/stl_ctags
 
     " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
     set cscopetag
 
-    " Show msg when cscope db added
-    set cscopeverbose
-
-    " Use tags for definition search first
-    set cscopetagorder=1
+    " check cscope for definition of a symbol before checking ctags: set to 1
+    " if you want the reverse search order.
+    set cscopetagorder=0
 
     " Use quickfix window to show cscope results
     set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-
 
-
-    " check cscope for definition of a symbol before checking ctags: set to 1
-    " if you want the reverse search order.
-    set csto=0
-
-    " add any cscope database in current directory
+    " add any cscope database in current directory of vim or current directory of the shell.
     if filereadable("cscope.out")
-        cs add cscope.out  
+        cs add cscope.out
+    elseif filereadable($PWD.g:separator."cscope.out")
+        cs add cscope.out
     " else add the database pointed to by environment variable 
     elseif $CSCOPE_DB != ""
         cs add $CSCOPE_DB
     endif
 
     " show msg when any other cscope db added
-    set cscopeverbose  
+    set cscopeverbose
 
 
     """"""""""""" My cscope/vim key mappings
@@ -223,13 +244,21 @@ if has("cscope")
     " The following maps all invoke one of the following cscope search types:
     "
     "   's'   symbol: find all references to the token under cursor
+    "                 查找本C符号(跳过注释)
     "   'g'   global: find global definition(s) of the token under cursor
+    "                 查找全局定义
     "   'c'   calls:  find all calls to the function name under cursor
+    "                 查找所有本函数被调用的语句
     "   't'   text:   find all instances of the text under cursor
+    "                 查找本字符串
     "   'e'   egrep:  egrep search for the word under cursor
+    "                 查找本 egrep 模式
     "   'f'   file:   open the filename under cursor
+    "                 打开本文件
     "   'i'   includes: find files that include the filename under cursor
+    "                   查找包含本文件的文件
     "   'd'   called: find functions that function under cursor calls
+    "                 查找被本函数调用的函数
     "
     " Below are three sets of the maps: one set that just jumps to your
     " search result, one that splits the existing vim window horizontally and
@@ -257,14 +286,14 @@ if has("cscope")
     " go back to where you were before the search.  
     "
 
-    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>      
-    nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>      
-    nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>      
-    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>      
-    nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>      
-    nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>      
-    nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>      
+    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+    nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+    nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+    nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>:copen<CR>
+    nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:copen<CR>
+    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>:copen<CR>
 
 
     " Using 'CTRL-spacebar' (intepreted as CTRL-@ by vim) then a search type
@@ -334,7 +363,7 @@ endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Mappings
+" Other Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Tab navigation
@@ -355,7 +384,7 @@ noremap <C-l> <C-W>l
 noremap <Up> gk
 noremap <Down> gj
 
-" Toggle Tagbar
+" Toggle Tagbar, more convenient than TList
 nnoremap <silent> <F2> :TagbarToggle<CR>
 
 " Grep search tools
@@ -372,8 +401,10 @@ nnoremap <F6> :w<CR>:make! %< CC=gcc CFLAGS="-g -Wall"<CR>:!./%<<CR>
 nnoremap <silent> <F7> :botright copen<CR>
 nnoremap <silent> <F8> :cclose<CR>
 
-" NERDTreeToggle
-" nnoremap <silent> <F9> :NERDTreeToggle<CR>
+" NERDTreeTabsToggle
+" This need nerdtree and nerdtreetabs both installed, press t to open the file
+" in a new tab, press ENTER to open in the current window.
+nnoremap <silent> <F9> :NERDTreeTabsToggle<CR>
 
 " Toggle display line number
 nnoremap <silent> <F10> :set number!<CR>
@@ -389,7 +420,7 @@ if $DISPLAY != '' && executable('xsel')
     nnoremap <silent> "+p :r!xsel -b<CR>
 endif
 
-map <F9> :silent! Tlist<CR>
+map <F11> :silent! Tlist<CR>
 map <F12> :call Do_CsTag()<CR>
 "map <F4> :call TitleDet()<cr>'s
 map <leader>P :BlogPreview<CR>
@@ -407,8 +438,6 @@ let autocscope_menus = 0
 
 " Use context to decide completion type
 let SuperTabDefaultCompletionType = "context"
-
-
 
 "vim-pathogen plugin 该插件可以将每个github的vim plugin工程单独放到bundle目录下
 runtime bundle/vim-pathogen/autoload/pathogen.vim
@@ -432,8 +461,6 @@ let Tlist_Exit_OnlyWindow=1 "当taglist是最后一个分割窗口时，自动�
 let Tlist_Process_File_Always=0 "是否一直处理tags.1:处理;0:不处理。不是一直实时更新tags，因为没有必要
 let Tlist_Inc_Winwidth=0
 
-"OmniCppComplete Plugin 目前用neocomplcache
-
 "对NERD_commenter的设置,在光标所在行上，按ctrl+h变换注释,cm是多行注释,cu是取消注释
 let NERDShutUp=1
 
@@ -450,6 +477,7 @@ let g:DoxygenToolkit_maxFunctionProtoLines = 30
 
 "a.vim插件 :A，打开.cpp和.h对应的文件，:AV，分屏显示.cpp和.h对应的文件(无需配置)
 
+"OmniCppComplete Plugin 目前用neocomplcache
 "neocomplcache 代码补全插件
 let g:acp_enableAtStartup = 0
 let g:neocomplcache_enable_at_startup = 1
@@ -461,6 +489,10 @@ let g:neocomplcache_min_keyword_length = 1
 let g:neocomplcache_min_syntax_length = 1
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Functions
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 "此方法见http://xwz.me/blog/2010/11/29/01-23/
 "if(executable('ctags'))
 "    silent! execute "!g++ -E % -o tmpcpp -I./include"
@@ -468,30 +500,14 @@ let g:neocomplcache_min_syntax_length = 1
 "    silent! execute "!unlink tmpcpp"
 "endif
 
-"cscope 函数定义  用cscope生成数据库，并添加到vim中
-"function Do_CsTag()
-"    if(executable('cscope') && has("cscope") )
-"        if(g:iswindows!=1)
-"            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
-"        else
-"            silent! execute "!dir /b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
-"        endif
-"        silent! execute "!cscope -b"
-"        if filereadable("cscope.out")
-"            execute "cs add cscope.out"
-"        endif
-"    endif
-"endf
-
-"ctags 函数定义
+"cscope ctags 函数定义
+"cscope使用绝对路径的两个方法：
+"1，直接find绝对路径或添加cscope -P /path 参数，使文件列表全部以绝对路径表示；
+"2. :cscope add /path/to/cscope.out /path/to/src/code
 function Do_CsTag()
     let dir = getcwd()
-    if filereadable("tags")
-        if(g:iswindows==1)
-            let tagsdeleted=delete(dir."\\"."tags")
-        else
-            let tagsdeleted=delete("./"."tags")
-        endif
+    if filereadable($PWD.g:separator."tags")
+        let tagsdeleted=delete($PWD.g:separator."tags")
         if(tagsdeleted!=0)
             echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
             return
@@ -500,23 +516,15 @@ function Do_CsTag()
     if has("cscope")
         silent! execute "cs kill -1"
     endif
-    if filereadable("cscope.files")
-        if(g:iswindows==1)
-            let csfilesdeleted=delete(dir."\\"."cscope.files")
-        else
-            let csfilesdeleted=delete("./"."cscope.files")
-        endif
+    if filereadable($PWD.g:separator."cscope.files")
+        let csfilesdeleted=delete($PWD.g:separator."cscope.files")
         if(csfilesdeleted!=0)
             echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.files" | echohl None
             return
         endif
     endif
-    if filereadable("cscope.out")
-        if(g:iswindows==1)
-            let csoutdeleted=delete(dir."\\"."cscope.out")
-        else
-            let csoutdeleted=delete("./"."cscope.out")
-        endif
+    if filereadable($PWD.g:separator."cscope.out")
+        let csoutdeleted=delete($PWD.g:separator."cscope.out")
         if(csoutdeleted!=0)
             echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.out" | echohl None
             return
@@ -524,20 +532,25 @@ function Do_CsTag()
     endif
     if(executable('ctags'))
         "silent! execute "!ctags -R --c-types=+p --fields=+S *"
-        silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q ."
+        silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f " .$PWD.g:separator ."tags " .$PWD.g:separator
     endif
     if(executable('cscope') && has("cscope") )
         if(g:iswindows!=1)
-            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
+            silent! execute "!find " .$PWD.g:separator ." -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.php' -o -name '*.py' -o -name '*.java' -o -name '*.cs' > " .$PWD.g:separator ."cscope.files"
         else
-            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
+            "FIXME　windows下从$PWD.g:separator扫描
+            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.php,*.py,*.java,*.cs >> " .$PWD.g:separator ."cscope.files"
         endif
-        silent! execute "!cscope -b"
+        "cscope -b or cscope -bq ?
+        silent! execute "!cscope -b -i" .$PWD.g:separator ."cscope.files -f " .$PWD.g:separator ."cscope.out"
         execute "normal :"
-        if filereadable("cscope.out")
-            execute "cs add cscope.out"
+        if filereadable($PWD.g:separator."cscope.out")
+            execute "cs add " .$PWD.g:separator ."cscope.out"
         endif
     endif
+
+    "解决白屏问题
+    execute "redraw!"
 endfunction
 
 
@@ -557,7 +570,7 @@ function AddTitle()
     call append(10,"#")
     call append(11,"=============================================================================*")
     echohl WarningMsg | echo "Successful in adding the copyright." | echohl None
-endf
+endfunction
 
 "更新最近修改时间和文件名
 function UpdateTitle()
