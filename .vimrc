@@ -229,7 +229,7 @@ if has("cscope")
     if filereadable("cscope.out")
         cs add cscope.out
     elseif filereadable($PWD.g:separator."cscope.out")
-        cs add cscope.out
+        exe "cs add" $PWD.g:separator."cscope.out"
     " else add the database pointed to by environment variable 
     elseif $CSCOPE_DB != ""
         cs add $CSCOPE_DB
@@ -384,11 +384,13 @@ noremap <C-l> <C-W>l
 noremap <Up> gk
 noremap <Down> gj
 
-" Toggle Tagbar, more convenient than TList
-nnoremap <silent> <F2> :TagbarToggle<CR>
+" NERDTreeTabsToggle
+" This need nerdtree and nerdtreetabs both installed, press t to open the file
+" in a new tab, press ENTER to open in the current window.
+nnoremap <silent> <F2> :NERDTreeTabsToggle<CR>
 
-" Grep search tools
-nnoremap <F3> :Rgrep<CR>
+" Toggle display line number
+nnoremap <silent> <F3> :set number!<CR>
 
 " Paste toggle
 set pastetoggle=<F4>
@@ -401,13 +403,11 @@ nnoremap <F6> :w<CR>:make! %< CC=gcc CFLAGS="-g -Wall"<CR>:!./%<<CR>
 nnoremap <silent> <F7> :botright copen<CR>
 nnoremap <silent> <F8> :cclose<CR>
 
-" NERDTreeTabsToggle
-" This need nerdtree and nerdtreetabs both installed, press t to open the file
-" in a new tab, press ENTER to open in the current window.
-nnoremap <silent> <F9> :NERDTreeTabsToggle<CR>
+" Toggle Tagbar, more convenient than TList
+nnoremap <silent> <F9> :TagbarToggle<CR>
 
-" Toggle display line number
-nnoremap <silent> <F10> :set number!<CR>
+" Grep search tools
+nnoremap <F10> :Rgrep<CR>
 
 " Use <space> to toggle fold
 nnoremap <silent> <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
@@ -420,8 +420,9 @@ if $DISPLAY != '' && executable('xsel')
     nnoremap <silent> "+p :r!xsel -b<CR>
 endif
 
-map <F11> :silent! Tlist<CR>
-map <F12> :call Do_CsTag()<CR>
+"map <F11> :silent! Tlist<CR>
+map <F11> :call Do_CsTag( getcwd() .g:separator )<CR>
+map <F12> :call Do_CsTag( $PWD .g:separator )<CR>
 "map <F4> :call TitleDet()<cr>'s
 map <leader>P :BlogPreview<CR>
 map fg : Dox<cr>
@@ -504,10 +505,10 @@ let g:neocomplcache_min_syntax_length = 1
 "cscope使用绝对路径的两个方法：
 "1，直接find绝对路径或添加cscope -P /path 参数，使文件列表全部以绝对路径表示；
 "2. :cscope add /path/to/cscope.out /path/to/src/code
-function Do_CsTag()
+function Do_CsTag(prefix)
     let dir = getcwd()
-    if filereadable($PWD.g:separator."tags")
-        let tagsdeleted=delete($PWD.g:separator."tags")
+    if filereadable(a:prefix."tags")
+        let tagsdeleted=delete(a:prefix."tags")
         if(tagsdeleted!=0)
             echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
             return
@@ -516,15 +517,15 @@ function Do_CsTag()
     if has("cscope")
         silent! execute "cs kill -1"
     endif
-    if filereadable($PWD.g:separator."cscope.files")
-        let csfilesdeleted=delete($PWD.g:separator."cscope.files")
+    if filereadable(a:prefix."cscope.files")
+        let csfilesdeleted=delete(a:prefix."cscope.files")
         if(csfilesdeleted!=0)
             echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.files" | echohl None
             return
         endif
     endif
-    if filereadable($PWD.g:separator."cscope.out")
-        let csoutdeleted=delete($PWD.g:separator."cscope.out")
+    if filereadable(a:prefix."cscope.out")
+        let csoutdeleted=delete(a:prefix."cscope.out")
         if(csoutdeleted!=0)
             echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.out" | echohl None
             return
@@ -532,20 +533,20 @@ function Do_CsTag()
     endif
     if(executable('ctags'))
         "silent! execute "!ctags -R --c-types=+p --fields=+S *"
-        silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f " .$PWD.g:separator ."tags " .$PWD.g:separator
+        silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f " .a:prefix ."tags " .a:prefix
     endif
     if(executable('cscope') && has("cscope") )
         if(g:iswindows!=1)
-            silent! execute "!find " .$PWD.g:separator ." -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.php' -o -name '*.py' -o -name '*.java' -o -name '*.cs' > " .$PWD.g:separator ."cscope.files"
+            silent! execute "!find " .a:prefix ." -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.php' -o -name '*.py' -o -name '*.java' -o -name '*.cs' > " .a:prefix ."cscope.files"
         else
-            "FIXME　windows下从$PWD.g:separator扫描
-            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.php,*.py,*.java,*.cs >> " .$PWD.g:separator ."cscope.files"
+            "FIXME　windows下从a:prefix扫描
+            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.php,*.py,*.java,*.cs >> " .a:prefix ."cscope.files"
         endif
         "cscope -b or cscope -bq ?
-        silent! execute "!cscope -b -i" .$PWD.g:separator ."cscope.files -f " .$PWD.g:separator ."cscope.out"
+        silent! execute "!cscope -b -i" .a:prefix ."cscope.files -f " .a:prefix ."cscope.out"
         execute "normal :"
-        if filereadable($PWD.g:separator."cscope.out")
-            execute "cs add " .$PWD.g:separator ."cscope.out"
+        if filereadable(a:prefix."cscope.out")
+            execute "cs add " .a:prefix ."cscope.out"
         endif
     endif
 
