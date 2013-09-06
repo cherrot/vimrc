@@ -126,8 +126,9 @@ set display=lastline
 "设置匹配模式，类似当输入一个左括号时会匹配相应的那个右括号 
 set showmatch
 
-"Split the new window on the right instead of the left
-"set splitright
+"Split the new window on the right&below instead of the left
+set splitright
+set splitbelow
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Search
