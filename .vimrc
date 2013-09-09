@@ -368,6 +368,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Tab navigation
+" nnoremap : Normal mode NO REcursive MAP key
 nnoremap tp :tabprevious<CR>
 nnoremap tn :tabnext<CR>
 nnoremap to :tabnew<CR>
@@ -422,11 +423,11 @@ if $DISPLAY != '' && executable('xsel')
 endif
 
 "map <F11> :silent! Tlist<CR>
-map <F11> :call Do_CsTag( getcwd() .g:separator )<CR>
-map <F12> :call Do_CsTag( $PWD .g:separator )<CR>
+nnoremap <F11> :call Do_CsTag( getcwd() .g:separator )<CR>
+nnoremap <F12> :call Do_CsTag( $PWD .g:separator )<CR>
 "map <F4> :call TitleDet()<cr>'s
-map <leader>P :BlogPreview<CR>
-map fg : Dox<cr>
+nnoremap <leader>P :BlogPreview<CR>
+nnoremap fg :Dox<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
