@@ -32,7 +32,7 @@ test -z "$1" -o "$1" = '-h' && usage
 
 message="bundle/$bundle_name from github $github_name $github_branch
 
-from https://github.com/$github_name
+from git@github.com:$github_name
 
 Install or update
 
@@ -53,4 +53,4 @@ git subtree $cmd \
 	--prefix=bundle/$bundle_name \
 	--squash \
 	-m "$action $message" \
-	https://github.com/$github_name.git $github_branch
+	git@github.com:$github_name.git $github_branch
