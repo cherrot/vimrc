@@ -635,7 +635,7 @@ let NERDShutUp=1
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 filetype off
 
-set runtimepath+=~/.vim/bundle/Vundle.vim/
+set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
