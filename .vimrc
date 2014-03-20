@@ -638,6 +638,7 @@ filetype off
 set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+let g:vundle_default_git_proto = 'ssh'
 Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/vim-powerline'
 "Bundle 'Lokaltog/powerline'
