@@ -635,35 +635,36 @@ let NERDShutUp=1
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 filetype off
 
-set runtimepath+=~/.vim/bundle/vundle/
+set runtimepath+=~/.vim/bundle/Vundle.vim/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/vim-powerline'
+"Bundle 'Lokaltog/powerline'
 Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'Align' "Download from github instead of vim.org
-Bundle 'vim-scripts/Align'
-Bundle 'vim-scripts/autoload_cscope.vim'
-Bundle 'vim-scripts/bufexplorer.zip'
+Bundle 'Align'
+Bundle 'autoload_cscope.vim'
+Bundle 'bufexplorer.zip'
 Bundle 'kien/ctrlp.vim'
-Bundle 'lilydjwg/echofunc.vim'
+Bundle 'echofunc.vim'
 Bundle 'lilydjwg/fcitx.vim'
-Bundle 'vim-scripts/grep.vim'
-Bundle 'vim-scripts/Indent-Guides'
-Bundle 'vim-scripts/Markdown'
-Bundle 'vim-scripts/matchit.zip'
-Bundle 'vim-scripts/snipMate'
-Bundle 'vim-scripts/SuperTab-continued.'
-Bundle 'vim-scripts/Tagbar'
-"Bundle 'vim-scripts/tagbar-phpctags'
-Bundle 'vim-scripts/The-NERD-Commenter'
-Bundle 'vim-scripts/The-NERD-tree'
+Bundle 'grep.vim'
+Bundle 'Indent-Guides'
+Bundle 'Markdown'
+Bundle 'matchit.zip'
+Bundle 'snipMate'
+Bundle 'SuperTab-continued.'
+Bundle 'Tagbar'
+"Bundle 'tagbar-phpctags'
+Bundle 'The-NERD-Commenter'
+Bundle 'The-NERD-tree'
 "Bundle 'jistr/vim-nerdtree-tabs'
-"Bundle 'vim-scripts/a.vim'
-Bundle 'vim-scripts/DoxygenToolkit.vim'
+"Bundle 'a.vim'
+Bundle 'DoxygenToolkit.vim'
 "Bundle 'Shougo/neocomplcache.vim'
 "Bundle 'Shougo/neocomplete.vim'
-"Bundle 'vim-scripts/OmniCppComplete'
+"Bundle 'OmniCppComplete'
+"Bundle 'scrooloose/syntastic'
 Bundle 'pkufranky/VimRepress'
 
 filetype plugin indent on
