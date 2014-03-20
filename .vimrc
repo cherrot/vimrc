@@ -212,9 +212,9 @@ if has("cscope")
     " directory, then the parent of the parent, and so on.
     set tags=tags;
     "添加ctags自动搜索路径，以支持STL
-    "TODO Windows兼容
+    "TODO Windows compatible
     "set tags+=$HOME/.vim/stl_ctags
-    set tags+=~/.vim/stl_ctags
+    "set tags+=~/.vim/stl_ctags
 
     " use both cscope and ctag for 'ctrl-]', ':ta', and 'vim -t'
     set cscopetag
@@ -226,15 +226,16 @@ if has("cscope")
     " Use quickfix window to show cscope results
     set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-
 
+    " Use autoload_cscope instead ;)
     " add any cscope database in current directory of vim or current directory of the shell.
-    if filereadable("cscope.out")
-        cs add cscope.out
-    elseif filereadable($PWD.g:separator."cscope.out")
-        exe "cs add" $PWD.g:separator."cscope.out"
-    " else add the database pointed to by environment variable 
-    elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
-    endif
+    "if filereadable("cscope.out")
+    "    cs add cscope.out
+    "elseif filereadable($PWD.g:separator."cscope.out")
+    "    exe "cs add" $PWD.g:separator."cscope.out"
+    "" else add the database pointed to by environment variable 
+    "elseif $CSCOPE_DB != ""
+    "    cs add $CSCOPE_DB
+    "endif
 
     " show msg when any other cscope db added
     set cscopeverbose
@@ -429,43 +430,74 @@ nnoremap <F12> :call Do_CsTag( $PWD .g:separator )<CR>
 nnoremap <leader>P :BlogPreview<CR>
 nnoremap fg :Dox<cr>
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Functions
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"此方法见http://xwz.me/blog/2010/11/29/01-23/
+"if(executable('ctags'))
+"    silent! execute "!g++ -E % -o tmpcpp -I./include"
+"    silent! execute "!ctags -R --c++-kinds=+p --fields=+ialS --extra=+q --language-force=C++ ."
+"    silent! execute "!unlink tmpcpp"
+"endif
+
+"cscope ctags 函数定义
+"cscope使用绝对路径的两个方法：
+"1，直接find绝对路径或添加cscope -P /path 参数，使文件列表全部以绝对路径表示；
+"2. :cscope add /path/to/cscope.out /path/to/src/code
+function Do_CsTag(prefix)
+    let dir = getcwd()
+    if filereadable(a:prefix."tags")
+        let tagsdeleted=delete(a:prefix."tags")
+        if(tagsdeleted!=0)
+            echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
+            return
+        endif
+    endif
+    if has("cscope")
+        silent! execute "cs kill -1"
+    endif
+    if filereadable(a:prefix."cscope.files")
+        let csfilesdeleted=delete(a:prefix."cscope.files")
+        if(csfilesdeleted!=0)
+            echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.files" | echohl None
+            return
+        endif
+    endif
+    if filereadable(a:prefix."cscope.out")
+        let csoutdeleted=delete(a:prefix."cscope.out")
+        if(csoutdeleted!=0)
+            echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.out" | echohl None
+            return
+        endif
+    endif
+    if(executable('ctags'))
+        "silent! execute "!ctags -R --c-types=+p --fields=+S *"
+        silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f " .a:prefix ."tags " .a:prefix
+    endif
+    if(executable('cscope') && has("cscope") )
+        if(g:iswindows!=1)
+            silent! execute "!find " .a:prefix ." -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.php' -o -name '*.py' -o -name '*.java' -o -name '*.cs' > " .a:prefix ."cscope.files"
+        else
+            "FIXME　windows下从a:prefix扫描
+            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.php,*.py,*.java,*.cs >> " .a:prefix ."cscope.files"
+        endif
+        "cscope -b or cscope -bq ?
+        silent! execute "!cscope -b -i" .a:prefix ."cscope.files -f " .a:prefix ."cscope.out"
+        execute "normal :"
+        if filereadable(a:prefix."cscope.out")
+            execute "cs add " .a:prefix ."cscope.out"
+        endif
+    endif
+
+    "解决白屏问题
+    execute "redraw!"
+endfunction
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Set Tagbar width
-let tagbar_width = 32
-
-" Use my own cscope mappings
-let autocscope_menus = 0
-
-" Use context to decide completion type
-let SuperTabDefaultCompletionType = "context"
-
-"vim-pathogen plugin 该插件可以将每个github的vim plugin工程单独放到bundle目录下
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-
-"vim-repress插件 see https://github.com/vim-scripts/VimRepress
-let VIMPRESS = [{'username':'cherrot',
-                \'blog_url':'http://www.cherrot.com/'
-                \}]
-"map <leader>P :BlogPreview<CR> 见 Mapping 一节
-
-
-"taglist插件，进行Tlist的设置
-"TlistUpdate可以更新tags
-"map <F3> :silent! Tlist<CR> //见Mapping一节
-let Tlist_Ctags_Cmd='ctags' "因为我们放在环境变量里，所以可以直接执行
-let Tlist_Use_Right_Window=1 "让窗口显示在右边，0的话就是显示在左边
-let Tlist_Show_One_File=0 "让taglist可以同时展示多个文件的函数列表，如果想只有1个，设置为1
-let Tlist_File_Fold_Auto_Close=1 "非当前文件，函数列表折叠隐藏
-let Tlist_Exit_OnlyWindow=1 "当taglist是最后一个分割窗口时，自动推出vim
-let Tlist_Process_File_Always=0 "是否一直处理tags.1:处理;0:不处理。不是一直实时更新tags，因为没有必要
-let Tlist_Inc_Winwidth=0
-
-"对NERD_commenter的设置,在光标所在行上，按ctrl+h变换注释,cm是多行注释,cu是取消注释
-let NERDShutUp=1
 
 "DoxygenToolkit插件配置
 "map fg : Dox<cr> //见Mapping一节
@@ -477,8 +509,6 @@ let g:DoxygenToolkit_paramTag_pre = "@param\t"
 let g:DoxygenToolkit_returnTag = "@return\t"
 let g:DoxygenToolkit_briefTag_funcName = "no"
 let g:DoxygenToolkit_maxFunctionProtoLines = 30
-
-"a.vim插件 :A，打开.cpp和.h对应的文件，:AV，分屏显示.cpp和.h对应的文件(无需配置)
 
 "OmniCppComplete Plugin 目前用neocomplcache
 "neocomplcache 代码补全插件
@@ -576,114 +606,64 @@ endif
 "let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Functions
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set Tagbar width
+let tagbar_width = 32
 
-"此方法见http://xwz.me/blog/2010/11/29/01-23/
-"if(executable('ctags'))
-"    silent! execute "!g++ -E % -o tmpcpp -I./include"
-"    silent! execute "!ctags -R --c++-kinds=+p --fields=+ialS --extra=+q --language-force=C++ ."
-"    silent! execute "!unlink tmpcpp"
-"endif
+" Use my own cscope mappings
+let autocscope_menus = 0
 
-"cscope ctags 函数定义
-"cscope使用绝对路径的两个方法：
-"1，直接find绝对路径或添加cscope -P /path 参数，使文件列表全部以绝对路径表示；
-"2. :cscope add /path/to/cscope.out /path/to/src/code
-function Do_CsTag(prefix)
-    let dir = getcwd()
-    if filereadable(a:prefix."tags")
-        let tagsdeleted=delete(a:prefix."tags")
-        if(tagsdeleted!=0)
-            echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
-            return
-        endif
-    endif
-    if has("cscope")
-        silent! execute "cs kill -1"
-    endif
-    if filereadable(a:prefix."cscope.files")
-        let csfilesdeleted=delete(a:prefix."cscope.files")
-        if(csfilesdeleted!=0)
-            echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.files" | echohl None
-            return
-        endif
-    endif
-    if filereadable(a:prefix."cscope.out")
-        let csoutdeleted=delete(a:prefix."cscope.out")
-        if(csoutdeleted!=0)
-            echohl WarningMsg | echo "Fail to do cscope! I cannot delete the cscope.out" | echohl None
-            return
-        endif
-    endif
-    if(executable('ctags'))
-        "silent! execute "!ctags -R --c-types=+p --fields=+S *"
-        silent! execute "!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f " .a:prefix ."tags " .a:prefix
-    endif
-    if(executable('cscope') && has("cscope") )
-        if(g:iswindows!=1)
-            silent! execute "!find " .a:prefix ." -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.php' -o -name '*.py' -o -name '*.java' -o -name '*.cs' > " .a:prefix ."cscope.files"
-        else
-            "FIXME　windows下从a:prefix扫描
-            silent! execute "!dir /s/b *.c,*.cpp,*.h,*.php,*.py,*.java,*.cs >> " .a:prefix ."cscope.files"
-        endif
-        "cscope -b or cscope -bq ?
-        silent! execute "!cscope -b -i" .a:prefix ."cscope.files -f " .a:prefix ."cscope.out"
-        execute "normal :"
-        if filereadable(a:prefix."cscope.out")
-            execute "cs add " .a:prefix ."cscope.out"
-        endif
-    endif
+" Use context to decide completion type
+let SuperTabDefaultCompletionType = "context"
 
-    "解决白屏问题
-    execute "redraw!"
-endfunction
+"vim-repress插件 see https://github.com/vim-scripts/VimRepress
+let VIMPRESS = [{'username':'cherrot',
+                \'blog_url':'http://www.cherrot.com/'
+                \}]
+"map <leader>P :BlogPreview<CR> 见 Mapping 一节
+
+"对NERD_commenter的设置,在光标所在行上，按ctrl+h变换注释,cm是多行注释,cu是取消注释
+let NERDShutUp=1
+
+"a.vim插件 :A，打开.cpp和.h对应的文件，:AV，分屏显示.cpp和.h对应的文件(无需配置)
 
 
-"进行版权声明的设置
-"添加或更新头
-function AddTitle()
-    call append(0,"/*=============================================================================")
-    call append(1,"#")
-    call append(2,"# Author: Cherrot Luo - cherrot+vim@cherrot.com")
-    call append(3,"#")
-    call append(4,"#")
-    call append(5,"# Last modified:	2012-08-31 17:02
-    call append(6,"#")
-    call append(7,"# Filename:		.vimrc
-    call append(8,"#")
-    call append(9,"# Description: ")
-    call append(10,"#")
-    call append(11,"=============================================================================*")
-    echohl WarningMsg | echo "Successful in adding the copyright." | echohl None
-endfunction
+"vim-pathogen plugin 
+"runtime bundle/vim-pathogen/autoload/pathogen.vim
+"call pathogen#infect()
 
-"更新最近修改时间和文件名
-function UpdateTitle()
-    normal m'
-    execute '/# *Last modified:/s@:.*$@\=strftime(":\t%Y-%m-%d %H:%M")@'
-    normal ''
-    normal mk
-    execute '/# *Filename:/s@:.*$@\=":\t\t".expand("%:t")@'
-    execute "noh"
-    normal 'k
-    echohl WarningMsg | echo "Successful in updating the copy right." | echohl None
-endfunction
+" Vundle plugin manager
+" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+filetype off
 
-"判断前10行代码里面，是否有Last modified这个单词，
-"如果没有的话，代表没有添加过作者信息，需要新添加；
-"如果有的话，那么只需要更新即可
-function TitleDet()
-    let n=1
-    "默认为添加
-    while n < 10
-        let line = getline(n)
-        if line =~ '^\#\s*\S*Last\smodified:\S*.*$'
-            call UpdateTitle()
-            return
-        endif
-        let n = n + 1
-    endwhile
-    call AddTitle()
-endfunction
+set runtimepath+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'Align' "Download from github instead of vim.org
+Bundle 'vim-scripts/Align'
+Bundle 'vim-scripts/autoload_cscope.vim'
+Bundle 'vim-scripts/bufexplorer.zip'
+Bundle 'kien/ctrlp.vim'
+Bundle 'lilydjwg/echofunc.vim'
+Bundle 'lilydjwg/fcitx.vim'
+Bundle 'vim-scripts/grep.vim'
+Bundle 'vim-scripts/Indent-Guides'
+Bundle 'vim-scripts/Markdown'
+Bundle 'vim-scripts/matchit.zip'
+Bundle 'vim-scripts/snipMate'
+Bundle 'vim-scripts/SuperTab-continued.'
+Bundle 'vim-scripts/Tagbar'
+"Bundle 'vim-scripts/tagbar-phpctags'
+Bundle 'vim-scripts/The-NERD-Commenter'
+Bundle 'vim-scripts/The-NERD-tree'
+"Bundle 'jistr/vim-nerdtree-tabs'
+"Bundle 'vim-scripts/a.vim'
+Bundle 'vim-scripts/DoxygenToolkit.vim'
+"Bundle 'Shougo/neocomplcache.vim'
+"Bundle 'Shougo/neocomplete.vim'
+"Bundle 'vim-scripts/OmniCppComplete'
+Bundle 'pkufranky/VimRepress'
+
+filetype plugin indent on
