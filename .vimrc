@@ -369,22 +369,22 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " http://lilydjwg.is-programmer.com/posts/23574.html
-if ! has("gui_running")
-    "修复ALT键 可用Alt控制缓冲区移动等，但不能在Insert模式下使用
-    for i in range(97,122) " a-z in ascii
-        let c=nr2char(i)
-        exec "set <M-".c.">=\<Esc>".c
-    endfor
-    set ttimeoutlen=50
-
-    "避免终端退出时乱码
-    set t_fs=(B
-    set t_IE=(B
-else
-    set guioptions=a  "去掉菜单等，自动复制选择的区域
-    set guicursor=a:blinkwait600-blinkoff600-blinkon600 "光标闪烁频率
-    set guifont=Monospace\ 11
-endif
+"if ! has("gui_running")
+"    "修复ALT键 可用Alt控制缓冲区移动等，但不能在Insert模式下使用
+"    for i in range(97,122) " a-z in ascii
+"        let c=nr2char(i)
+"        exec "set <M-".c.">=\<Esc>".c
+"    endfor
+"    set ttimeoutlen=50
+"
+"    "避免终端退出时乱码
+"    set t_fs=(B
+"    set t_IE=(B
+"else
+"    set guioptions=a  "去掉菜单等，自动复制选择的区域
+"    set guicursor=a:blinkwait600-blinkoff600-blinkon600 "光标闪烁频率
+"    set guifont=Monospace\ 11
+"endif
 
 
 " Tab navigation
