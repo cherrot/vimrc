@@ -698,3 +698,5 @@ Bundle 'Shougo/neocomplete.vim'
 Bundle 'pkufranky/VimRepress'
 
 filetype plugin indent on
+"If your ~/.vim/bundle/ is empty except vundle, execute the following cmd:
+":BundleInstall
