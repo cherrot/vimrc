@@ -368,6 +368,25 @@ endif
 " Other Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" http://lilydjwg.is-programmer.com/posts/23574.html
+if ! has("gui_running")
+    "修复ALT键 可用Alt控制缓冲区移动等，但不能在Insert模式下使用
+    for i in range(97,122) " a-z in ascii
+        let c=nr2char(i)
+        exec "set <M-".c.">=\<Esc>".c
+    endfor
+    set ttimeoutlen=50
+
+    "避免终端退出时乱码
+    set t_fs=(B
+    set t_IE=(B
+else
+    set guioptions=a  "去掉菜单等，自动复制选择的区域
+    set guicursor=a:blinkwait600-blinkoff600-blinkon600 "光标闪烁频率
+    set guifont=Monospace\ 11
+endif
+
+
 " Tab navigation
 " nnoremap : Normal mode NO REcursive MAP key
 nnoremap tp :tabprevious<CR>
@@ -390,7 +409,8 @@ noremap <Down> gj
 " NERDTreeTabsToggle
 " This need nerdtree and nerdtreetabs both installed, press t to open the file
 " in a new tab, press ENTER to open in the current window.
-nnoremap <silent> <F2> :NERDTreeTabsToggle<CR>
+"nnoremap <silent> <F2> :NERDTreeTabsToggle<CR>
+nnoremap <silent> <F2> :NERDTreeToggle<CR>
 
 " Toggle display line number
 nnoremap <silent> <F3> :set number!<CR>
@@ -429,7 +449,6 @@ nnoremap <F12> :call Do_CsTag( $PWD .g:separator )<CR>
 "map <F4> :call TitleDet()<cr>'s
 nnoremap <leader>P :BlogPreview<CR>
 nnoremap fg :Dox<cr>
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions
@@ -494,6 +513,7 @@ function Do_CsTag(prefix)
     "解决白屏问题
     execute "redraw!"
 endfunction
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
@@ -626,6 +646,15 @@ let NERDShutUp=1
 
 "a.vim插件 :A，打开.cpp和.h对应的文件，:AV，分屏显示.cpp和.h对应的文件(无需配置)
 
+"enable 256 colors in vim ==> To support powerline
+set t_Co=256
+"set guifont=PowerlineSymbols\ for\ Powerline
+let g:Powerline_symbols = 'fancy'
+
+let g:EchoFuncKeyNext = '<C-n>'
+let g:EchoFuncKeyPrev = '<C-p>'
+"imap  n <M-n>3<BS>
+"imap  p <M-p>3<BS>
 
 "vim-pathogen plugin 
 "runtime bundle/vim-pathogen/autoload/pathogen.vim
@@ -663,7 +692,7 @@ Bundle 'The-NERD-tree'
 "Bundle 'a.vim'
 Bundle 'DoxygenToolkit.vim'
 "Bundle 'Shougo/neocomplcache.vim'
-"Bundle 'Shougo/neocomplete.vim'
+Bundle 'Shougo/neocomplete.vim'
 "Bundle 'OmniCppComplete'
 "Bundle 'scrooloose/syntastic'
 Bundle 'pkufranky/VimRepress'
