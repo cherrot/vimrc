@@ -413,7 +413,8 @@ noremap <Down> gj
 nnoremap <silent> <F2> :NERDTreeToggle<CR>
 
 " Toggle display line number
-nnoremap <silent> <F3> :set number!<CR>
+"nnoremap <silent> <F3> :set number!<CR>
+nnoremap <silent> <F3> :set foldenable!<CR>
 
 " Paste toggle
 set pastetoggle=<F4>
