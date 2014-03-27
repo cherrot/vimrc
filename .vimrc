@@ -386,6 +386,8 @@ endif
 "    set guifont=Monospace\ 11
 "endif
 
+" Let <leader> be , instead of \
+let mapleader = ","
 
 " Tab navigation
 " nnoremap : Normal mode NO REcursive MAP key
@@ -676,7 +678,8 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Align'
 Bundle 'autoload_cscope.vim'
 Bundle 'bufexplorer.zip'
-Bundle 'kien/ctrlp.vim'
+"Bundle 'kien/ctrlp.vim'
+Bundle 'Yggdroot/LeaderF'
 Bundle 'echofunc.vim'
 Bundle 'lilydjwg/fcitx.vim'
 Bundle 'grep.vim'
