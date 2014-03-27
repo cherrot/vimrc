@@ -704,3 +704,15 @@ Bundle 'pkufranky/VimRepress'
 filetype plugin indent on
 "If your ~/.vim/bundle/ is empty except vundle, execute the following cmd:
 ":BundleInstall
+"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" General
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Set to autoload_cscope to support all types of sources files.
+" au BufEnter *      call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
+" au BufUnload *     call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+
+" Set to leaderF to support search from the CWD of the current shell.
+" exec 'nnoremap <silent>' g:Lf_ShortcutF ':<C-U>Leaderf '.$PWD.'<CR>'
