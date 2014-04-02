@@ -679,7 +679,8 @@ Bundle 'Align'
 Bundle 'autoload_cscope.vim'
 Bundle 'bufexplorer.zip'
 Bundle 'kien/ctrlp.vim'
-Bundle 'Yggdroot/LeaderF' " Better than ctrlp :)
+" Better than ctrlp :)
+Bundle 'Yggdroot/LeaderF'
 Bundle 'echofunc.vim'
 Bundle 'lilydjwg/fcitx.vim'
 Bundle 'grep.vim'
