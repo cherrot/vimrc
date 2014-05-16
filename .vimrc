@@ -640,8 +640,8 @@ let SuperTabDefaultCompletionType = "context"
 
 "vim-repress插件 see https://github.com/vim-scripts/VimRepress
 let VIMPRESS = [{'username':'cherrot',
-                \'blog_url':'http://www.cherrot.com/'
-                \}]
+            \'blog_url':'http://www.cherrot.com/'
+            \}]
 "map <leader>P :BlogPreview<CR> 见 Mapping 一节
 
 "对NERD_commenter的设置,在光标所在行上，按ctrl+h变换注释,cm是多行注释,cu是取消注释
@@ -654,8 +654,9 @@ set t_Co=256
 "set guifont=PowerlineSymbols\ for\ Powerline
 let g:Powerline_symbols = 'fancy'
 
-let g:EchoFuncKeyNext = '<C-n>'
-let g:EchoFuncKeyPrev = '<C-p>'
+"I get trouble maping <M-n> and <M-p> :(
+let g:EchoFuncKeyNext = '<S-n>'
+let g:EchoFuncKeyPrev = '<S-p>'
 "imap  n <M-n>3<BS>
 "imap  p <M-p>3<BS>
 
@@ -678,7 +679,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Align'
 Bundle 'autoload_cscope.vim'
 Bundle 'bufexplorer.zip'
-Bundle 'kien/ctrlp.vim'
+" Bundle 'kien/ctrlp.vim'
 " Better than ctrlp :)
 Bundle 'Yggdroot/LeaderF'
 Bundle 'echofunc.vim'
