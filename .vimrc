@@ -193,7 +193,7 @@ autocmd FileType ruby set shiftwidth=2 softtabstop=2
 autocmd FileType javascript set shiftwidth=4 softtabstop=4 foldmethod=indent foldnestmax=4 textwidth=120
 
 " Use extension to set filetype
-autocmd BufNewFile,BufRead *.md set filetype=markdown
+" autocmd BufNewFile,BufRead *.md set filetype=markdown
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ctags & Cscope
@@ -468,7 +468,7 @@ nnoremap fg :Dox<cr>
 "cscope使用绝对路径的两个方法：
 "1，直接find绝对路径或添加cscope -P /path 参数，使文件列表全部以绝对路径表示；
 "2. :cscope add /path/to/cscope.out /path/to/src/code
-function Do_CsTag(prefix)
+function! Do_CsTag(prefix)
     let dir = getcwd()
     if filereadable(a:prefix."tags")
         let tagsdeleted=delete(a:prefix."tags")
@@ -686,7 +686,8 @@ Bundle 'echofunc.vim'
 Bundle 'lilydjwg/fcitx.vim'
 Bundle 'grep.vim'
 Bundle 'Indent-Guides'
-Bundle 'Markdown'
+"Bundle 'Markdown'
+Bundle 'plasticboy/vim-markdown'
 Bundle 'matchit.zip'
 "snipMate would disable my TAB! 
 "Bundle 'snipMate'
