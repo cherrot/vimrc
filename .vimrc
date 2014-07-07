@@ -86,19 +86,6 @@ set backupdir=~/.vim/backup
 set directory=~/.vim/swap,/tmp
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colors
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Set colorscheme
-colorscheme desert
-
-" Enable syntax highlight
-syntax on
-
-"Use black background 
-"set background=dark 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Interface
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -315,6 +302,15 @@ if has("cscope")
     nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>   
     nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>     
 
+    " not works :(
+    "nnoremap <silent><Leader><C-@>s <C-@>s<C-w>T
+    "nnoremap <silent><Leader><C-@>g <C-@>g<C-w>T
+    "nnoremap <silent><Leader><C-@>c <C-@>c<C-w>T
+    "nnoremap <silent><Leader><C-@>t <C-@>t<C-w>T
+    "nnoremap <silent><Leader><C-@>e <C-@>e<C-w>T
+    "nnoremap <silent><Leader><C-@>f <C-@>f<C-w>T
+    "nnoremap <silent><Leader><C-@>i <C-@>i<C-w>T
+    "nnoremap <silent><Leader><C-@>d <C-@>d<C-w>T
 
     " Hitting CTRL-space *twice* before the search type does a vertical 
     " split instead of a horizontal one (vim 6 and up only)
@@ -360,7 +356,7 @@ if has("cscope")
     "
     "set ttimeoutlen=100
 
-"end scope mappings
+    "end scope mappings
 endif
 
 
@@ -519,9 +515,8 @@ endfunction
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins
+" Plugins Config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 "DoxygenToolkit插件配置
 "map fg : Dox<cr> //见Mapping一节
 let g:DoxygenToolkit_authorName="Cherrot Luo"
@@ -660,6 +655,9 @@ let g:EchoFuncKeyPrev = '<C-p>'
 "imap  n <M-n>3<BS>
 "imap  p <M-p>3<BS>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins Manager
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "vim-pathogen plugin 
 "runtime bundle/vim-pathogen/autoload/pathogen.vim
 "call pathogen#infect()
@@ -703,17 +701,40 @@ Bundle 'DoxygenToolkit.vim'
 Bundle 'Shougo/neocomplete.vim'
 "Bundle 'OmniCppComplete'
 "Bundle 'scrooloose/syntastic'
-Bundle 'pkufranky/VimRepress'
+"Bundle 'pkufranky/VimRepress'
+Bundle 'VimRepress'
+Bundle 'altercation/vim-colors-solarized'
 
 filetype plugin indent on
 "If your ~/.vim/bundle/ is empty except vundle, execute the following cmd:
 ":BundleInstall
-"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General
+" Colors
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Set colorscheme
+"colorscheme desert
+colorscheme solarized
+
+" Enable syntax highlight
+" The ':syntax enable' command will keep your current color settings.  This
+" allows using ':highlight' commands to set your preferred colors before or
+" after using this command.  If you want Vim to overrule your settings with the
+" defaults, use: ':syntax on'
+"syntax on
+syntax enable
+
+"Use black background 
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Other
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set to autoload_cscope to support all types of sources files.
 " au BufEnter *      call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
 " au BufUnload *     call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
