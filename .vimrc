@@ -650,8 +650,8 @@ set t_Co=256
 let g:Powerline_symbols = 'fancy'
 
 "I get trouble maping <M-n> and <M-p> :(
-let g:EchoFuncKeyNext = '<C-n>'
-let g:EchoFuncKeyPrev = '<C-p>'
+let g:EchoFuncKeyNext = '<C-j>'
+let g:EchoFuncKeyPrev = '<C-k>'
 "imap  n <M-n>3<BS>
 "imap  p <M-p>3<BS>
 
