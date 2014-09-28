@@ -57,7 +57,7 @@ set autochdir
 set sessionoptions-=curdir
 
 " Keep more backups for one file
-autocmd BufWritePre * let &backupext = strftime(".%m-%d-%H-%M")
+" autocmd BufWritePre * let &backupext = strftime(".%m-%d-%H-%M")
 
 " keep 512 lines of command line history
 set history=512		
@@ -79,11 +79,12 @@ set backup
 
 " Set backup directory
 " TODO add windows settings
-set backupdir=~/.vim/backup
+"set backupdir=~/.vim/backup
+" set backupdir=/tmp
 
 " Set swap file directory
 " TODO add windows settings
-set directory=~/.vim/swap,/tmp
+" set directory=~/.vim/swap,/tmp
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Interface
