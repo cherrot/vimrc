@@ -80,11 +80,11 @@ set backup
 " Set backup directory
 " TODO add windows settings
 "set backupdir=~/.vim/backup
-" set backupdir=/tmp
+set backupdir=/tmp
 
 " Set swap file directory
 " TODO add windows settings
-" set directory=~/.vim/swap,/tmp
+set directory=~/.vim/swap,/tmp
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Interface
