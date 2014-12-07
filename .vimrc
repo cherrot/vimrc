@@ -634,10 +634,11 @@ let autocscope_menus = 0
 " Use context to decide completion type
 let SuperTabDefaultCompletionType = "context"
 
-"vim-repress插件 see https://github.com/vim-scripts/VimRepress
-let VIMPRESS = [{'username':'cherrot',
-            \'blog_url':'http://www.cherrot.com/'
-            \}]
+"vim-repress插件 see https://bitbucket.org/pentie/vimrepress
+"now config is ~/.vimpressrc
+"let VIMPRESS = [{'username':'cherrot',
+            "\'blog_url':'http://www.cherrot.com/'
+            "\}]
 "map <leader>P :BlogPreview<CR> 见 Mapping 一节
 
 "对NERD_commenter的设置,在光标所在行上，按ctrl+h变换注释,cm是多行注释,cu是取消注释
