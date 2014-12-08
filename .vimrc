@@ -529,17 +529,6 @@ let g:DoxygenToolkit_returnTag = "@return\t"
 let g:DoxygenToolkit_briefTag_funcName = "no"
 let g:DoxygenToolkit_maxFunctionProtoLines = 30
 
-"OmniCppComplete Plugin 目前用neocomplcache
-"neocomplcache 代码补全插件
-"let g:acp_enableAtStartup = 0
-"let g:neocomplcache_enable_at_startup = 1
-"let g:neocomplcache_enable_smart_case = 1
-"let g:neocomplcache_enable_underbar_completion = 1
-"let g:neocomplcache_enable_camel_case_completion = 1
-"let g:neocomplcache_auto_completion_start_length = 2
-"let g:neocomplcache_min_keyword_length = 1
-"let g:neocomplcache_min_syntax_length = 1
-
 "neocomplete 使用Lua的下一代代码补全插件
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -550,6 +539,24 @@ let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 2
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+"neocomplete compatible with clang_complete / vim-clang
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif 
+let g:neocomplete#force_overwrite_completefunc = 1
+let g:neocomplete#force_omni_input_patterns.c =
+            \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.cpp =
+            \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:neocomplete#force_omni_input_patterns.objc =
+            \ '\[\h\w*\s\h\?\|\h\w*\%(\.\|->\)'
+let g:neocomplete#force_omni_input_patterns.objcpp =
+            \ '\[\h\w*\s\h\?\|\h\w*\%(\.\|->\)\|\h\w*::\w*'
+let g:clang_complete_auto = 0
+let g:clang_auto_select = 0
+"let g:clang_use_library = 1
+
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
@@ -673,8 +680,8 @@ call vundle#rc()
 
 let g:vundle_default_git_proto = 'ssh'
 Bundle 'gmarik/vundle'
-Bundle 'Lokaltog/vim-powerline'
-"Bundle 'Lokaltog/powerline'
+"Bundle 'Lokaltog/vim-powerline'
+Bundle 'Lokaltog/powerline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Align'
 Bundle 'autoload_cscope.vim'
@@ -701,7 +708,7 @@ Bundle 'The-NERD-tree'
 Bundle 'DoxygenToolkit.vim'
 "Bundle 'Shougo/neocomplcache.vim'
 Bundle 'Shougo/neocomplete.vim'
-"Bundle 'OmniCppComplete'
+Bundle 'justmao945/vim-clang'
 "Bundle 'scrooloose/syntastic'
 "Bundle 'pkufranky/VimRepress'
 Bundle 'VimRepress'
