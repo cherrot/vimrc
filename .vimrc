@@ -662,7 +662,7 @@ let g:EchoFuncKeyPrev = '<C-k>'
 "imap  p <M-p>3<BS>
 
 "disable folding in markdown
-let g:vim_markdown_folding_disabled=1
+"let g:vim_markdown_folding_disabled=1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Manager
