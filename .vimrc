@@ -170,14 +170,11 @@ set cinoptions=:0,l1,t0,g0
 
 " set textwidth for mail
 autocmd FileType mail set textwidth=72
-
+autocmd FileType markdown set textwidth=0
 " Use soft tabs for python
 autocmd FileType python set expandtab shiftwidth=4 softtabstop=4 foldmethod=indent
-
 autocmd FileType php set foldmethod=indent
-
 autocmd FileType ruby set shiftwidth=2 softtabstop=2
-
 autocmd FileType javascript set shiftwidth=4 softtabstop=4 foldmethod=indent foldnestmax=4 textwidth=120
 
 " Use extension to set filetype
@@ -694,6 +691,8 @@ Bundle 'lilydjwg/fcitx.vim'
 Bundle 'grep.vim'
 Bundle 'Indent-Guides'
 "Bundle 'Markdown'
+"tabular is Used by vim-markdown
+Plugin 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'matchit.zip'
 "snipMate would disable my TAB! 
