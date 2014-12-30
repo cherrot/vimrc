@@ -51,7 +51,8 @@ set wildmode=longest:full,full
 set ttimeoutlen=100
 
 " Auto change current directory
-set autochdir
+" I don't need autochdir since I have LeaderF ;)
+" set autochdir
 
 " Use absolute paths in sessions
 set sessionoptions-=curdir
