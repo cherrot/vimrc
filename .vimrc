@@ -176,7 +176,7 @@ autocmd FileType markdown set textwidth=0
 autocmd FileType python set expandtab shiftwidth=4 softtabstop=4 foldmethod=indent
 autocmd FileType php set foldmethod=indent
 autocmd FileType ruby set shiftwidth=2 softtabstop=2
-autocmd FileType javascript set shiftwidth=4 softtabstop=4 foldmethod=indent foldnestmax=4 textwidth=120
+autocmd FileType javascript set shiftwidth=2 softtabstop=2 foldmethod=indent foldnestmax=4 textwidth=120
 
 " Use extension to set filetype
 " autocmd BufNewFile,BufRead *.md set filetype=markdown
