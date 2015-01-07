@@ -171,7 +171,7 @@ set cinoptions=:0,l1,t0,g0
 
 " set textwidth for mail
 autocmd FileType mail set textwidth=72
-autocmd FileType markdown set textwidth=0
+autocmd FileType mkd set textwidth=0
 " Use soft tabs for python
 autocmd FileType python set expandtab shiftwidth=4 softtabstop=4 foldmethod=indent
 autocmd FileType php set foldmethod=indent
