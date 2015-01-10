@@ -665,6 +665,15 @@ let g:EchoFuncKeyPrev = '<C-k>'
 "disable folding in markdown
 "let g:vim_markdown_folding_disabled=1
 
+" syntastic settings
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Manager
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -716,8 +725,10 @@ Bundle 'justmao945/vim-clang'
 "Bundle 'pkufranky/VimRepress'
 Bundle 'VimRepress'
 Bundle 'altercation/vim-colors-solarized'
+"syntax checker
+Bundle 'scrooloose/syntastic'
 
-filetype plugin indent on
+"filetype plugin indent on
 "If your ~/.vim/bundle/ is empty except vundle, execute the following cmd:
 ":BundleInstall
 
