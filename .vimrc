@@ -31,9 +31,6 @@ set foldenable
 set foldnestmax=2
 set foldmethod=syntax
 
-" Enable filetypes
-filetype plugin indent on
-
 " Set fileencodings
 set fileencodings=utf-8,chinese,latin-1 ",ucs-bom,gbk,big5
 let $LANG="zh_CN.UTF-8"
@@ -730,24 +727,34 @@ Bundle 'altercation/vim-colors-solarized'
 "syntax checker
 Bundle 'scrooloose/syntastic'
 
-"filetype plugin indent on
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+
 "If your ~/.vim/bundle/ is empty except vundle, execute the following cmd:
 ":BundleInstall
+
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Set colorscheme
-"colorscheme desert
-colorscheme solarized
 
 " Enable syntax highlight
 " The ':syntax enable' command will keep your current color settings.  This
 " allows using ':highlight' commands to set your preferred colors before or
 " after using this command.  If you want Vim to overrule your settings with the
 " defaults, use: ':syntax on'
-"syntax on
+" syntax on
 syntax enable
 
 "Use black background 
@@ -756,6 +763,10 @@ if has('gui_running')
 else
     set background=dark
 endif
+
+" Set colorscheme
+"colorscheme desert
+colorscheme solarized
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Other
