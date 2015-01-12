@@ -685,11 +685,13 @@ let g:syntastic_check_on_wq = 0
 " git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 filetype off
 
-set runtimepath+=~/.vim/bundle/vundle/
-call vundle#rc()
+set runtimepath+=~/.vim/bundle/Vundle.vim
+"call vundle#rc()
+call vundle#begin()
 
-let g:vundle_default_git_proto = 'ssh'
-Bundle 'gmarik/vundle'
+"let g:vundle_default_git_proto = 'ssh'
+"
+Bundle 'gmarik/Vundle.vim'
 "Bundle 'Lokaltog/vim-powerline'
 Bundle 'Lokaltog/powerline'
 Bundle 'Lokaltog/vim-easymotion'
