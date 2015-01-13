@@ -671,7 +671,9 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-let g:syntastic_python_python_exec = '/usr/bin/python2'
+" Now I don't think it a good idea not to use the default `python`, 
+" use vertualenv instead of global setting.
+" let g:syntastic_python_python_exec = '/usr/bin/python2'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Manager
