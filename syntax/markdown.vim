@@ -1,1 +1,0 @@
-/home/cherrot/.vim/bundle/vim-markdown/syntax/markdown.vim

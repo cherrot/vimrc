@@ -1,3 +1,8 @@
 bundle/
 backup/
 swap/
+ftdetect/
+syntax/
+stl_ctags
+.viminfo
+.netrwhist
