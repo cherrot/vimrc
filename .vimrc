@@ -683,7 +683,7 @@ let g:syntastic_check_on_wq = 0
 "call pathogen#infect()
 
 " Vundle plugin manager
-" git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 filetype off
 
 set runtimepath+=~/.vim/bundle/Vundle.vim
