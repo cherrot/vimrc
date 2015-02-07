@@ -68,6 +68,9 @@ autocmd BufReadPost *
 	\   exe "normal g`\"" |
 	\ endif
 
+" Let <leader> be , instead of \
+let mapleader = ","
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Backup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -378,8 +381,6 @@ endif
 "    set guifont=Monospace\ 11
 "endif
 
-" Let <leader> be , instead of \
-let mapleader = ","
 
 " Tab navigation
 " nnoremap : Normal mode NO REcursive MAP key
@@ -445,6 +446,17 @@ nnoremap <F12> :call Do_CsTag( $PWD .g:separator )<CR>
 nnoremap <leader>P :BlogPreview<CR>
 nnoremap fg :Dox<cr>
 
+
+"Tabularize mapping. 
+"TODO I don't know why I cannot map :Tabularize /|<CR> ?
+"if exists(":Tabularize")
+nmap <Leader>aa= :Tabularize /=<CR>
+vmap <Leader>aa= :Tabularize /=<CR>
+nmap <Leader>aa: :Tabularize /:\zs<CR>
+vmap <Leader>aa: :Tabularize /:\zs<CR>
+"endif
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -508,7 +520,6 @@ function! Do_CsTag(prefix)
     "解决白屏问题
     execute "redraw!"
 endfunction
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Config
@@ -675,6 +686,7 @@ let g:syntastic_check_on_wq = 0
 " use vertualenv instead of global setting.
 " let g:syntastic_python_python_exec = '/usr/bin/python2'
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Manager
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -708,6 +720,7 @@ Bundle 'grep.vim'
 Bundle 'Indent-Guides'
 "Bundle 'Markdown'
 "tabular is Used by vim-markdown
+"and also an awesome formatter plugin!
 Plugin 'godlygeek/tabular'
 Bundle 'plasticboy/vim-markdown'
 Bundle 'matchit.zip'
@@ -730,6 +743,7 @@ Bundle 'VimRepress'
 Bundle 'altercation/vim-colors-solarized'
 "syntax checker
 Bundle 'scrooloose/syntastic'
+Bundle 'python.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -768,6 +782,7 @@ else
     set background=dark
 endif
 
+"let g:solarized_termcolors=16
 " Set colorscheme
 "colorscheme desert
 colorscheme solarized
