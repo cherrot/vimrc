@@ -504,7 +504,7 @@ function! Do_CsTag(prefix)
     endif
     if(executable('cscope') && has("cscope") )
         if(g:iswindows!=1)
-            silent! execute "!find " .a:prefix ." -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.php' -o -name '*.py' -o -name '*.java' -o -name '*.cs' > " .a:prefix ."cscope.files"
+            silent! execute "!find " .a:prefix ." -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.php' -o -name '*.py' -o -name '*.java' -o -name '*.cs' -o -name '*.rb' > " .a:prefix ."cscope.files"
         else
             "FIXME　windows下从a:prefix扫描
             silent! execute "!dir /s/b *.c,*.cpp,*.h,*.php,*.py,*.java,*.cs >> " .a:prefix ."cscope.files"
