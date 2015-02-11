@@ -790,7 +790,9 @@ else
     set background=dark
 endif
 
-if(has("mac") && !has('gui_running'))
+"if(has("mac") && !has('gui_running'))
+"SSH to a VPS through mac's terminal would look awful too. So remove `has("mac")`
+if(!has('gui_running'))
   let g:solarized_termcolors=&t_Co
   let g:solarized_termtrans=1
 endif
