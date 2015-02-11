@@ -790,7 +790,10 @@ else
     set background=dark
 endif
 
-"let g:solarized_termcolors=256
+if(has("mac") && !has('gui_running'))
+  let g:solarized_termcolors=&t_Co
+  let g:solarized_termtrans=1
+endif
 " Set colorscheme
 "colorscheme desert
 colorscheme solarized
