@@ -16,15 +16,15 @@ if(g:iswindows==1)
     set guifont=Consolas:h14:cANSI
 endif
 
-"enable 256 colors in vim ==> To support powerline
-set t_Co=256
-
 if &t_Co != 256 && ! has("gui_running")  
   echomsg ""
   echomsg "err: please use GUI or a 256-color terminal (so that t_Co=256 could be set)"
   echomsg ""
   finish
 endif
+
+"enable 256 colors in vim ==> To support powerline
+set t_Co=256
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
