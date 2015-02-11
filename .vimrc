@@ -16,6 +16,16 @@ if(g:iswindows==1)
     set guifont=Consolas:h14:cANSI
 endif
 
+"enable 256 colors in vim ==> To support powerline
+set t_Co=256
+
+if &t_Co != 256 && ! has("gui_running")  
+  echomsg ""
+  echomsg "err: please use GUI or a 256-color terminal (so that t_Co=256 could be set)"
+  echomsg ""
+  finish
+endif
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -659,8 +669,6 @@ let NERDShutUp=1
 
 "a.vim插件 :A，打开.cpp和.h对应的文件，:AV，分屏显示.cpp和.h对应的文件(无需配置)
 
-"enable 256 colors in vim ==> To support powerline
-set t_Co=256
 "set guifont=PowerlineSymbols\ for\ Powerline
 let g:Powerline_symbols = 'fancy'
 
@@ -782,7 +790,7 @@ else
     set background=dark
 endif
 
-"let g:solarized_termcolors=16
+"let g:solarized_termcolors=256
 " Set colorscheme
 "colorscheme desert
 colorscheme solarized
