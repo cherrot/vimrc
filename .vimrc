@@ -751,7 +751,8 @@ Bundle 'VimRepress'
 Bundle 'altercation/vim-colors-solarized'
 "syntax checker
 Bundle 'scrooloose/syntastic'
-Bundle 'python.vim'
+"python.vim has mapped tooooo many keys! (even `[c`)
+"Bundle 'python.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
