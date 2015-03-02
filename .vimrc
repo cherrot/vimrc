@@ -795,7 +795,7 @@ endif
 "You need modify the `ANSI color` config in Preference (listed as follows):
 " 073642 DC322F 859900 B58900 268BD2 D33682 2AA198 EEE8D5
 " 002B36 CB4B16 586E75 657B83 839496 6C71C4 93A1A1 FDF6E3
-" text: 839496 bold: 93A1A1 selected: whatever (mine 000000)
+" text: 839496 bold: 93A1A1 selected: whatever (mine: EEE8D5)
 " cursor: whatever (mine: 575757)
 " background: 002B36
 
