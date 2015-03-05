@@ -194,7 +194,7 @@ autocmd FileType javascript set shiftwidth=2 softtabstop=2 foldmethod=indent fol
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ctags & Cscope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-source cscope.vim
+source ~/.vim/cscope.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Other Mappings
@@ -308,7 +308,7 @@ let g:DoxygenToolkit_briefTag_funcName = "no"
 let g:DoxygenToolkit_maxFunctionProtoLines = 30
 
 "neocomplete 使用Lua的下一代代码补全插件
-source neocomplete.vim
+source ~/.vim/neocomplete.vim
 
 
 " Set Tagbar width
@@ -418,6 +418,7 @@ Bundle 'scrooloose/syntastic'
 "python.vim has mapped tooooo many keys! (even `[c`)
 "Bundle 'python.vim'
 Bundle 'LargeFile'
+Bundle 'mkitt/tabline.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
