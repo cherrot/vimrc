@@ -1,3 +1,5 @@
+"pretty print json (I don't want it map to any key):
+":%!python -m json.tool
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Platform related settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -124,10 +126,15 @@ set display=lastline
 
 "设置匹配模式，类似当输入一个左括号时会匹配相应的那个右括号 
 set showmatch
+"show 0.2s
+set matchtime=2
 
 "Split the new window on the right&below instead of the left
 set splitright
 set splitbelow
+
+" 光标移动到buffer的顶部和底部时保持3行距离
+set scrolloff=3
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Search
@@ -173,8 +180,8 @@ set smarttab
 " Break long lines
 set textwidth=80 " wrap text for 78 letters
 
-" Set auto-formating
-set formatoptions+=mM
+" Set auto-formating. mM for chinese charaters, n for number list auto-indent
+set formatoptions+=mMn
 
 " Config C-indenting
 set cinoptions=:0,l1,t0,g0
@@ -183,7 +190,7 @@ set cinoptions=:0,l1,t0,g0
 autocmd FileType mail set textwidth=72
 autocmd FileType mkd set textwidth=0
 " Use soft tabs for python
-autocmd FileType python set expandtab shiftwidth=4 softtabstop=4 foldmethod=indent
+autocmd FileType python set expandtab shiftwidth=4 softtabstop=4 foldmethod=indent 
 autocmd FileType php set foldmethod=indent
 autocmd FileType ruby set shiftwidth=2 softtabstop=2 foldnestmax=4
 autocmd FileType javascript set shiftwidth=2 softtabstop=2 foldmethod=indent foldnestmax=4 textwidth=120
@@ -310,7 +317,6 @@ let g:DoxygenToolkit_maxFunctionProtoLines = 30
 "neocomplete 使用Lua的下一代代码补全插件
 source ~/.vim/neocomplete.vim
 
-
 " Set Tagbar width
 let tagbar_width = 32
 
@@ -378,7 +384,8 @@ call vundle#begin()
 "
 Bundle 'gmarik/Vundle.vim'
 "Bundle 'Lokaltog/vim-powerline'
-Bundle 'Lokaltog/powerline'
+"Bundle 'Lokaltog/powerline'
+Bundle 'bling/vim-airline'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Align'
 Bundle 'autoload_cscope.vim'
@@ -419,6 +426,8 @@ Bundle 'scrooloose/syntastic'
 "Bundle 'python.vim'
 Bundle 'LargeFile'
 Bundle 'mkitt/tabline.vim'
+Bundle 'MattesGroeger/vim-bookmarks'
+Bundle 'davidhalter/jedi-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
