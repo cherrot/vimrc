@@ -316,6 +316,12 @@ let g:DoxygenToolkit_maxFunctionProtoLines = 30
 
 "neocomplete 使用Lua的下一代代码补全插件
 source ~/.vim/neocomplete.vim
+"let g:jedi#goto_assignments_command = "<leader>g"
+"let g:jedi#goto_definitions_command = "<leader>d"
+"let g:jedi#documentation_command = "K"
+"let g:jedi#usages_command = "<leader>n"
+"let g:jedi#completions_command = "<C-Space>"
+"let g:jedi#rename_command = "<leader>r"
 
 " Set Tagbar width
 let tagbar_width = 32
