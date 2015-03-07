@@ -338,8 +338,28 @@ let NERDShutUp=1
 
 "a.vim插件 :A，打开.cpp和.h对应的文件，:AV，分屏显示.cpp和.h对应的文件(无需配置)
 
+"powerline config
 "set guifont=PowerlineSymbols\ for\ Powerline
 "let g:Powerline_symbols = 'fancy'
+
+""""""""""""""""""""""""""""""
+" airline
+""""""""""""""""""""""""""""""
+let g:airline_theme             = 'powerlineish'
+let g:airline_enable_branch     = 1
+let g:airline_enable_syntastic  = 1
+""let g:airline_powerline_fonts = 1
+"" vim-powerline symbols
+"if !exists('g:airline_symbols')
+"    let g:airline_symbols = {}
+"endif
+"let g:airline_left_sep          = ''
+"let g:airline_left_alt_sep      = ''
+"let g:airline_right_sep         = ''
+"let g:airline_right_alt_sep     = ''
+"let g:airline_branch_prefix     = ''
+"let g:airline_readonly_symbol   = ''
+"let g:airline_linecolumn_prefix = ''
 
 "I get trouble maping <M-n> and <M-p> :(
 let g:EchoFuncKeyNext = '<C-j>'
