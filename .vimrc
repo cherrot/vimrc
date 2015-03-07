@@ -124,11 +124,6 @@ set display=lastline
 "当vim进行编辑时，如果命令错误，会发出一个响声，该设置去掉响声 
 "set vb t_vb= 
 
-"设置匹配模式，类似当输入一个左括号时会匹配相应的那个右括号 
-set showmatch
-"show 0.2s
-set matchtime=2
-
 "Split the new window on the right&below instead of the left
 set splitright
 set splitbelow
@@ -190,7 +185,7 @@ set cinoptions=:0,l1,t0,g0
 autocmd FileType mail set textwidth=72
 autocmd FileType mkd set textwidth=0
 " Use soft tabs for python
-autocmd FileType python set expandtab shiftwidth=4 softtabstop=4 foldmethod=indent 
+autocmd FileType python set expandtab shiftwidth=4 softtabstop=4 "foldmethod=indent 
 autocmd FileType php set foldmethod=indent
 autocmd FileType ruby set shiftwidth=2 softtabstop=2 foldnestmax=4
 autocmd FileType javascript set shiftwidth=2 softtabstop=2 foldmethod=indent foldnestmax=4 textwidth=120
