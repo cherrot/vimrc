@@ -339,7 +339,7 @@ let NERDShutUp=1
 "a.vim插件 :A，打开.cpp和.h对应的文件，:AV，分屏显示.cpp和.h对应的文件(无需配置)
 
 "set guifont=PowerlineSymbols\ for\ Powerline
-let g:Powerline_symbols = 'fancy'
+"let g:Powerline_symbols = 'fancy'
 
 "I get trouble maping <M-n> and <M-p> :(
 let g:EchoFuncKeyNext = '<C-j>'
