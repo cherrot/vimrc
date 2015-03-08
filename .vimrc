@@ -244,28 +244,31 @@ noremap <Down> gj
 " This need nerdtree and nerdtreetabs both installed, press t to open the file
 " in a new tab, press ENTER to open in the current window.
 "nnoremap <silent> <F2> :NERDTreeTabsToggle<CR>
-nnoremap <silent> <F2> :NERDTreeToggle<CR>
+nnoremap <silent> <Leader>1 :NERDTreeToggle<CR>
 
 " Toggle display line number
-"nnoremap <silent> <F3> :set number!<CR>
-nnoremap <silent> <F3> :set foldenable!<CR>
+nnoremap <Leader>2 :set number!<CR>
+nnoremap <Leader>3 :set foldenable!<CR>
 
 " Paste toggle
-set pastetoggle=<F4>
+set pastetoggle=<Leader>4
 
 " Save & Make 
-nnoremap <F5> :w<CR>:make!<CR>
-nnoremap <F6> :w<CR>:make! %< CC=gcc CFLAGS="-g -Wall"<CR>:!./%<<CR>
+nnoremap <Leader>5 :w<CR>:make!<CR>
+nnoremap <Leader>6 :w<CR>:make! %< CC=gcc CFLAGS="-g -Wall"<CR>:!./%<<CR>
 
 " Quickfix window
-nnoremap <silent> <F7> :botright copen<CR>
-nnoremap <silent> <F8> :cclose<CR>
+nnoremap <Leader>7 :botright copen<CR>
+nnoremap <Leader>8 :cclose<CR>
 
 " Toggle Tagbar, more convenient than TList
-nnoremap <silent> <F9> :TagbarToggle<CR>
+nnoremap <silent> <Leader>9 :TagbarToggle<CR>
 
 " Grep search tools
-nnoremap <F10> :Rgrep<CR>
+nnoremap <Leader>0 :Rgrep<CR>
+"map <F11> :silent! Tlist<CR>
+nnoremap <Leader>- :call Do_CsTag( getcwd() .g:separator )<CR>
+nnoremap <Leader>= :call Do_CsTag( $PWD .g:separator )<CR>
 
 " Use <space> to toggle fold
 nnoremap <silent> <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
@@ -278,9 +281,6 @@ if $DISPLAY != '' && executable('xsel')
     nnoremap <silent> "+p :r!xsel -b<CR>
 endif
 
-"map <F11> :silent! Tlist<CR>
-nnoremap <F11> :call Do_CsTag( getcwd() .g:separator )<CR>
-nnoremap <F12> :call Do_CsTag( $PWD .g:separator )<CR>
 "map <F4> :call TitleDet()<cr>'s
 nnoremap <leader>P :BlogPreview<CR>
 nnoremap fg :Dox<cr>
@@ -346,9 +346,16 @@ let NERDShutUp=1
 """"""""""""""""""""""""""""""
 " airline
 """"""""""""""""""""""""""""""
-let g:airline_theme                        = 'powerlineish'
-let g:airline#extensions#branch#enabled    = 1
-let g:airline#extensions#syntastic#enabled = 1
+let g:airline_theme                              = 'powerlineish'
+let g:airline#extensions#branch#enabled          = 1
+let g:airline#extensions#syntastic#enabled       = 1
+let g:airline#extensions#tagbar#enabled          = 1
+let g:airline#extensions#virtualenv#enabled      = 1
+"let g:airline#extensions#tabline#enabled         = 1
+"let g:airline#extensions#tabline#show_buffers    = 1
+"let g:airline#extensions#tabline#show_tabs       = 1
+"let g:airline#extensions#tabline#buffer_idx_mode = 1
+
 ""let g:airline_powerline_fonts            = 1
 "" vim-powerline symbols
 if !exists('g:airline_symbols')
@@ -361,13 +368,13 @@ let g:airline_left_sep           = '▶ '
 "let g:airline_right_sep         = '«'
 let g:airline_right_sep          = '◀ '
 "let g:airline_right_alt_sep     = '<'
-let g:airline_symbols.linenr     = '␊'
-let g:airline_symbols.linenr     = '␤'
-let g:airline_symbols.linenr     = '¶'
+"let g:airline_symbols.linenr     = '␊'
+"let g:airline_symbols.linenr     = '␤'
+"let g:airline_symbols.linenr     = '¶'
 let g:airline_symbols.branch     = '⎇'
-let g:airline_symbols.paste      = 'ρ'
-let g:airline_symbols.paste      = 'Þ'
-let g:airline_symbols.paste      = '∥'
+"let g:airline_symbols.paste      = 'ρ'
+"let g:airline_symbols.paste      = 'Þ'
+"let g:airline_symbols.paste      = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 "let g:airline_branch_prefix     = ''
 "let g:airline_readonly_symbol   = ''
