@@ -525,9 +525,17 @@ colorscheme solarized
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Other
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let s:SID = Sid('bundle/autoload_cscope.vim/plugin/autoload_cscope.vim')
+"function! s:Is( input, expected, description )
+    "let l:got = SidInvoke(s:SID, printf("IsWildcardPathPattern('%s')", a:input))
+    "call vimtap#Is(l:got, a:expected, a:description)
+"endfunction
+
 " Set to autoload_cscope to support all types of sources files.
 " au BufEnter *      call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
 " au BufUnload *     call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
+" that's not work
+" au BufEnter *.py   call autoload_cscope#Cycle_csdb() | call autoload_cscope#Cycle_macros_menus()
 
 " Set to leaderF to support search from the CWD of the current shell.
 " exec 'nnoremap <silent>' g:Lf_ShortcutF ':<C-U>Leaderf '.$PWD.'<CR>'
