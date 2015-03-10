@@ -468,6 +468,7 @@ Bundle 'mkitt/tabline.vim'
 Bundle 'MattesGroeger/vim-bookmarks'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'jmcantrell/vim-virtualenv'
+Bundle 'TaskList.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
