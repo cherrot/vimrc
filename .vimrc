@@ -350,7 +350,7 @@ let NERDShutUp=1
 let g:airline_theme                              = 'powerlineish'
 let g:airline#extensions#branch#enabled          = 1
 "It often cause syntastic not working
-"let g:airline#extensions#syntastic#enabled       = 1
+let g:airline#extensions#syntastic#enabled       = 1
 let g:airline#extensions#tagbar#enabled          = 1
 let g:airline#extensions#virtualenv#enabled      = 1
 "let g:airline#extensions#tabline#enabled         = 1
@@ -457,7 +457,6 @@ Bundle 'DoxygenToolkit.vim'
 "Bundle 'Shougo/neocomplcache.vim'
 Bundle 'Shougo/neocomplete.vim'
 Bundle 'justmao945/vim-clang'
-"Bundle 'scrooloose/syntastic'
 "Bundle 'pkufranky/VimRepress'
 Bundle 'VimRepress'
 Bundle 'altercation/vim-colors-solarized'
