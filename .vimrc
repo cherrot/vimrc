@@ -1,5 +1,6 @@
 "pretty print json (I don't want it map to any key):
 ":%!python -m json.tool
+"ctrl+r = to insert a caculated value
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Platform related settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -348,7 +349,8 @@ let NERDShutUp=1
 """"""""""""""""""""""""""""""
 let g:airline_theme                              = 'powerlineish'
 let g:airline#extensions#branch#enabled          = 1
-let g:airline#extensions#syntastic#enabled       = 1
+"It often cause syntastic not working
+"let g:airline#extensions#syntastic#enabled       = 1
 let g:airline#extensions#tagbar#enabled          = 1
 let g:airline#extensions#virtualenv#enabled      = 1
 "let g:airline#extensions#tabline#enabled         = 1
