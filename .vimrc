@@ -1,6 +1,7 @@
 "pretty print json (I don't want it map to any key):
 ":%!python -m json.tool
-"ctrl+r = to insert a caculated value
+"ctrl+r =           to insert a caculated value
+":w !sudo tee %     to save file with sudo
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Platform related settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
