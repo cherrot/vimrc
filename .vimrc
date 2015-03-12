@@ -313,6 +313,8 @@ let g:DoxygenToolkit_maxFunctionProtoLines = 30
 
 "neocomplete 使用Lua的下一代代码补全插件
 source ~/.vim/neocomplete.vim
+"let g:neocomplete#fallback_mappings = ["\<C-x>\<C-o>", "\<C-x>\<C-n>"]
+"当自动提示没有满意结果时，可以使用 C-x C-n 查看当前buffer的提示列表
 let g:jedi#popup_select_first = 0
 let g:jedi#popup_on_dot = 0
 "let g:jedi#goto_assignments_command = "<leader>g"
