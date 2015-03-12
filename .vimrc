@@ -313,6 +313,8 @@ let g:DoxygenToolkit_maxFunctionProtoLines = 30
 
 "neocomplete 使用Lua的下一代代码补全插件
 source ~/.vim/neocomplete.vim
+let g:jedi#popup_select_first = 0
+let g:jedi#popup_on_dot = 0
 "let g:jedi#goto_assignments_command = "<leader>g"
 "let g:jedi#goto_definitions_command = "<leader>d"
 "let g:jedi#documentation_command = "K"
