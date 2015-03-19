@@ -11,4 +11,5 @@ I use vim to write markdown, python, ruby, Erlang/Elixir, php, javascript, C, C+
         ln -sf ~/.vim/.vimrc ~/
 4. run `vim`, I know there would be some errors, just press any key to ignore that this time. 
 run `:PluginInstall` to install all the requirements.
-5. restart your `vim` and welcome to the new world!
+5. After somedays you could run `:PluginUpdate` to update all the installed plugins.
+5. restart your `vim` and **welcome to the new world!**
