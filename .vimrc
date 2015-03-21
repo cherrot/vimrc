@@ -428,53 +428,54 @@ call vundle#begin()
 
 "let g:vundle_default_git_proto = 'ssh'
 "
-Bundle 'gmarik/Vundle.vim'
-"Bundle 'Lokaltog/vim-powerline'
-"Bundle 'Lokaltog/powerline'
-Bundle 'bling/vim-airline'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Align'
-Bundle 'autoload_cscope.vim'
-Bundle 'bufexplorer.zip'
-" Bundle 'kien/ctrlp.vim'
+Plugin 'gmarik/Vundle.vim'
+"Plugin 'Lokaltog/vim-powerline'
+"Plugin 'Lokaltog/powerline'
+Plugin 'bling/vim-airline'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Align'
+Plugin 'autoload_cscope.vim'
+Plugin 'bufexplorer.zip'
+" Plugin 'kien/ctrlp.vim'
 " Better than ctrlp :)
-Bundle 'Yggdroot/LeaderF'
-Bundle 'echofunc.vim'
-Bundle 'lilydjwg/fcitx.vim'
-Bundle 'grep.vim'
-Bundle 'Indent-Guides'
-"Bundle 'Markdown'
+Plugin 'Yggdroot/LeaderF'
+Plugin 'echofunc.vim'
+Plugin 'lilydjwg/fcitx.vim'
+Plugin 'grep.vim'
+Plugin 'Indent-Guides'
+"Plugin 'Markdown'
 "tabular is Used by vim-markdown
 "and also an awesome formatter plugin!
 Plugin 'godlygeek/tabular'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'matchit.zip'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'matchit.zip'
 "snipMate would disable my TAB! 
-"Bundle 'snipMate'
-Bundle 'SuperTab-continued.'
-Bundle 'Tagbar'
-"Bundle 'tagbar-phpctags'
-Bundle 'The-NERD-Commenter'
-Bundle 'The-NERD-tree'
-"Bundle 'jistr/vim-nerdtree-tabs'
-"Bundle 'a.vim'
-Bundle 'DoxygenToolkit.vim'
-"Bundle 'Shougo/neocomplcache.vim'
-Bundle 'Shougo/neocomplete.vim'
-Bundle 'justmao945/vim-clang'
-"Bundle 'pkufranky/VimRepress'
-Bundle 'VimRepress'
-Bundle 'altercation/vim-colors-solarized'
+"Plugin 'snipMate'
+Plugin 'SuperTab-continued.'
+Plugin 'Tagbar'
+"Plugin 'tagbar-phpctags'
+Plugin 'The-NERD-Commenter'
+Plugin 'The-NERD-tree'
+"Plugin 'jistr/vim-nerdtree-tabs'
+"Plugin 'a.vim'
+Plugin 'DoxygenToolkit.vim'
+"Plugin 'Shougo/neocomplcache.vim'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'justmao945/vim-clang'
+"Plugin 'pkufranky/VimRepress'
+Plugin 'VimRepress'
+Plugin 'altercation/vim-colors-solarized'
 "syntax checker
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 "python.vim has mapped tooooo many keys! (even `[c`)
-"Bundle 'python.vim'
-Bundle 'LargeFile'
-Bundle 'mkitt/tabline.vim'
-Bundle 'MattesGroeger/vim-bookmarks'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'jmcantrell/vim-virtualenv'
-Bundle 'TaskList.vim'
+"Plugin 'python.vim'
+Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'LargeFile'
+Plugin 'mkitt/tabline.vim'
+Plugin 'MattesGroeger/vim-bookmarks'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'TaskList.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -483,7 +484,7 @@ filetype plugin indent on    " required
 "filetype plugin on
 
 "If your ~/.vim/bundle/ is empty except vundle, execute the following cmd:
-":BundleInstall
+":PluginInstall
 
 " Brief help
 " :PluginList       - lists configured plugins
