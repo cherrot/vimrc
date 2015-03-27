@@ -1,7 +1,12 @@
 "pretty print json (I don't want it map to any key):
 ":%!python -m json.tool
+"
 "ctrl+r =           to insert a caculated value
+"
 ":w !sudo tee %     to save file with sudo
+"
+"convert ascii in json to utf-8
+"native2ascii -encoding UTF-8 -reverse src.json out.json
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Platform related settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
