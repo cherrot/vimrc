@@ -298,6 +298,8 @@ nnoremap fg :Dox<cr>
 "if exists(":Tabularize")
 nmap <Leader>aa= :Tabularize /=<CR>
 vmap <Leader>aa= :Tabularize /=<CR>
+nmap <Leader>aa\ :Tabularize /\|<CR>
+vmap <Leader>aa\ :Tabularize /\|<CR>
 nmap <Leader>aa: :Tabularize /:\zs<CR>
 vmap <Leader>aa: :Tabularize /:\zs<CR>
 "endif
