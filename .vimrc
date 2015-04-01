@@ -456,7 +456,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'matchit.zip'
 "snipMate would disable my TAB! 
 "Plugin 'snipMate'
-Plugin 'SuperTab-continued.'
+Plugin 'SuperTab--Van-Dewoestine'
 Plugin 'Tagbar'
 "Plugin 'tagbar-phpctags'
 Plugin 'The-NERD-Commenter'
