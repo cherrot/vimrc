@@ -35,6 +35,8 @@ endif
 "enable 256 colors in vim ==> To support powerline
 set t_Co=256
 
+" :help readonly
+"set noro
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
