@@ -460,7 +460,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'matchit.zip'
 "snipMate would disable my TAB! 
 "Plugin 'snipMate'
-Plugin 'SuperTab-continued'
+Plugin 'SuperTab--Van-Dewoestine'
 Plugin 'Tagbar'
 "Plugin 'tagbar-phpctags'
 Plugin 'The-NERD-Commenter'
@@ -484,7 +484,7 @@ Plugin 'mkitt/tabline.vim'
 Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'TaskList.vim'
+"Plugin 'TaskList.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
