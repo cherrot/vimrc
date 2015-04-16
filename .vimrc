@@ -306,6 +306,12 @@ nmap <Leader>aa: :Tabularize /:\zs<CR>
 vmap <Leader>aa: :Tabularize /:\zs<CR>
 "endif
 
+"emmet mapping.
+"frontend development for css,html
+let g:user_emmet_mode='nv'
+let g:user_emmet_install_global = 0
+autocmd FileType html,css,scss,sass,less EmmetInstall
+let g:user_emmet_expandabbr_key = '<tab>'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -484,8 +490,9 @@ Plugin 'mkitt/tabline.vim'
 Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'mattn/emmet-vim' 
 "Plugin 'TaskList.vim'
-
+" emmet plugins for frontend development
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
