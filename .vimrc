@@ -308,10 +308,10 @@ vmap <Leader>aa: :Tabularize /:\zs<CR>
 
 "emmet mapping.
 "frontend development for css,html
-let g:user_emmet_mode='nv'
+let g:user_emmet_mode='a'
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,scss,sass,less EmmetInstall
-let g:user_emmet_expandabbr_key = '<tab>'
+let g:user_emmet_expandabbr_key = '<c-e>'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
