@@ -294,7 +294,6 @@ endif
 nnoremap <leader>P :BlogPreview<CR>
 nnoremap fg :Dox<cr>
 
-
 "Tabularize mapping. 
 "TODO I don't know why I cannot map :Tabularize /|<CR> ?
 "if exists(":Tabularize")
@@ -302,18 +301,10 @@ nmap <Leader>aa= :Tabularize /=<CR>
 vmap <Leader>aa= :Tabularize /=<CR>
 nmap <Leader>aa\ :Tabularize /\|<CR>
 vmap <Leader>aa\ :Tabularize /\|<CR>
-nmap <Leader>aa: :Tabularize /:\zs<CR>
-vmap <Leader>aa: :Tabularize /:\zs<CR>
+nmap <Leader>aa; :Tabularize /:\zs<CR>
+vmap <Leader>aa; :Tabularize /:\zs<CR>
 "endif
 
-"emmet mapping.
-"frontend development for css,html
-let g:user_emmet_mode='a'
-let g:user_emmet_install_global = 0
-autocmd FileType html,css,scss,sass,less EmmetInstall
-let g:user_emmet_expandabbr_key = '<c-e>'
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins Config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "DoxygenToolkit插件配置
 "map fg : Dox<cr> //见Mapping一节
@@ -360,13 +351,22 @@ let NERDShutUp=1
 
 "a.vim插件 :A，打开.cpp和.h对应的文件，:AV，分屏显示.cpp和.h对应的文件(无需配置)
 
-"powerline config
-"set guifont=PowerlineSymbols\ for\ Powerline
-"let g:Powerline_symbols = 'fancy'
+"frontend development for css,html
+"emmet mapping.
+let g:user_emmet_mode='a'
+let g:user_emmet_install_global = 0
+autocmd FileType html,css,scss,sass,less EmmetInstall
+"let g:user_emmet_expandabbr_key = '<tab>'
+"let g:jedi#goto_assignments_command = "<leader>g"
+let g:user_emmet_leader_key = "<leader>"
 
 """"""""""""""""""""""""""""""
 " airline
 """"""""""""""""""""""""""""""
+"powerline config
+"set guifont=PowerlineSymbols\ for\ Powerline
+"let g:Powerline_symbols = 'fancy'
+
 let g:airline_theme                              = 'powerlineish'
 let g:airline#extensions#branch#enabled          = 1
 "It often cause syntastic not working
@@ -490,9 +490,9 @@ Plugin 'mkitt/tabline.vim'
 Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'jmcantrell/vim-virtualenv'
+" emmet plugins for frontend development
 Plugin 'mattn/emmet-vim' 
 "Plugin 'TaskList.vim'
-" emmet plugins for frontend development
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
