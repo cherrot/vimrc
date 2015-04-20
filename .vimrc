@@ -454,7 +454,8 @@ Plugin 'bling/vim-airline'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'Align'
 Plugin 'autoload_cscope.vim'
-Plugin 'bufexplorer.zip'
+"leaderF has mapped <leader>b for similar using
+"Plugin 'bufexplorer.zip'
 " Plugin 'kien/ctrlp.vim'
 " Better than ctrlp :)
 Plugin 'Yggdroot/LeaderF'
