@@ -301,12 +301,10 @@ nmap <Leader>aa= :Tabularize /=<CR>
 vmap <Leader>aa= :Tabularize /=<CR>
 nmap <Leader>aa\ :Tabularize /\|<CR>
 vmap <Leader>aa\ :Tabularize /\|<CR>
-nmap <Leader>aa: :Tabularize /:\zs<CR>
-vmap <Leader>aa: :Tabularize /:\zs<CR>
+nmap <Leader>aa; :Tabularize /:\zs<CR>
+vmap <Leader>aa; :Tabularize /:\zs<CR>
 "endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins Config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "DoxygenToolkit插件配置
 "map fg : Dox<cr> //见Mapping一节
@@ -354,11 +352,17 @@ let NERDShutUp=1
 "a.vim插件 :A，打开.cpp和.h对应的文件，:AV，分屏显示.cpp和.h对应的文件(无需配置)
 
 "frontend development for css,html
+" use <Leader> instead of <C-y> 
+" ,, expand html,css etc.
+" ,/ comment html,css,scss,sass,less
+" More :help emmet-customize 
 "emmet mapping.
-let g:user_emmet_mode='nv'
+let g:user_emmet_mode='a'
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,scss,sass,less EmmetInstall
-let g:user_emmet_expandabbr_key = '<tab>'
+"let g:user_emmet_expandabbr_key = '<tab>'
+"let g:jedi#goto_assignments_command = "<leader>g"
+let g:user_emmet_leader_key = "<leader>"
 
 """"""""""""""""""""""""""""""
 " airline
