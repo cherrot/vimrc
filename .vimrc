@@ -268,7 +268,9 @@ nnoremap <Leader>6 :w<CR>:make! %< CC=gcc CFLAGS="-g -Wall"<CR>:!./%<<CR>
 
 " Quickfix window
 nnoremap <Leader>7 :botright copen<CR>
+nnoremap <Leader><Leader>7 :botright lopen<CR>
 nnoremap <Leader>8 :cclose<CR>
+nnoremap <Leader><Leader>8 :lclose<CR>
 
 " Toggle Tagbar, more convenient than TList
 nnoremap <silent> <Leader>9 :TagbarToggle<CR>
@@ -423,6 +425,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+"let g:syntastic_python_checkers=['flake8']
+"let g:syntastic_python_checker_args = '--ignore=E221,E501,E225'
+"let g:syntastic_python_flake8_args = '--ignore=E221,E501,E502,W391,E126'
+let g:syntastic_python_flake8_args = '--ignore=E221,E241'
 
 " Now I don't think it a good idea not to use the default `python`, 
 " use vertualenv instead of global setting.
@@ -498,6 +504,7 @@ Plugin 'jmcantrell/vim-virtualenv'
 " emmet plugins for frontend development
 Plugin 'mattn/emmet-vim' 
 "Plugin 'TaskList.vim'
+Plugin 'editorconfig/editorconfig-vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
