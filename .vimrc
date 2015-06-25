@@ -140,6 +140,8 @@ set splitbelow
 " 光标移动到buffer的顶部和底部时保持3行距离
 set scrolloff=3
 
+set cursorcolumn
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Search
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -268,7 +270,7 @@ nnoremap <Leader>6 :w<CR>:make! %< CC=gcc CFLAGS="-g -Wall"<CR>:!./%<<CR>
 
 " Quickfix window
 nnoremap <Leader>7 :botright copen<CR>
-nnoremap <Leader><Leader>7 :botright lopen<CR>
+nnoremap <Leader><Leader>7 :lopen<CR>
 nnoremap <Leader>8 :cclose<CR>
 nnoremap <Leader><Leader>8 :lclose<CR>
 
@@ -505,6 +507,7 @@ Plugin 'jmcantrell/vim-virtualenv'
 Plugin 'mattn/emmet-vim' 
 "Plugin 'TaskList.vim'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'nathanaelkane/vim-indent-guides'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
