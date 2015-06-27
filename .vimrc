@@ -430,7 +430,7 @@ let g:syntastic_check_on_wq = 0
 "let g:syntastic_python_checkers=['flake8']
 "let g:syntastic_python_checker_args = '--ignore=E221,E501,E225'
 "let g:syntastic_python_flake8_args = '--ignore=E221,E501,E502,W391,E126'
-let g:syntastic_python_flake8_args = '--ignore=E221,E241'
+let g:syntastic_python_flake8_args = '--ignore=E221,E241,E251'
 
 " Now I don't think it a good idea not to use the default `python`, 
 " use vertualenv instead of global setting.
