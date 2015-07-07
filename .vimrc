@@ -500,7 +500,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'LargeFile'
 Plugin 'mkitt/tabline.vim'
-Plugin 'MattesGroeger/vim-bookmarks'
+"Plugin 'MattesGroeger/vim-bookmarks'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'jmcantrell/vim-virtualenv'
 " emmet plugins for frontend development
