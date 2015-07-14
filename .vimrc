@@ -295,7 +295,6 @@ if $DISPLAY != '' && executable('xsel')
 endif
 
 "map <F4> :call TitleDet()<cr>'s
-nnoremap <leader>P :BlogPreview<CR>
 nnoremap fg :Dox<cr>
 
 "Tabularize mapping. 
@@ -342,13 +341,6 @@ let autocscope_menus = 0
 
 " Use context to decide completion type
 let SuperTabDefaultCompletionType = "context"
-
-"vim-repress插件 see https://bitbucket.org/pentie/vimrepress
-"now config is ~/.vimpressrc
-"let VIMPRESS = [{'username':'cherrot',
-            "\'blog_url':'http://www.cherrot.com/'
-            "\}]
-"map <leader>P :BlogPreview<CR> 见 Mapping 一节
 
 "对NERD_commenter的设置,在光标所在行上，按ctrl+h变换注释,cm是多行注释,cu是取消注释
 let NERDShutUp=1
@@ -490,8 +482,6 @@ Plugin 'DoxygenToolkit.vim'
 "Plugin 'Shougo/neocomplcache.vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'justmao945/vim-clang'
-"Plugin 'pkufranky/VimRepress'
-Plugin 'VimRepress'
 Plugin 'altercation/vim-colors-solarized'
 "syntax checker
 Plugin 'scrooloose/syntastic'
