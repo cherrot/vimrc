@@ -498,6 +498,7 @@ Plugin 'mattn/emmet-vim'
 "Plugin 'TaskList.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'elixir-lang/vim-elixir'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
