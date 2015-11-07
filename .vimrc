@@ -173,18 +173,18 @@ set autoindent
 set smartindent
 
 " Use hard tabs
-"set tabstop=8
+set tabstop=8
 "set noexpandtab
 "set shiftwidth=8
 
 " expand tabs
 set shiftwidth=4
-set softtabstop=4
+"set softtabstop=4
 set expandtab
 set smarttab
 
 " Break long lines
-set textwidth=80 " wrap text for 78 letters
+set textwidth=79 " wrap text for 78 letters
 
 " Set auto-formating. mM for chinese charaters, n for number list auto-indent
 set formatoptions+=mMn
@@ -423,7 +423,9 @@ let g:syntastic_check_on_wq = 0
 "let g:syntastic_python_checkers=['flake8']
 "let g:syntastic_python_checker_args = '--ignore=E221,E501,E225'
 "let g:syntastic_python_flake8_args = '--ignore=E221,E501,E502,W391,E126'
-let g:syntastic_python_flake8_args = '--ignore=E221,E241,E251'
+let g:syntastic_python_flake8_args = '--ignore=E221,E241,E251,E712'
+let g:syntastic_enable_elixir_checker = 1
+let g:syntastic_elixir_checkers = ['elixir']
 
 " Now I don't think it a good idea not to use the default `python`, 
 " use vertualenv instead of global setting.
