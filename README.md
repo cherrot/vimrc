@@ -3,9 +3,12 @@ I use vim to write markdown, python, ruby, Erlang/Elixir, php, javascript, C, C+
 
 ## Usage
 1. checkout this repo to ~/.vim
-2. create directory `bundle` under ~/.vim/:
+
+        git clone https://github.com/cherrot/vimrc.git ~/.vim
+2. create plugin directory and install plugin manager `Vundle`:
 
         mkdir ~/.vim/bundle
+        git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 3. create a soft link under ~/ to ~/.vim/.vimrc:
 
         ln -sf ~/.vim/.vimrc ~/
