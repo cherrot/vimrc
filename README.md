@@ -20,16 +20,22 @@ C, C++, and blah blah blah...
 3. create a soft link `~/.vimrc`:
 
         ln -sf ~/.vim/.vimrc ~/
-4. run `vim`, I know there would be some errors, just press any key to ignore that this time. 
-run `:PluginInstall` to install all the requirements.
-5. After somedays you could run `:PluginUpdate` to update all the installed plugins.
+4. run `vim`, I know there would be some errors, just press any key to ignore
+that this time. 
+5. run `:PluginInstall` to install all the requirements.
 5. restart your `vim` and **welcome to the new world!**
+5. After somedays you may run `:PluginUpdate` to update all the installed
+plugins.
 
-P.S. In my `.vimrc` I have installed many plugins, please take a look to make
-full use of my configuration (especially examine my key bindings).
+P.S. Please take a look at my `.vimrc` to make full use of it. (especially my
+key bindings and plugins).
 
 ## Typical workflow
 1. First `cd` to your project's root directory
 2. open a source file using `vim`
-3. To enable code auto-completing you may type `<Leader>=` (In my case, `,=`) to build index files for `ctags` and `cscope`
-4. I use jedi to auto-complete python code, sometimes it is not as smart as you expect it to be, then you could type `ctrl-x ctrl-n` to enable `cscope`'s auto-completing.
+3. To enable code auto-completing you may type `<Leader>=` (In my case, `,=`)
+to build/rebuild tag index files for `ctags` and `cscope`. (Of course you need
+install them first)
+4. I use `jedi` to auto-complete python code, so you don't need to build tag
+files for a python project. but sometimes it is not as smart as you expect it
+to be, then you may type `ctrl-x ctrl-n` to enable generic auto-completing.
