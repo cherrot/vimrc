@@ -137,8 +137,8 @@ set display=lastline
 set splitright
 set splitbelow
 
-" 光标移动到buffer的顶部和底部时保持3行距离
-set scrolloff=3
+" 光标移动到buffer的顶部和底部时保持2行距离
+set scrolloff=2
 
 set cursorcolumn
 
