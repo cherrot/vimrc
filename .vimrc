@@ -465,7 +465,6 @@ Plugin 'Yggdroot/LeaderF'
 Plugin 'echofunc.vim'
 Plugin 'lilydjwg/fcitx.vim'
 Plugin 'grep.vim'
-Plugin 'Indent-Guides'
 "Plugin 'Markdown'
 "tabular is Used by vim-markdown
 "and also an awesome formatter plugin!
