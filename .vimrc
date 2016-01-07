@@ -163,7 +163,7 @@ set ignorecase
 set incsearch
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Indent
+" Indent & FileType specific settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Auto indent
@@ -200,7 +200,7 @@ autocmd FileType python set expandtab shiftwidth=4 softtabstop=4 foldmethod=inde
 autocmd FileType php set foldmethod=indent
 autocmd FileType ruby set shiftwidth=2 softtabstop=2 foldnestmax=4
 autocmd FileType javascript set shiftwidth=2 softtabstop=2 foldmethod=indent foldnestmax=4 textwidth=120
-
+autocmd FileType html,css,scss,sass,less EmmetInstall
 " Use extension to set filetype
 " autocmd BufNewFile,BufRead *.md set filetype=markdown
 
@@ -210,7 +210,7 @@ autocmd FileType javascript set shiftwidth=2 softtabstop=2 foldmethod=indent fol
 source ~/.vim/cscope.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Other Mappings
+" Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " http://lilydjwg.is-programmer.com/posts/23574.html
@@ -355,7 +355,6 @@ let NERDShutUp=1
 "emmet mapping.
 let g:user_emmet_mode='a'
 let g:user_emmet_install_global = 0
-autocmd FileType html,css,scss,sass,less EmmetInstall
 "let g:user_emmet_expandabbr_key = '<tab>'
 "let g:jedi#goto_assignments_command = "<leader>g"
 let g:user_emmet_leader_key = "<leader>"
