@@ -201,6 +201,7 @@ autocmd FileType php set foldmethod=indent
 autocmd FileType ruby set shiftwidth=2 softtabstop=2 foldnestmax=4
 autocmd FileType javascript set shiftwidth=2 softtabstop=2 foldmethod=indent foldnestmax=4 textwidth=120
 autocmd FileType html,css,scss,sass,less EmmetInstall
+autocmd FileType go set noexpandtab "tabstop=4
 " Use extension to set filetype
 " autocmd BufNewFile,BufRead *.md set filetype=markdown
 
