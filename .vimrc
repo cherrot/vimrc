@@ -436,9 +436,9 @@ let g:syntastic_elixir_checkers = ['elixir']
 let g:LargeFile = 10
 
 " Vim-go plugin settings
-let go_fmt_fail_silently = 1
+"let go_fmt_fail_silently = 1
 let go_highlight_functions = 1
-let go_highlight_methods = 1
+"let go_highlight_methods = 1
 let go_highlight_structs = 1
 let go_highlight_operators = 1
 let go_highlight_build_constraints = 1
