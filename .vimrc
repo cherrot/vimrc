@@ -310,7 +310,15 @@ nmap <Leader>aa; :Tabularize /:\zs<CR>
 vmap <Leader>aa; :Tabularize /:\zs<CR>
 "endif
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+source ~/.vim/neocomplete.vim
+"let g:neocomplete#fallback_mappings = ["\<C-x>\<C-o>", "\<C-x>\<C-n>"]
+"当自动提示没有满意结果时，可以使用 C-x C-n 查看当前buffer的提示列表
+
 "DoxygenToolkit插件配置
 "map fg : Dox<cr> //见Mapping一节
 let g:DoxygenToolkit_authorName="Cherrot Luo"
@@ -322,10 +330,6 @@ let g:DoxygenToolkit_returnTag = "@return\t"
 let g:DoxygenToolkit_briefTag_funcName = "no"
 let g:DoxygenToolkit_maxFunctionProtoLines = 30
 
-"neocomplete 使用Lua的下一代代码补全插件
-source ~/.vim/neocomplete.vim
-"let g:neocomplete#fallback_mappings = ["\<C-x>\<C-o>", "\<C-x>\<C-n>"]
-"当自动提示没有满意结果时，可以使用 C-x C-n 查看当前buffer的提示列表
 let g:jedi#popup_select_first = 0
 let g:jedi#popup_on_dot = 0
 "let g:jedi#goto_assignments_command = "<leader>g"
@@ -347,8 +351,6 @@ let SuperTabDefaultCompletionType = "context"
 "对NERD_commenter的设置,在光标所在行上，按ctrl+h变换注释,cm是多行注释,cu是取消注释
 let NERDShutUp=1
 
-"a.vim插件 :A，打开.cpp和.h对应的文件，:AV，分屏显示.cpp和.h对应的文件(无需配置)
-
 "frontend development for css,html
 " use <Leader> instead of <C-y> 
 " ,, expand html,css etc.
@@ -358,7 +360,6 @@ let NERDShutUp=1
 let g:user_emmet_mode='a'
 let g:user_emmet_install_global = 0
 "let g:user_emmet_expandabbr_key = '<tab>'
-"let g:jedi#goto_assignments_command = "<leader>g"
 let g:user_emmet_leader_key = "<leader>"
 
 """"""""""""""""""""""""""""""
@@ -433,6 +434,14 @@ let g:syntastic_elixir_checkers = ['elixir']
 " let g:syntastic_python_python_exec = '/usr/bin/python2'
 
 let g:LargeFile = 10
+
+" Vim-go plugin settings
+let go_fmt_fail_silently = 1
+let go_highlight_functions = 1
+let go_highlight_methods = 1
+let go_highlight_structs = 1
+let go_highlight_operators = 1
+let go_highlight_build_constraints = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Manager
