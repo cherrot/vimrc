@@ -8,36 +8,7 @@
 "
 "" convert ascii in json to utf-8:
 " native2ascii -encoding UTF-8 -reverse src.json out.json
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Platform related settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if(has("win32") || has("win64"))
-    let g:iswindows=1
-    let g:separator="\\"
-else
-    let g:iswindows=0
-    let g:separator="/"
-endif
 
-if(g:iswindows==1)
-    source $VIMRUNTIME/vimrc_example.vim
-    source $VIMRUNTIME/mswin.vim
-    behave mswin
-    set guifont=Consolas:h14:cANSI
-endif
-
-if &t_Co != 256 && ! has("gui_running")  
-  echomsg ""
-  echomsg "err: please use GUI or a 256-color terminal (so that t_Co=256 could be set)"
-  echomsg ""
-  finish
-endif
-
-"enable 256 colors in vim ==> To support powerline
-set t_Co=256
-
-" :help readonly
-"set noro
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -54,8 +25,8 @@ set foldnestmax=2
 set foldmethod=syntax
 
 " Set fileencodings
-set fileencodings=utf-8,chinese,latin-1 ",ucs-bom,gbk,big5
-let $LANG="zh_CN.UTF-8"
+set fileencodings=utf-8,chinese,latin-1,ucs-bom,gbk,big5
+"let $LANG="zh_CN.UTF-8"
 set termencoding=utf-8
 set encoding=utf-8
 
@@ -69,45 +40,22 @@ set wildmode=longest:full,full
 " Set key codes timeout
 set ttimeoutlen=100
 
-" Auto change current directory
-" I don't need autochdir since I have LeaderF ;)
-" set autochdir
-
 " Use absolute paths in sessions
 set sessionoptions-=curdir
-
-" Keep more backups for one file
-" autocmd BufWritePre * let &backupext = strftime(".%m-%d-%H-%M")
-
-" keep 512 lines of command line history
-set history=512		
-
-" When editing a file, always jump to the last known cursor position.
-" Don't do it when the position is invalid or when inside an event handler
-" (happens when dropping a file on gvim).
-autocmd BufReadPost *
-	\ if line("'\"") > 0 && line("'\"") <= line("$") |
-	\   exe "normal g`\"" |
-	\ endif
 
 " Let <leader> be , instead of \
 let mapleader = ","
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Backup
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Auto change current directory
+" I don't need autochdir since I have LeaderF ;)
+" set autochdir
 
-" Enable backup
-set backup
+" Set current working directory automatically
+autocmd BufEnter * silent! lcd %:p:h
 
-" Set backup directory
-" TODO add windows settings
-"set backupdir=~/.vim/backup
-set backupdir=/tmp
+" :help readonly
+"set noro
 
-" Set swap file directory
-" TODO add windows settings
-set directory=~/.vim/swap,/tmp
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Interface
@@ -131,17 +79,52 @@ set laststatus=2
 " Allow to display incomplete line
 set display=lastline
 
-"当vim进行编辑时，如果命令错误，会发出一个响声，该设置去掉响声 
+"Do not alarm
 "set vb t_vb= 
 
 "Split the new window on the right&below instead of the left
 set splitright
 set splitbelow
 
-" 光标移动到buffer的顶部和底部时保持2行距离
 set scrolloff=2
 
 set cursorcolumn
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Colors
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Enable syntax highlight
+" The ':syntax enable' command will keep your current color settings.  This
+" allows using ':highlight' commands to set your preferred colors before or
+" after using this command.  If you want Vim to overrule your settings with the
+" defaults, use: ':syntax on'
+" syntax on
+syntax enable
+
+"Use black background 
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+
+" Use solarized/osx-terminal.app-colors-solarized is not enough!
+" You need modify the `ANSI color` config in Preference (listed as follows):
+" 073642 DC322F 859900 B58900 268BD2 D33682 2AA198 EEE8D5
+" 002B36 CB4B16 586E75 657B83 839496 6C71C4 93A1A1 FDF6E3
+" text: 839496 bold: 93A1A1 selected: whatever (mine: EEE8D5)
+" cursor: whatever (mine: 575757)
+" background: 002B36
+
+"if(!has('gui_running'))
+  "let g:solarized_termcolors=&t_Co
+  "let g:solarized_termtrans=1
+"endif
+" Set colorscheme
+colorscheme desert
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Search
@@ -162,6 +145,53 @@ set ignorecase
 
 " Incremental match when searching
 set incsearch
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Backup
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable backup
+set backup
+
+" Set backup directory
+set backupdir=~/.vim/backup,/tmp
+
+" Set swap file directory
+set directory=~/.vim/swap,/tmp
+" Keep more backups for one file
+" autocmd BufWritePre * let &backupext = strftime(".%m-%d-%H-%M")
+
+" keep 512 lines of command line history
+" set history=512		
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Platform related settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if(has("win32") || has("win64"))
+    let g:iswindows=1
+    let g:separator="\\"
+else
+    let g:iswindows=0
+    let g:separator="/"
+endif
+
+if(g:iswindows==1)
+    source $VIMRUNTIME/vimrc_example.vim
+    source $VIMRUNTIME/mswin.vim
+    behave mswin
+    set guifont=Consolas:h14:cANSI
+endif
+
+if &t_Co != 256 && ! has("gui_running")  
+  echomsg "Please use GUI or a 256-color terminal (so that t_Co=256 could be set)"
+  finish
+endif
+
+"enable 256 colors in vim ==> To support powerline
+set t_Co=256
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Indent & FileType specific settings
@@ -185,31 +215,32 @@ set expandtab "this can be set in buffer scope
 set smarttab "this is a global config
 
 " Break long lines
-set textwidth=79 " wrap text for 78 letters
+"set textwidth=78
 
 " Set auto-formating. mM for chinese charaters, n for number list auto-indent
 set formatoptions+=mMn
 
 " Config C-indenting
-set cinoptions=:0,l1,t0,g0
+set cinoptions=:0,l1,t0,g0,(0
 
 " set textwidth for mail
 autocmd FileType mail set textwidth=72
-autocmd FileType mkd set textwidth=0
 " Use soft tabs for python
 autocmd FileType python set softtabstop=4 foldmethod=indent foldnestmax=4
 autocmd FileType php set foldmethod=indent
 autocmd FileType ruby set shiftwidth=2 softtabstop=2 foldnestmax=4
-autocmd FileType javascript set shiftwidth=2 softtabstop=2 foldmethod=indent foldnestmax=4 textwidth=120
+autocmd FileType javascript set shiftwidth=2 softtabstop=2 foldmethod=indent foldnestmax=4
 autocmd FileType html,css,scss,sass,less EmmetInstall
 autocmd FileType go set noexpandtab shiftwidth=8 "tabstop=4
 " Use extension to set filetype
 " autocmd BufNewFile,BufRead *.md set filetype=markdown
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ctags & Cscope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source ~/.vim/cscope.vim
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
@@ -310,6 +341,11 @@ nmap <Leader>aa; :Tabularize /:\zs<CR>
 vmap <Leader>aa; :Tabularize /:\zs<CR>
 "endif
 
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
@@ -321,14 +357,6 @@ source ~/.vim/neocomplete.vim
 
 "DoxygenToolkit插件配置
 "map fg : Dox<cr> //见Mapping一节
-let g:DoxygenToolkit_authorName="Cherrot Luo"
-let g:DoxygenToolkit_licenseTag="GPLv3\<enter>"
-let g:DoxygenToolkit_undocTag="DOXIGEN_SKIP_BLOCK"
-let g:DoxygenToolkit_briefTag_pre = "@brief\t"
-let g:DoxygenToolkit_paramTag_pre = "@param\t"
-let g:DoxygenToolkit_returnTag = "@return\t"
-let g:DoxygenToolkit_briefTag_funcName = "no"
-let g:DoxygenToolkit_maxFunctionProtoLines = 30
 
 let g:jedi#popup_select_first = 0
 let g:jedi#popup_on_dot = 0
@@ -351,6 +379,21 @@ let SuperTabDefaultCompletionType = "context"
 "对NERD_commenter的设置,在光标所在行上，按ctrl+h变换注释,cm是多行注释,cu是取消注释
 let NERDShutUp=1
 
+" Add extra spaces when (un)commenting
+let NERDSpaceDelims = 1
+
+let g:LargeFile = 10
+
+
+" Vim-go plugin settings
+"let go_fmt_fail_silently = 1
+let go_highlight_functions = 1
+"let go_highlight_methods = 1
+let go_highlight_structs = 1
+let go_highlight_operators = 1
+let go_highlight_build_constraints = 1
+
+
 "frontend development for css,html
 " use <Leader> instead of <C-y> 
 " ,, expand html,css etc.
@@ -362,9 +405,7 @@ let g:user_emmet_install_global = 0
 "let g:user_emmet_expandabbr_key = '<tab>'
 let g:user_emmet_leader_key = "<leader>"
 
-""""""""""""""""""""""""""""""
-" airline
-""""""""""""""""""""""""""""""
+
 "powerline config
 "set guifont=PowerlineSymbols\ for\ Powerline
 "let g:Powerline_symbols = 'fancy'
@@ -405,13 +446,14 @@ let g:airline_symbols.whitespace = 'Ξ'
 "let g:airline_linecolumn_prefix = ''
 
 "I get trouble maping <M-n> and <M-p> :(
-let g:EchoFuncKeyNext = '<C-j>'
-let g:EchoFuncKeyPrev = '<C-k>'
+"let g:EchoFuncKeyNext = '<C-j>'
+"let g:EchoFuncKeyPrev = '<C-k>'
 "imap  n <M-n>3<BS>
 "imap  p <M-p>3<BS>
 
 "disable folding in markdown
 "let g:vim_markdown_folding_disabled=1
+
 
 " syntastic settings
 "set statusline+=%#warningmsg#
@@ -433,138 +475,95 @@ let g:syntastic_elixir_checkers = ['elixir']
 " use vertualenv instead of global setting.
 " let g:syntastic_python_python_exec = '/usr/bin/python2'
 
-let g:LargeFile = 10
-
-" Vim-go plugin settings
-"let go_fmt_fail_silently = 1
-let go_highlight_functions = 1
-"let go_highlight_methods = 1
-let go_highlight_structs = 1
-let go_highlight_operators = 1
-let go_highlight_build_constraints = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Manager
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 "vim-pathogen plugin 
 "runtime bundle/vim-pathogen/autoload/pathogen.vim
 "call pathogen#infect()
 
 " Vundle plugin manager
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-filetype off
-
-set runtimepath+=~/.vim/bundle/Vundle.vim
+" filetype off
+"set runtimepath+=~/.vim/bundle/Vundle.vim
 "call vundle#rc()
-call vundle#begin()
+"call vundle#begin()
 
-"let g:vundle_default_git_proto = 'ssh'
-"
-Plugin 'gmarik/Vundle.vim'
-"Plugin 'Lokaltog/vim-powerline'
-"Plugin 'Lokaltog/powerline'
-Plugin 'bling/vim-airline'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'Align'
-Plugin 'autoload_cscope.vim'
+"vim-plug plugin manager
+if empty(glob('~/.vim/autoload/plug.vim'))
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall | source ~/.vimrc
+endif
+
+call plug#begin('~/.vim/bundle')
+
+"Plug 'gmarik/Vundle.vim'
+Plug 'lilydjwg/fcitx.vim'
+Plug 'autoload_cscope.vim'
+Plug 'grep.vim'
+Plug 'matchit.zip'
+"Plug 'DoxygenToolkit.vim'
+"Plug 'Lokaltog/vim-powerline'
+"Plug 'Lokaltog/powerline'
+Plug 'bling/vim-airline'
+Plug 'Lokaltog/vim-easymotion'
+"Plug 'Align'
+Plug 'junegunn/vim-easy-align'
 "leaderF has mapped <leader>b for similar using
-"Plugin 'bufexplorer.zip'
-" Plugin 'kien/ctrlp.vim'
+"Plug 'bufexplorer.zip'
+"Plug 'kien/ctrlp.vim'
 " Better than ctrlp :)
-Plugin 'Yggdroot/LeaderF'
-Plugin 'echofunc.vim'
-Plugin 'lilydjwg/fcitx.vim'
-Plugin 'grep.vim'
-"Plugin 'Markdown'
-"tabular is Used by vim-markdown
-"and also an awesome formatter plugin!
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'matchit.zip'
+Plug 'Yggdroot/LeaderF'
+"Plug 'echofunc.vim'
+"Plug 'Markdown'
+"tabular is Used by vim-markdown and also an awesome formatter plugin!
+"Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 "snipMate would disable my TAB! 
-"Plugin 'snipMate'
-Plugin 'SuperTab--Van-Dewoestine'
-Plugin 'Tagbar'
-"Plugin 'tagbar-phpctags'
-Plugin 'The-NERD-Commenter'
-Plugin 'The-NERD-tree'
-"Plugin 'jistr/vim-nerdtree-tabs'
-"Plugin 'a.vim'
-Plugin 'DoxygenToolkit.vim'
-"Plugin 'Shougo/neocomplcache.vim'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'justmao945/vim-clang'
-Plugin 'altercation/vim-colors-solarized'
+"Plug 'snipMate'
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'ervandew/supertab'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdcommenter'
+"Plug 'jistr/vim-nerdtree-tabs'
+"Plug 'a.vim'
+"Plug 'Shougo/neocomplcache.vim'
+Plug 'Shougo/neocomplete.vim'
+Plug 'justmao945/vim-clang'
+Plug 'altercation/vim-colors-solarized'
 "syntax checker
-Plugin 'scrooloose/syntastic'
-"python.vim has mapped tooooo many keys! (even `[c`)
-"Plugin 'python.vim'
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'LargeFile'
-Plugin 'mkitt/tabline.vim'
-"Plugin 'MattesGroeger/vim-bookmarks'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'jmcantrell/vim-virtualenv'
+Plug 'scrooloose/syntastic'
+Plug 'LargeFile'
+Plug 'mkitt/tabline.vim'
+"Plug 'MattesGroeger/vim-bookmarks'
 " emmet plugins for frontend development
-Plugin 'mattn/emmet-vim' 
-"Plugin 'TaskList.vim'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'elixir-lang/vim-elixir'
-Plugin 'fatih/vim-go'
+Plug 'mattn/emmet-vim' { 'for': 'html,css,scss,sass,less' }
+"Plug 'TaskList.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'nathanaelkane/vim-indent-guides'
+"python.vim has mapped tooooo many keys! (even `[c`)
+"Plug 'python.vim'
+Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
+Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
+Plug 'fatih/vim-go', { 'for': 'go' }
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+" call vundle#end()            " required
+" filetype plugin indent on    " required
+
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 
-"If your ~/.vim/bundle/ is empty except vundle, execute the following cmd:
-":PluginInstall
+call plug#end()
 
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colors
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Enable syntax highlight
-" The ':syntax enable' command will keep your current color settings.  This
-" allows using ':highlight' commands to set your preferred colors before or
-" after using this command.  If you want Vim to overrule your settings with the
-" defaults, use: ':syntax on'
-" syntax on
-syntax enable
-
-"Use black background 
-if has('gui_running')
-    set background=light
-else
-    set background=dark
-endif
-
-"use solarized/osx-terminal.app-colors-solarized is not enough!
-"You need modify the `ANSI color` config in Preference (listed as follows):
-" 073642 DC322F 859900 B58900 268BD2 D33682 2AA198 EEE8D5
-" 002B36 CB4B16 586E75 657B83 839496 6C71C4 93A1A1 FDF6E3
-" text: 839496 bold: 93A1A1 selected: whatever (mine: EEE8D5)
-" cursor: whatever (mine: 575757)
-" background: 002B36
-
-"if(!has('gui_running'))
-  "let g:solarized_termcolors=&t_Co
-  "let g:solarized_termtrans=1
-"endif
-" Set colorscheme
-"colorscheme desert
 colorscheme solarized
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Other
@@ -583,3 +582,11 @@ colorscheme solarized
 
 " Set to leaderF to support search from the CWD of the current shell.
 " exec 'nnoremap <silent>' g:Lf_ShortcutF ':<C-U>Leaderf '.$PWD.'<CR>'
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+autocmd BufReadPost *
+	\ if line("'\"") > 0 && line("'\"") <= line("$") |
+	\   exe "normal g`\"" |
+        \ endif

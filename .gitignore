@@ -1,4 +1,5 @@
 bundle/
+autoload/
 backup/
 swap/
 ftdetect/
