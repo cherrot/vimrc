@@ -541,7 +541,7 @@ Plug 'LargeFile'
 Plug 'mkitt/tabline.vim'
 "Plug 'MattesGroeger/vim-bookmarks'
 " emmet plugins for frontend development
-Plug 'mattn/emmet-vim' { 'for': 'html,css,scss,sass,less' }
+Plug 'mattn/emmet-vim', { 'for': ['html','css','scss','sass','less'] }
 "Plug 'TaskList.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
