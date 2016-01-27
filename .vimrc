@@ -51,7 +51,7 @@ let mapleader = ","
 " set autochdir
 
 " Set current working directory automatically
-autocmd BufEnter * silent! lcd %:p:h
+" autocmd BufEnter * silent! lcd %:p:h
 
 " :help readonly
 "set noro
