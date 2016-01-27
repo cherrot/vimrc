@@ -330,17 +330,6 @@ endif
 "map <F4> :call TitleDet()<cr>'s
 nnoremap fg :Dox<cr>
 
-"Tabularize mapping. 
-"TODO I don't know why I cannot map :Tabularize /|<CR> ?
-"if exists(":Tabularize")
-nmap <Leader>aa= :Tabularize /=<CR>
-vmap <Leader>aa= :Tabularize /=<CR>
-nmap <Leader>aa\ :Tabularize /\|<CR>
-vmap <Leader>aa\ :Tabularize /\|<CR>
-nmap <Leader>aa; :Tabularize /:\zs<CR>
-vmap <Leader>aa; :Tabularize /:\zs<CR>
-"endif
-
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
