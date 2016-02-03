@@ -373,6 +373,8 @@ let NERDShutUp=1
 
 " Add extra spaces when (un)commenting
 let NERDSpaceDelims = 1
+" Otherwise in python i would get 2 spaces after #
+let g:NERDCustomDelimiters = {'python': {'left': '#'}}
 
 let g:LargeFile = 10
 
