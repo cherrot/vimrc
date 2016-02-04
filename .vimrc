@@ -197,7 +197,7 @@ set t_Co=256
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Indent & FileType specific settings
+" Indent
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Auto indent
@@ -233,7 +233,6 @@ autocmd FileType python set softtabstop=4 foldmethod=indent foldnestmax=4
 autocmd FileType php set foldmethod=indent
 autocmd FileType ruby set shiftwidth=2 softtabstop=2 foldnestmax=4
 autocmd FileType javascript set shiftwidth=2 softtabstop=2 foldmethod=indent foldnestmax=4
-autocmd FileType html,css,scss,sass,less EmmetInstall
 autocmd FileType go set noexpandtab shiftwidth=8 "tabstop=4
 " Use extension to set filetype
 " autocmd BufNewFile,BufRead *.md set filetype=markdown
@@ -553,8 +552,6 @@ Plug 'fatih/vim-go', { 'for': 'go' }
 
 call plug#end()
 
-colorscheme solarized
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Other
@@ -577,6 +574,11 @@ colorscheme solarized
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
 " (happens when dropping a file on gvim).
+
+colorscheme solarized
+
+autocmd FileType html,css,scss,sass,less EmmetInstall
+
 autocmd BufReadPost *
 	\ if line("'\"") > 0 && line("'\"") <= line("$") |
 	\   exe "normal g`\"" |
