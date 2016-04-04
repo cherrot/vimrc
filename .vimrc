@@ -313,7 +313,8 @@ nnoremap <Leader><Leader>8 :lclose<CR>
 nnoremap <silent> <Leader>9 :TagbarToggle<CR>
 
 " Grep search tools
-nnoremap <Leader>0 :Rgrep<CR>
+"nnoremap <Leader>0 :Rgrep<CR>
+nnoremap <Leader>0 :Ag <C-R>=expand("<cword>")<CR> ./
 "map <F11> :silent! Tlist<CR>
 nnoremap <Leader>- :call Do_CsTag( getcwd() .g:separator )<CR>
 nnoremap <Leader>= :call Do_CsTag( $PWD .g:separator )<CR>
@@ -336,6 +337,10 @@ nnoremap fg :Dox<cr>
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+nnoremap <Leader>f :FzfFiles<CR>
+nnoremap <Leader>b :FzfBuffers<CR>
+nnoremap <Leader>m :FzfHistory<CR>
+nnoremap <Leader>g :FzfGitFiles<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -346,12 +351,16 @@ source ~/.vim/neocomplete.vim
 "let g:neocomplete#fallback_mappings = ["\<C-x>\<C-o>", "\<C-x>\<C-n>"]
 "当自动提示没有满意结果时，可以使用 C-x C-n 查看当前buffer的提示列表
 
+" Fzf command prefix
+let fzf_command_prefix = 'Fzf'
+
 "DoxygenToolkit插件配置
 "map fg : Dox<cr> //见Mapping一节
 
+" Python jedi plugin config
 let g:jedi#popup_select_first = 0
 let g:jedi#popup_on_dot = 0
-"let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_assignments_command = "<leader>a"
 "let g:jedi#goto_definitions_command = "<leader>d"
 "let g:jedi#documentation_command = "K"
 "let g:jedi#usages_command = "<leader>n"
@@ -375,7 +384,7 @@ let NERDSpaceDelims = 1
 " Otherwise in python i would get 2 spaces after #
 let g:NERDCustomDelimiters = {'python': {'left': '#'}}
 
-let g:LargeFile = 10
+"let g:LargeFile = 10
 
 
 " Vim-go plugin settings
@@ -490,65 +499,54 @@ endif
 
 call plug#begin('~/.vim/bundle')
 
+"Common vim plugins
+"
 "Plug 'gmarik/Vundle.vim'
-Plug 'lilydjwg/fcitx.vim'
 Plug 'autoload_cscope.vim'
-Plug 'grep.vim'
+" Match html tags using %
 Plug 'matchit.zip'
-"Plug 'DoxygenToolkit.vim'
-"Plug 'Lokaltog/vim-powerline'
-"Plug 'Lokaltog/powerline'
-Plug 'bling/vim-airline'
-Plug 'Lokaltog/vim-easymotion'
-"Plug 'Align'
-Plug 'junegunn/vim-easy-align'
-"leaderF has mapped <leader>b for similar using
-"Plug 'bufexplorer.zip'
-"Plug 'kien/ctrlp.vim'
-" Better than ctrlp :)
-Plug 'Yggdroot/LeaderF'
+"Plug 'LargeFile'
+"Plug 'TaskList.vim'
+"python.vim has mapped tooooo many keys! (even `[c`)
+"Plug 'python.vim'
 "Plug 'echofunc.vim'
 "Plug 'Markdown'
-"tabular is Used by vim-markdown and also an awesome formatter plugin!
-"Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-"snipMate would disable my TAB! 
-"Plug 'snipMate'
+"Plug 'DoxygenToolkit.vim'
+Plug 'bling/vim-airline'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'junegunn/vim-easy-align'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
-"Plug 'jistr/vim-nerdtree-tabs'
-"Plug 'a.vim'
-"Plug 'Shougo/neocomplcache.vim'
 Plug 'Shougo/neocomplete.vim'
-Plug 'justmao945/vim-clang'
 Plug 'altercation/vim-colors-solarized'
-"syntax checker
 Plug 'scrooloose/syntastic'
-Plug 'LargeFile'
 Plug 'mkitt/tabline.vim'
 "Plug 'MattesGroeger/vim-bookmarks'
-" emmet plugins for frontend development
-Plug 'mattn/emmet-vim', { 'for': ['html','css','scss','sass','less'] }
-"Plug 'TaskList.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
-"python.vim has mapped tooooo many keys! (even `[c`)
-"Plug 'python.vim'
+
+" Plugins need outer world dependencies.
+" Plug 'grep.vim'
+" Faster than grep.vim. Need install the_silver_searcher first.
+Plug 'rking/ag.vim'
+Plug 'lilydjwg/fcitx.vim'
+"Plug 'Yggdroot/LeaderF'
+"Alternative to LeaderF, can be used in terminal too.
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+" Plugins for specific languages
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'justmao945/vim-clang'
+Plug 'mattn/emmet-vim', { 'for': ['html','css','scss','sass','less'] }
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
 Plug 'fatih/vim-go', { 'for': 'go' }
-
-" All of your Plugins must be added before the following line
-" call vundle#end()            " required
-" filetype plugin indent on    " required
-
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
 
 call plug#end()
 
