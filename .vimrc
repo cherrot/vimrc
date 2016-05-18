@@ -527,6 +527,7 @@ Plug 'mkitt/tabline.vim'
 "Plug 'MattesGroeger/vim-bookmarks'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'tpope/vim-fugitive'
 
 " Plugins need outer world dependencies.
 " Plug 'grep.vim'
