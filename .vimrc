@@ -25,7 +25,7 @@ set backspace=eol,start,indent
 " Lines folding
 set foldenable
 set foldnestmax=2
-set foldmethod=syntax
+set foldmethod=indent
 
 " Set fileencodings
 set fileencodings=utf-8,chinese,latin-1,ucs-bom,gbk,big5
@@ -528,6 +528,10 @@ Plug 'mkitt/tabline.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-fugitive'
+" set foldmethod to syntax or expr would slow down neocomplete speed, see:
+" https://github.com/Shougo/neocomplete.vim/issues/525
+Plug 'Konfekt/FastFold'
+Plug 'Konfekt/FoldText'
 
 " Plugins need outer world dependencies.
 " Plug 'grep.vim'
