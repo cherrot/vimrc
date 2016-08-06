@@ -233,7 +233,7 @@ autocmd FileType python set softtabstop=4 foldmethod=indent foldnestmax=3
 autocmd FileType php set foldmethod=indent
 autocmd FileType ruby set shiftwidth=2 softtabstop=2 foldnestmax=4
 autocmd FileType javascript set shiftwidth=2 softtabstop=2 foldmethod=indent foldnestmax=4
-autocmd FileType go set noexpandtab shiftwidth=8 "tabstop=4
+autocmd FileType go set noexpandtab shiftwidth=4 tabstop=4
 " Use extension to set filetype
 " autocmd BufNewFile,BufRead *.md set filetype=markdown
 
@@ -393,6 +393,7 @@ let g:NERDCustomDelimiters = {'python': {'left': '#'}}
 "let go_fmt_fail_silently = 1
 let go_highlight_functions = 1
 "let go_highlight_methods = 1
+let g:go_highlight_types = 1
 let go_highlight_structs = 1
 let go_highlight_operators = 1
 let go_highlight_build_constraints = 1
