@@ -34,7 +34,7 @@ set termencoding=utf-8
 set encoding=utf-8
 
 " Set complete options
-set completeopt=longest,menu
+set completeopt=longest,menuone
 
 " Set wild menu & mode
 set wildmenu
@@ -346,10 +346,9 @@ nnoremap <Leader>g :FzfGitFiles<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:UltiSnipsExpandTrigger="<C-j>"
 
 source ~/.vim/neocomplete.vim
-"let g:neocomplete#fallback_mappings = ["\<C-x>\<C-o>", "\<C-x>\<C-n>"]
-"当自动提示没有满意结果时，可以使用 C-x C-n 查看当前buffer的提示列表
 
 " Fzf command prefix
 let fzf_command_prefix = 'Fzf'
@@ -366,6 +365,9 @@ let g:jedi#goto_assignments_command = "<leader>a"
 "let g:jedi#usages_command = "<leader>n"
 "let g:jedi#completions_command = "<C-Space>"
 "let g:jedi#rename_command = "<leader>r"
+"use neocomplete
+let g:jedi#completions_enabled = 0
+let g:jedi#auto_vim_configuration = 0
 
 " Set Tagbar width
 let tagbar_width = 32
@@ -374,7 +376,7 @@ let tagbar_width = 32
 let autocscope_menus = 0
 
 " Use context to decide completion type
-let SuperTabDefaultCompletionType = "context"
+"let SuperTabDefaultCompletionType = "context"
 
 "对NERD_commenter的设置,在光标所在行上，按ctrl+h变换注释,cm是多行注释,cu是取消注释
 let NERDShutUp=1
@@ -516,10 +518,10 @@ Plug 'bling/vim-airline'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'junegunn/vim-easy-align'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
+"Plug 'ervandew/supertab'
 Plug 'Shougo/neocomplete.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/syntastic'
