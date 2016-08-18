@@ -342,6 +342,7 @@ nnoremap <Leader>b :FzfBuffers<CR>
 nnoremap <Leader>m :FzfHistory<CR>
 nnoremap <Leader>g :FzfGitFiles<CR>
 
+"autocmd FileType go nmap <Leader>s <Plug>(go-implements)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
@@ -472,6 +473,9 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_python_flake8_args = '--ignore=E221,E501,E241,E251,E712'
 let g:syntastic_enable_elixir_checker = 1
 let g:syntastic_elixir_checkers = ['elixir']
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_list_type = "quickfix"
 
 " Now I don't think it a good idea not to use the default `python`, 
 " use vertualenv instead of global setting.
