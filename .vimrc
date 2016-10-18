@@ -314,7 +314,7 @@ nnoremap <silent> <Leader>9 :TagbarToggle<CR>
 
 " Grep search tools
 "nnoremap <Leader>0 :Rgrep<CR>
-nnoremap <Leader>0 :Ag <C-R>=expand("<cword>")<CR> ./
+nnoremap <Leader>0 :Ag \\b<C-R>=expand("<cword>")<CR>\\b ./
 "map <F11> :silent! Tlist<CR>
 nnoremap <Leader>- :call Do_CsTag( getcwd() .g:separator )<CR>
 nnoremap <Leader>= :call Do_CsTag( $PWD .g:separator )<CR>
@@ -398,6 +398,7 @@ let g:go_highlight_types = 1
 let go_highlight_structs = 1
 let go_highlight_operators = 1
 let go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
 
 
 "frontend development for css,html
@@ -558,7 +559,7 @@ Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
-Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'fatih/vim-go'
 
 call plug#end()
 
