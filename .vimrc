@@ -340,8 +340,10 @@ nmap ga <Plug>(EasyAlign)
 nnoremap <Leader>f :FzfFiles<CR>
 nnoremap <Leader>b :FzfBuffers<CR>
 nnoremap <Leader>m :FzfHistory<CR>
-nnoremap <Leader>g :FzfGitFiles<CR>
+"nnoremap <Leader>g :FzfGitFiles<CR>
 
+" invoke omni completion by pressing ctrl+/ (ctrl+/ is recognized as C-_)        
+inoremap <unique> <C-_> <C-x><C-o><C-p>
 "autocmd FileType go nmap <Leader>s <Plug>(go-implements)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -349,7 +351,8 @@ nnoremap <Leader>g :FzfGitFiles<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:UltiSnipsExpandTrigger="<C-j>"
 
-source ~/.vim/neocomplete.vim
+"use omni complete for Go is tooo slow. I'll try YCM
+"source ~/.vim/neocomplete.vim
 
 " Fzf command prefix
 let fzf_command_prefix = 'Fzf'
@@ -366,7 +369,7 @@ let g:jedi#goto_assignments_command = "<leader>a"
 "let g:jedi#usages_command = "<leader>n"
 "let g:jedi#completions_command = "<C-Space>"
 "let g:jedi#rename_command = "<leader>r"
-"use neocomplete
+"use neocomplete or YCM
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
 
@@ -528,7 +531,8 @@ Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 "Plug 'ervandew/supertab'
-Plug 'Shougo/neocomplete.vim'
+"Plug 'Shougo/neocomplete.vim'
+Plug 'Valloric/YouCompleteMe'
 Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/syntastic'
 Plug 'mkitt/tabline.vim'
@@ -538,8 +542,8 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-fugitive'
 " set foldmethod to syntax or expr would slow down neocomplete speed, see:
 " https://github.com/Shougo/neocomplete.vim/issues/525
-Plug 'Konfekt/FastFold'
-Plug 'Konfekt/FoldText'
+"Plug 'Konfekt/FastFold'
+"Plug 'Konfekt/FoldText'
 
 " Plugins need outer world dependencies.
 " Plug 'grep.vim'
