@@ -532,7 +532,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 "Plug 'ervandew/supertab'
 "Plug 'Shougo/neocomplete.vim'
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe' " On fresh installation: cd bundle/YouCompleteMe/ ./install.py --clang-completer --gocode-completer
 Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/syntastic'
 Plug 'mkitt/tabline.vim'
