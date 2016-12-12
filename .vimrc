@@ -241,7 +241,7 @@ autocmd FileType go set noexpandtab shiftwidth=4 tabstop=4
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ctags & Cscope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-source ~/.vim/cscope.vim
+"source ~/.vim/cscope.vim
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -316,8 +316,8 @@ nnoremap <silent> <Leader>9 :TagbarToggle<CR>
 "nnoremap <Leader>0 :Rgrep<CR>
 nnoremap <Leader>0 :Ag \\b<C-R>=expand("<cword>")<CR>\\b ./
 "map <F11> :silent! Tlist<CR>
-nnoremap <Leader>- :call Do_CsTag( getcwd() .g:separator )<CR>
-nnoremap <Leader>= :call Do_CsTag( $PWD .g:separator )<CR>
+"nnoremap <Leader>- :call Do_CsTag( getcwd() .g:separator )<CR>
+"nnoremap <Leader>= :call Do_CsTag( $PWD .g:separator )<CR>
 
 " Use <space> to toggle fold
 nnoremap <silent> <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
@@ -513,7 +513,7 @@ call plug#begin('~/.vim/bundle')
 "Common vim plugins
 "
 "Plug 'gmarik/Vundle.vim'
-Plug 'autoload_cscope.vim'
+"Plug 'autoload_cscope.vim'
 " Match html tags using %
 Plug 'matchit.zip'
 "Plug 'LargeFile'
@@ -557,7 +557,7 @@ Plug 'junegunn/fzf.vim'
 
 " Plugins for specific languages
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-Plug 'justmao945/vim-clang'
+"Plug 'justmao945/vim-clang'
 Plug 'mattn/emmet-vim', { 'for': ['html','css','scss','sass','less'] }
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
