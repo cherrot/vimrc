@@ -564,6 +564,7 @@ Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
 Plug 'fatih/vim-go'
+Plug 'powerman/vim-plugin-AnsiEsc'
 
 call plug#end()
 
