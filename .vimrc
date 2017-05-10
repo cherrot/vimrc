@@ -389,6 +389,8 @@ let NERDShutUp=1
 let NERDSpaceDelims = 1
 " Otherwise in python i would get 2 spaces after #
 let g:NERDCustomDelimiters = {'python': {'left': '#'}}
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
 
 "let g:LargeFile = 10
 
