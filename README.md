@@ -1,6 +1,7 @@
 # My vim config for developers
 
-This is a config for vim, integrated with `Go`,`Python`,`Elixir`,`Javascript`,`HTML&CSS` and `Markdown` languages by default.
+This is a config for Vim, integrated with `Go`,`Python`,`Elixir`,`Javascript`,`HTML&CSS` and `Markdown` languages by default.
+Tested on OS X and Linux (specifically, Ubuntu and ArchLinux) with Vim version >= `7.3`.
 
 ## Feature
 
@@ -50,6 +51,8 @@ Wait for a moment and ignore the color scheme error for now (It should be fixed 
 This process will take a while depending on your network bandwidth and CPU. Take some patience :)
 
 5. Restart your vim and **welcome to the new world!**
+
+(ArchLinux) If you get an error about `libtinfo`, you may need to install `ncurses5-compat-libs` via the AUR.
 
 ## Typical workflow
 
