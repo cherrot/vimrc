@@ -17,24 +17,30 @@ is **fast** enough or bug free to use. And even more, `fzf` could be integrated 
 ## Install
 
 1.  This configuration has some external dependencies. 
-Concretely, Compiling [YCM][ycm] depends on `cmake`, [ag.vim][ag] needs
-[the_silver_searcher][silver] for a fast grep and more, [tagbar][tagbar] depends on `ctags` for code parsing.  
-Other binary dependencies such as `vim-go` and `fzf` would be downloaded automatically for you.  
+Concretely, Compiling [YCM][ycm] needs `cmake` to be installed; `:grep` needs either [ripgrep][ripgrep] or
+[the_silver_searcher][silver] for a fast grep, [tagbar][tagbar] depends on `ctags` for code parsing.  
+Other binary dependencies such as `vim-go` and `fzf` would be downloaded and installed automatically for you.  
 To install them on OSX:
 
-    ``` bash
-    brew install cmake, ctags, the_silver_searcher
+    ```bash
+    brew install cmake, ctags, ripgrep
     ```
 
-    Or on Ubuntu Linux >= 13.10(Saucy)
+    On Arch Linux :
 
-    ``` bash
-    sudo apt-get install cmake exuberant-ctags silversearcher-ag
+    ```bash
+    pacman -S cmake ctags ripgrep
+    ```
+
+    Or on Ubuntu Linux >= 13.10(Saucy):
+
+    ```bash
+    apt-get install cmake exuberant-ctags silversearcher-ag
     ```
 
 2.  Clone this repository:
 
-    ``` bash
+    ```bash
     git clone https://github.com/cherrot/vimrc.git ~/.vim
     ln -sf ~/.vim/.vimrc ~/
     ```
@@ -93,3 +99,4 @@ Aha, it is deprecated. Maybe I'll remove it from this repo in some day.
 [silver]: https://github.com/ggreer/the_silver_searcher
 [tagbar]: https://github.com/majutsushi/tagbar
 [neocomplete]: https://github.com/Shougo/neocomplete.vim
+[ripgrep]: https://github.com/BurntSushi/ripgrep

@@ -239,34 +239,8 @@ autocmd FileType go set noexpandtab shiftwidth=4 tabstop=4
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Ctags & Cscope
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"source ~/.vim/cscope.vim
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" http://lilydjwg.is-programmer.com/posts/23574.html
-"if ! has("gui_running")
-"    "修复ALT键 可用Alt控制缓冲区移动等，但不能在Insert模式下使用
-"    for i in range(97,122) " a-z in ascii
-"        let c=nr2char(i)
-"        exec "set <M-".c.">=\<Esc>".c
-"    endfor
-"    set ttimeoutlen=50
-"
-"    "避免终端退出时乱码
-"    set t_fs=(B
-"    set t_IE=(B
-"else
-"    set guioptions=a  "去掉菜单等，自动复制选择的区域
-"    set guicursor=a:blinkwait600-blinkoff600-blinkon600 "光标闪烁频率
-"    set guifont=Monospace\ 11
-"endif
-
-
 " Tab navigation
 " nnoremap : Normal mode NO REcursive MAP key
 nnoremap tp :tabprevious<CR>
@@ -312,12 +286,11 @@ nnoremap <Leader><Leader>8 :lclose<CR>
 " Toggle Tagbar, more convenient than TList
 nnoremap <silent> <Leader>9 :TagbarToggle<CR>
 
-" Grep search tools
-"nnoremap <Leader>0 :Rgrep<CR>
-nnoremap <Leader>0 :Ag \\b<C-R>=expand("<cword>")<CR>\\b ./
-"map <F11> :silent! Tlist<CR>
-"nnoremap <Leader>- :call Do_CsTag( getcwd() .g:separator )<CR>
-"nnoremap <Leader>= :call Do_CsTag( $PWD .g:separator )<CR>
+" grep search tools. Use ! to prevent auto jump.
+nnoremap <Leader>0 :Silent grep! \\b<C-R>=expand("<cword>")<CR>\\b
+nnoremap <Leader><Leader>0 :Silent grep!<space>
+" tasks
+nnoremap <Leader>t :Silent grep! TODO\\\|FIXME\\\|XXX<CR>
 
 " Use <space> to toggle fold
 nnoremap <silent> <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
@@ -330,8 +303,7 @@ if $DISPLAY != '' && executable('xsel')
     nnoremap <silent> "+p :r!xsel -b<CR>
 endif
 
-"map <F4> :call TitleDet()<cr>'s
-nnoremap fg :Dox<cr>
+"nnoremap fg :Dox<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -340,11 +312,10 @@ nmap ga <Plug>(EasyAlign)
 nnoremap <Leader>f :FzfFiles<CR>
 nnoremap <Leader>b :FzfBuffers<CR>
 nnoremap <Leader>m :FzfHistory<CR>
-"nnoremap <Leader>g :FzfGitFiles<CR>
+nnoremap <Leader>g :FzfGitFiles<CR>
 
 " invoke omni completion by pressing ctrl+/ (ctrl+/ is recognized as C-_)        
-inoremap <unique> <C-_> <C-x><C-o><C-p>
-"autocmd FileType go nmap <Leader>s <Plug>(go-implements)
+" inoremap <nique> <C-_> <C-x><C-o><C-p>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
@@ -356,9 +327,6 @@ let g:UltiSnipsExpandTrigger="<C-j>"
 
 " Fzf command prefix
 let fzf_command_prefix = 'Fzf'
-
-"DoxygenToolkit插件配置
-"map fg : Dox<cr> //见Mapping一节
 
 " Python jedi plugin config
 let g:jedi#popup_select_first = 0
@@ -376,24 +344,15 @@ let g:jedi#auto_vim_configuration = 0
 " Set Tagbar width
 let tagbar_width = 32
 
-" Use my own cscope mappings
-let autocscope_menus = 0
-
 " Use context to decide completion type
 "let SuperTabDefaultCompletionType = "context"
 
-"对NERD_commenter的设置,在光标所在行上，按ctrl+h变换注释,cm是多行注释,cu是取消注释
-let NERDShutUp=1
-
 " Add extra spaces when (un)commenting
-let NERDSpaceDelims = 1
+let g:NERDSpaceDelims = 1
 " Otherwise in python i would get 2 spaces after #
 let g:NERDCustomDelimiters = {'python': {'left': '#'}}
 " Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
-
-"let g:LargeFile = 10
-
 
 " Vim-go plugin settings
 "let go_fmt_fail_silently = 1
@@ -418,47 +377,12 @@ let g:user_emmet_install_global = 0
 let g:user_emmet_leader_key = "<leader>"
 
 
-"powerline config
-"set guifont=PowerlineSymbols\ for\ Powerline
-"let g:Powerline_symbols = 'fancy'
-
-"let g:airline_theme                              = 'powerlineish'
 let g:airline#extensions#branch#enabled          = 1
 "It often cause syntastic not working
 let g:airline#extensions#syntastic#enabled       = 1
 let g:airline#extensions#tagbar#enabled          = 1
 let g:airline#extensions#virtualenv#enabled      = 1
 
-""let g:airline_powerline_fonts            = 1
-"" vim-powerline symbols
-"if !exists('g:airline_symbols')
-"   let g:airline_symbols = {}
-"endif
-
-"" unicode symbols
-""let g:airline_left_sep          = '»'
-"let g:airline_left_sep           = '▶ '
-""let g:airline_left_alt_sep      = '>'
-""let g:airline_right_sep         = '«'
-"let g:airline_right_sep          = '◀ '
-""let g:airline_right_alt_sep     = '<'
-""let g:airline_symbols.linenr     = '␊'
-""let g:airline_symbols.linenr     = '␤'
-""let g:airline_symbols.linenr     = '¶'
-"let g:airline_symbols.branch     = '⎇'
-""let g:airline_symbols.paste      = 'ρ'
-""let g:airline_symbols.paste      = 'Þ'
-""let g:airline_symbols.paste      = '∥'
-"let g:airline_symbols.whitespace = 'Ξ'
-""let g:airline_branch_prefix     = ''
-""let g:airline_readonly_symbol   = ''
-""let g:airline_linecolumn_prefix = ''
-
-"I get trouble maping <M-n> and <M-p> :(
-"let g:EchoFuncKeyNext = '<C-j>'
-"let g:EchoFuncKeyPrev = '<C-k>'
-"imap  n <M-n>3<BS>
-"imap  p <M-p>3<BS>
 
 "disable folding in markdown
 "let g:vim_markdown_folding_disabled=1
@@ -472,10 +396,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-" pip install flake8
-"let g:syntastic_python_checkers=['flake8']
-"let g:syntastic_python_checker_args = '--ignore=E221,E501,E225'
-"let g:syntastic_python_flake8_args = '--ignore=E221,E502,W391,E126'
 let g:syntastic_python_flake8_args = '--ignore=E221,E501,E241,E251,E712'
 let g:syntastic_enable_elixir_checker = 1
 let g:syntastic_elixir_checkers = ['elixir']
@@ -483,26 +403,13 @@ let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_list_type = "quickfix"
 
-" Now I don't think it a good idea not to use the default `python`, 
-" use vertualenv instead of global setting.
-" let g:syntastic_python_python_exec = '/usr/bin/python2'
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Manager
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "vim-pathogen plugin 
-"runtime bundle/vim-pathogen/autoload/pathogen.vim
-"call pathogen#infect()
-
-" Vundle plugin manager
-" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-" filetype off
-"set runtimepath+=~/.vim/bundle/Vundle.vim
-"call vundle#rc()
-"call vundle#begin()
-
+"Vundle plugin manager
 "vim-plug plugin manager
 if empty(glob('~/.vim/autoload/plug.vim'))
 	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -514,16 +421,12 @@ call plug#begin('~/.vim/bundle')
 
 "Common vim plugins
 "
-"Plug 'gmarik/Vundle.vim'
-"Plug 'autoload_cscope.vim'
 " Match html tags using %
 Plug 'matchit.zip'
-"Plug 'LargeFile'
 "Plug 'TaskList.vim'
 "python.vim has mapped tooooo many keys! (even `[c`)
 "Plug 'python.vim'
 "Plug 'echofunc.vim'
-"Plug 'Markdown'
 "Plug 'DoxygenToolkit.vim'
 Plug 'bling/vim-airline'
 Plug 'Lokaltog/vim-easymotion'
@@ -533,7 +436,6 @@ Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 "Plug 'ervandew/supertab'
-"Plug 'Shougo/neocomplete.vim'
 Plug 'Valloric/YouCompleteMe' " On fresh installation: cd bundle/YouCompleteMe/ ./install.py --clang-completer --gocode-completer
 Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/syntastic'
@@ -542,15 +444,8 @@ Plug 'mkitt/tabline.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-fugitive'
-" set foldmethod to syntax or expr would slow down neocomplete speed, see:
-" https://github.com/Shougo/neocomplete.vim/issues/525
-"Plug 'Konfekt/FastFold'
-"Plug 'Konfekt/FoldText'
 
 " Plugins need outer world dependencies.
-" Plug 'grep.vim'
-" Faster than grep.vim. Need install the_silver_searcher first.
-Plug 'rking/ag.vim'
 Plug 'lilydjwg/fcitx.vim'
 "Plug 'Yggdroot/LeaderF'
 "Alternative to LeaderF, can be used in terminal too.
@@ -574,30 +469,32 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Other
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let s:SID = Sid('bundle/autoload_cscope.vim/plugin/autoload_cscope.vim')
-"function! s:Is( input, expected, description )
-    "let l:got = SidInvoke(s:SID, printf("IsWildcardPathPattern('%s')", a:input))
-    "call vimtap#Is(l:got, a:expected, a:description)
-"endfunction
-
-" Set to autoload_cscope to support all types of sources files.
-" au BufEnter *      call <SID>Cycle_csdb() | call <SID>Cycle_macros_menus()
-" au BufUnload *     call <SID>Unload_csdb() | call <SID>Cycle_macros_menus()
-" that's not work
-" au BufEnter *.py   call autoload_cscope#Cycle_csdb() | call autoload_cscope#Cycle_macros_menus()
-
-" Set to leaderF to support search from the CWD of the current shell.
-" exec 'nnoremap <silent>' g:Lf_ShortcutF ':<C-U>Leaderf '.$PWD.'<CR>'
-
-" When editing a file, always jump to the last known cursor position.
-" Don't do it when the position is invalid or when inside an event handler
-" (happens when dropping a file on gvim).
 
 colorscheme solarized
 
 autocmd FileType html,css,scss,sass,less EmmetInstall
 
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
 autocmd BufReadPost *
 	\ if line("'\"") > 0 && line("'\"") <= line("$") |
 	\   exe "normal g`\"" |
         \ endif
+
+" Configure default command used by :grep
+if executable('rg')
+    set grepprg=rg\ --vimgrep\ -g\ \'!*.min.js\'
+    set grepformat=%f:%l:%c:%m
+elseif executable('ag')
+    set grepprg=ag\ --vimgrep\ --ignore=\"**.min.js\"
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+elseif executable('ack')
+    set grepprg=ack\ --nogroup\ --nocolor\ --ignore-case\ --column
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
+" Open search results in quickfix and highlight matches
+command! -nargs=+ Silent
+\   execute 'silent <args>'
+\ | redraw! | copen
