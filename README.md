@@ -58,7 +58,10 @@ This process will take a while depending on your network bandwidth and CPU. Take
 
 5. Restart your vim and **welcome to the new world!**
 
-(ArchLinux) If you get an error about `libtinfo`, you may need to install `ncurses5-compat-libs` via the AUR.
+### Notes
+
+- (ArchLinux) If you get an error about `libtinfo`, you may need to install `ncurses5-compat-libs` via the AUR.
+- If you want a python PEP8 lint, you need `flake8` installed via `pip` systemwide or under your virtualenv only.
 
 ## Typical workflow
 
