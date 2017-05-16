@@ -423,12 +423,12 @@ call plug#begin('~/.vim/bundle')
 "Common vim plugins
 "
 " Match html tags using %
-Plug 'matchit.zip'
-"Plug 'TaskList.vim'
+Plug 'vim-scripts/matchit.zip'
+"Plug 'vim-scripts/TaskList.vim'
 "python.vim has mapped tooooo many keys! (even `[c`)
-"Plug 'python.vim'
-"Plug 'echofunc.vim'
-"Plug 'DoxygenToolkit.vim'
+"Plug 'vim-scripts/python.vim'
+"Plug 'vim-scripts/echofunc.vim'
+"Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'bling/vim-airline'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'junegunn/vim-easy-align'
