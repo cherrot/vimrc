@@ -396,7 +396,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_python_flake8_args = '--ignore=E221,E501,E241,E251,E712'
+let g:syntastic_python_flake8_args = '--ignore=E221,E501,E241,E251'
 let g:syntastic_enable_elixir_checker = 1
 let g:syntastic_elixir_checkers = ['elixir']
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
