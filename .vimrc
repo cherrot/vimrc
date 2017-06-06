@@ -208,12 +208,10 @@ set smartindent
 
 " Use hard tabs
 set tabstop=8
-"set noexpandtab
-"set shiftwidth=8
 
 " expand tabs
 set shiftwidth=4
-"set softtabstop=4
+set softtabstop=4
 set expandtab "this can be set in buffer scope
 set smarttab "this is a global config
 
