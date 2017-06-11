@@ -316,6 +316,8 @@ nnoremap <Leader>g :FzfGitFiles<CR>
 " invoke omni completion by pressing ctrl+/ (ctrl+/ is recognized as C-_)        
 " inoremap <nique> <C-_> <C-x><C-o><C-p>
 
+nnoremap <silent> <Leader>/ :nohlsearch<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
