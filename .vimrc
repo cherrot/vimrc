@@ -472,6 +472,8 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 colorscheme solarized
+highlight Normal ctermbg=none
+highlight NonText ctermbg=none
 
 autocmd FileType html,css,scss,sass,less EmmetInstall
 
