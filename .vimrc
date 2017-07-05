@@ -474,6 +474,8 @@ call plug#end()
 colorscheme solarized
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none
+highlight Folded ctermbg=none
+highlight LineNr ctermbg=none
 
 autocmd FileType html,css,scss,sass,less EmmetInstall
 
