@@ -472,6 +472,9 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 colorscheme solarized
+" Be compatible with transparent terminals under linux (tilda).
+" If you are not using solarized theme for your terminal, comment out the
+" following lines.
 highlight Normal ctermbg=none
 highlight NonText ctermbg=none
 highlight Folded ctermbg=none
