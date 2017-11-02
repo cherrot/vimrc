@@ -463,6 +463,7 @@ Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
 Plug 'fatih/vim-go'
 Plug 'powerman/vim-plugin-AnsiEsc'
+Plug 'MattesGroeger/vim-bookmarks'
 
 call plug#end()
 
