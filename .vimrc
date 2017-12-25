@@ -48,6 +48,7 @@ set sessionoptions-=curdir
 
 " Let <leader> be , instead of \
 let mapleader = ","
+let maplocalleader = ","
 
 " Auto change current directory
 " I don't need autochdir since I have LeaderF ;)
@@ -232,6 +233,7 @@ autocmd FileType php setl foldmethod=indent
 autocmd FileType ruby setl shiftwidth=2 softtabstop=2 foldnestmax=4
 autocmd FileType javascript setl shiftwidth=2 softtabstop=2 foldmethod=indent foldnestmax=4
 autocmd FileType go setl noexpandtab shiftwidth=4 tabstop=4
+autocmd FileType cpp setl noexpandtab shiftwidth=4 tabstop=4
 autocmd FileType yaml setl shiftwidth=2 softtabstop=2
 " Use extension to set filetype
 " autocmd BufNewFile,BufRead *.md set filetype=markdown
@@ -317,6 +319,8 @@ nnoremap <Leader>g :FzfGitFiles<CR>
 " inoremap <nique> <C-_> <C-x><C-o><C-p>
 
 nnoremap <silent> <Leader>/ :nohlsearch<CR>
+
+nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
@@ -404,6 +408,8 @@ let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_list_type = "quickfix"
 
+let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Manager
@@ -464,6 +470,7 @@ Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
 Plug 'fatih/vim-go'
 Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'MattesGroeger/vim-bookmarks'
+Plug 'wannesm/wmgraphviz.vim'
 
 call plug#end()
 
