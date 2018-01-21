@@ -233,8 +233,14 @@ autocmd FileType php setl foldmethod=indent
 autocmd FileType ruby setl shiftwidth=2 softtabstop=2 foldnestmax=4
 autocmd FileType javascript setl shiftwidth=2 softtabstop=2 foldmethod=indent foldnestmax=4
 autocmd FileType go setl noexpandtab shiftwidth=4 tabstop=4
+autocmd FileType proto setl noexpandtab shiftwidth=4 tabstop=4
 autocmd FileType cpp setl noexpandtab shiftwidth=4 tabstop=4
 autocmd FileType yaml setl shiftwidth=2 softtabstop=2
+" This trigger takes advantage of the fact that the quickfix window can be
+" easily distinguished by its file-type, qf. The wincmd J command is
+" equivalent to the Ctrl+W, Shift+J shortcut telling Vim to move a window to
+" the very bottom (see :help :wincmd and :help ^WJ).
+autocmd FileType qf wincmd J
 " Use extension to set filetype
 " autocmd BufNewFile,BufRead *.md set filetype=markdown
 
