@@ -284,11 +284,15 @@ set pastetoggle=<Leader>4
 nnoremap <Leader>5 :w<CR>:make!<CR>
 nnoremap <Leader>6 :w<CR>:make! %< CC=gcc CFLAGS="-g -Wall"<CR>:!./%<<CR>
 
-" Quickfix window
+" Quickfix and Location window
 nnoremap <Leader>7 :botright copen<CR>
 nnoremap <Leader><Leader>7 :lopen<CR>
 nnoremap <Leader>8 :cclose<CR>
 nnoremap <Leader><Leader>8 :lclose<CR>
+nnoremap <Leader>n :cnext<CR>
+nnoremap <Leader>p :cprevious<CR>
+nnoremap <Leader><Leader>n :lnext<CR>
+nnoremap <Leader><Leader>p :lprevious<CR>
 
 " Toggle Tagbar, more convenient than TList
 nnoremap <silent> <Leader>9 :TagbarToggle<CR>
@@ -374,6 +378,12 @@ let go_highlight_structs = 1
 let go_highlight_operators = 1
 let go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
+"let g:go_list_type = "quickfix"
+"let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+"let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+let g:go_metalinter_autosave = 1
 
 
 "frontend development for css,html
@@ -410,9 +420,8 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_python_flake8_args = '--ignore=E221,E501,E241,E251'
 let g:syntastic_enable_elixir_checker = 1
 let g:syntastic_elixir_checkers = ['elixir']
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:go_list_type = "quickfix"
+"let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+"let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
@@ -453,7 +462,7 @@ Plug 'Valloric/YouCompleteMe' " On fresh installation: cd bundle/YouCompleteMe/ 
 Plug 'altercation/vim-colors-solarized'
 Plug 'scrooloose/syntastic'
 Plug 'mkitt/tabline.vim'
-"Plug 'MattesGroeger/vim-bookmarks'
+Plug 'MattesGroeger/vim-bookmarks'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-fugitive'
@@ -475,7 +484,6 @@ Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
 Plug 'fatih/vim-go'
 Plug 'powerman/vim-plugin-AnsiEsc'
-Plug 'MattesGroeger/vim-bookmarks'
 Plug 'wannesm/wmgraphviz.vim'
 
 call plug#end()
