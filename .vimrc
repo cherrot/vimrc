@@ -469,7 +469,9 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-fugitive'
 
 " Plugins need outer world dependencies.
-Plug 'lilydjwg/fcitx.vim'
+if(has('linux'))
+    Plug 'lilydjwg/fcitx.vim'
+endif
 "Plug 'Yggdroot/LeaderF'
 "Alternative to LeaderF, can be used in terminal too.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
