@@ -12,6 +12,7 @@
 " :%!xxd     view in hex mode
 " :%!xxd -r  write back
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -50,13 +51,6 @@ set sessionoptions-=curdir
 let mapleader = ","
 let maplocalleader = ","
 
-" Auto change current directory
-" I don't need autochdir since I have LeaderF ;)
-" set autochdir
-
-" Set current working directory automatically
-" autocmd BufEnter * silent! lcd %:p:h
-
 " :help readonly
 "set noro
 
@@ -69,7 +63,7 @@ let maplocalleader = ","
 set ruler
 
 " display incomplete commands
-set showcmd		
+set showcmd
 
 " Dynamic title
 set title
@@ -114,6 +108,15 @@ else
     set background=dark
 endif
 
+if &t_Co != 256 && ! has("gui_running")  
+  echomsg "Please use GUI or a 256-color terminal (so that t_Co=256 could be set)"
+  finish
+endif
+
+"enable 256 colors in vim ==> To support powerline
+set t_Co=256
+
+" For MacOS users:
 " Use solarized/osx-terminal.app-colors-solarized is not enough!
 " You need modify the `ANSI color` config in Preference (listed as follows):
 " 073642 DC322F 859900 B58900 268BD2 D33682 2AA198 EEE8D5
@@ -126,8 +129,9 @@ endif
   "let g:solarized_termcolors=&t_Co
   "let g:solarized_termtrans=1
 "endif
-" Set colorscheme
-colorscheme desert
+
+" Set default colorscheme
+" colorscheme desert
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -154,6 +158,7 @@ set incsearch
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Backup
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Enable backup
 set backup
 
@@ -166,35 +171,7 @@ set directory=~/.vim/swap,/tmp
 " autocmd BufWritePre * let &backupext = strftime(".%m-%d-%H-%M")
 
 " keep 512 lines of command line history
-" set history=512		
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Platform related settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-if(has("win32") || has("win64"))
-    let g:iswindows=1
-    let g:separator="\\"
-else
-    let g:iswindows=0
-    let g:separator="/"
-endif
-
-if(g:iswindows==1)
-    source $VIMRUNTIME/vimrc_example.vim
-    source $VIMRUNTIME/mswin.vim
-    behave mswin
-    set guifont=Consolas:h14:cANSI
-endif
-
-if &t_Co != 256 && ! has("gui_running")  
-  echomsg "Please use GUI or a 256-color terminal (so that t_Co=256 could be set)"
-  finish
-endif
-
-"enable 256 colors in vim ==> To support powerline
-set t_Co=256
+" set history=512
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -236,25 +213,24 @@ autocmd FileType go setl noexpandtab shiftwidth=4 tabstop=4
 autocmd FileType proto setl noexpandtab shiftwidth=4 tabstop=4
 autocmd FileType cpp setl noexpandtab shiftwidth=4 tabstop=4
 autocmd FileType yaml setl shiftwidth=2 softtabstop=2
+
 " This trigger takes advantage of the fact that the quickfix window can be
 " easily distinguished by its file-type, qf. The wincmd J command is
 " equivalent to the Ctrl+W, Shift+J shortcut telling Vim to move a window to
 " the very bottom (see :help :wincmd and :help ^WJ).
 autocmd FileType qf wincmd J
-" Use extension to set filetype
-" autocmd BufNewFile,BufRead *.md set filetype=markdown
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Tab navigation
 " nnoremap : Normal mode NO REcursive MAP key
 nnoremap tp :tabprevious<CR>
 nnoremap tn :tabnext<CR>
 nnoremap to :tabnew<CR>
 nnoremap tc :tabclose<CR>
-nnoremap gf <C-W>gf
 
 " Move among windows
 noremap <C-h> <C-W>h
@@ -262,6 +238,7 @@ noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-l> <C-W>l
 
+nnoremap gf <C-W>gf
 
 " Set Up and Down non-linewise
 noremap <Up> gk
@@ -314,8 +291,6 @@ if $DISPLAY != '' && executable('xsel')
     nnoremap <silent> "+p :r!xsel -b<CR>
 endif
 
-"nnoremap fg :Dox<cr>
-
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
@@ -332,9 +307,11 @@ nnoremap <silent> <Leader>/ :nohlsearch<CR>
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins
+" Plugins Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 let g:UltiSnipsExpandTrigger="<C-j>"
 
 "use omni complete for Go is tooo slow. I'll try YCM
@@ -346,13 +323,13 @@ let fzf_command_prefix = 'Fzf'
 " Python jedi plugin config
 let g:jedi#popup_select_first = 0
 let g:jedi#popup_on_dot = 0
+let g:jedi#goto_command = "gd"
 let g:jedi#goto_assignments_command = "<leader>a"
-"let g:jedi#goto_definitions_command = "<leader>d"
 "let g:jedi#documentation_command = "K"
 "let g:jedi#usages_command = "<leader>n"
 "let g:jedi#completions_command = "<C-Space>"
 "let g:jedi#rename_command = "<leader>r"
-"use neocomplete or YCM
+" Use YCM instead
 let g:jedi#completions_enabled = 0
 let g:jedi#auto_vim_configuration = 0
 
@@ -364,7 +341,7 @@ let tagbar_width = 32
 
 " Add extra spaces when (un)commenting
 let g:NERDSpaceDelims = 1
-" Otherwise in python i would get 2 spaces after #
+" Otherwise in python u will get 2 spaces after #
 let g:NERDCustomDelimiters = {'python': {'left': '#'}}
 " Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
@@ -378,14 +355,14 @@ let go_highlight_structs = 1
 let go_highlight_operators = 1
 let go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
-"let g:go_updatetime = 800
-let g:go_auto_type_info = 1
+" let g:go_updatetime = 800
+" g:go_auto_type_info slows down vim
+" let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
 "let g:go_list_type = "quickfix"
 "let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 "let g:go_metalinter_autosave_enabled = ['vet', 'golint']
 let g:go_metalinter_autosave = 1
-
 
 "frontend development for css,html
 " use <Leader> instead of <C-y> 
@@ -398,17 +375,15 @@ let g:user_emmet_install_global = 0
 "let g:user_emmet_expandabbr_key = '<tab>'
 let g:user_emmet_leader_key = "<leader>"
 
-
 let g:airline#extensions#branch#enabled          = 1
 "It often cause syntastic not working
 let g:airline#extensions#syntastic#enabled       = 1
+let g:airline#extensions#ale#enabled             = 1
 let g:airline#extensions#tagbar#enabled          = 1
 let g:airline#extensions#virtualenv#enabled      = 1
 
-
 "disable folding in markdown
 "let g:vim_markdown_folding_disabled=1
-
 
 " syntastic settings
 "set statusline+=%#warningmsg#
@@ -435,9 +410,9 @@ let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cp
 "Vundle plugin manager
 "vim-plug plugin manager
 if empty(glob('~/.vim/autoload/plug.vim'))
-	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall | source ~/.vimrc
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source ~/.vimrc
 endif
 
 call plug#begin('~/.vim/bundle')
@@ -446,29 +421,34 @@ call plug#begin('~/.vim/bundle')
 "
 " Match html tags using %
 Plug 'vim-scripts/matchit.zip'
-"Plug 'vim-scripts/TaskList.vim'
-"python.vim has mapped tooooo many keys! (even `[c`)
-"Plug 'vim-scripts/python.vim'
-"Plug 'vim-scripts/echofunc.vim'
-"Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'bling/vim-airline'
 Plug 'Lokaltog/vim-easymotion'
-Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'majutsushi/tagbar'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
-"Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe' " On fresh installation: cd bundle/YouCompleteMe/ ./install.py --clang-completer --gocode-completer
 Plug 'altercation/vim-colors-solarized'
-Plug 'scrooloose/syntastic'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer' }
+if has('nvim') || v:version >= 800
+    Plug 'w0rp/ale'
+else
+    Plug 'scrooloose/syntastic'
+endif
 Plug 'mkitt/tabline.vim'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
+" git integration
 Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
+"Plug 'ervandew/supertab'
+"Plug 'vim-scripts/TaskList.vim'
+"Plug 'vim-scripts/echofunc.vim'
+"Plug 'vim-scripts/DoxygenToolkit.vim'
 
 " Plugins need outer world dependencies.
+"
 if(has('linux'))
     Plug 'lilydjwg/fcitx.vim'
 endif
@@ -478,16 +458,20 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Plugins for specific languages
+"
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
-"Plug 'justmao945/vim-clang'
 Plug 'mattn/emmet-vim', { 'for': ['html','css','scss','sass','less'] }
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" colorize terminal outputs in vim
 Plug 'powerman/vim-plugin-AnsiEsc'
+" graphviz integration to preview DOT graphs
 Plug 'wannesm/wmgraphviz.vim'
+"python.vim has mapped tooooo many keys! (even `[c`)
+"Plug 'vim-scripts/python.vim'
 
 call plug#end()
 
@@ -511,9 +495,9 @@ autocmd FileType html,css,scss,sass,less EmmetInstall
 " Don't do it when the position is invalid or when inside an event handler
 " (happens when dropping a file on gvim).
 autocmd BufReadPost *
-	\ if line("'\"") > 0 && line("'\"") <= line("$") |
-	\   exe "normal g`\"" |
-        \ endif
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
 
 " Configure default command used by :grep
 if executable('rg')
