@@ -1,92 +1,145 @@
-# My vim config for developers
+# My Vim config for developers
 
-This is a config for Vim, integrated with `Go`,`Python`,`Elixir`,`Javascript`,`HTML&CSS` and `Markdown` languages by default.
-Tested on OS X and Linux (specifically, Ubuntu and ArchLinux) with Vim version >= `7.3`.
+This is a Vim config (`.vimrc`) for NeoVim, Vim 8 and Vim 7.3+
 
-## Feature
+## Table of Contents
+1. [Supported Languages](#supported-languages)
+2. [Plugins and Custom Key Mappings](#plugins-and-custom-key-mappings)
+3. [Installation](#installation)
+4. [Additional Notes](#additional-notes)
+5. [FAQ](#faq)
+    1. [Why the color scheme looks so terrible on my terminal?](#256-color)
+    2. [Why switch to YouCompleteMe?](#why-ycm)
+    3. [cscope.vim?](#cscope-vim)
 
-1.  [YouCompleteMe][ycm] & [syntastic][syntastic] for code-completion and syntax checking: fast and easy to use.
-2.  [vim-plug][vim-plug] for plugin management: Super-fast parallel installation/update.
-3.  [fzf][fzf] as a fuzzy finder, I haved tried [ctrlp][ctrlp] and [leaderF][leaderF], neither of them
-is **fast** enough or bug free to use. And even more, `fzf` could be integrated with your terminal (bash and zsh)!
-4.  [vim-airline][vim-airline]. No need to install new fonts (compared to [powerline][powerline]).
-5.  [vim-easymotion][easymotion] and [vim-easy-align][easyalign]. You will love them ;)
-6.  [tpope/vim-fugitive][git-plug] for git integration. You can invoke common git commands by `:Gblame`, `:Glog`, `:Gdiff`, etc.
-7.  `<Leader>` key is mapped to `,` because it is used so frequently.
+<a name="supported-languages"></a>
+## Supported Languages
 
-## Install
+The following languages are supported out of the box:
 
-1.  This configuration has some external dependencies. 
-Concretely, Compiling [YCM][ycm] needs `cmake` to be installed; `:grep` needs either [ripgrep][ripgrep] or
-[the_silver_searcher][silver] for a fast grep, [tagbar][tagbar] depends on `ctags` for code parsing.  
-Other binary dependencies such as `vim-go` and `fzf` would be downloaded and installed automatically for you.  
-To install them on OSX:
+| Language  | Plugins |
+| --------- | ------- |
+| Go        | [YCM][ycm], [vim-go][vim-go] |
+| Python    | [YCM][ycm], [jedi-vim][jedi], [vim-python-pep8-indent][pep8], [vim-virtualenv][vim-virtualenv] |
+| Elixir    | [vim-elixir][vim-elixir] |
+| Markdown  | [vim-markdown][markdown] |
+| HTML, CSS | [emmet-vim][emmet] |
+| DOT graphs | [wmgraphviz.vim][wmgraphviz] |
+| Other     | Other languages supported by [YCM][ycm] or [ALE][ale] |
 
-    ```bash
-    brew install cmake, ctags, ripgrep
-    ```
+<a name="plugins-and-custom-key-mappings"></a>
+## Plugins and Custom Key Mappings
 
-    On Arch Linux :
+`<Leader>` key is mapped to `,` for convenience.
 
-    ```bash
-    pacman -S cmake ctags ripgrep
-    ```
+### Navigation Related
 
-    Or on Ubuntu Linux >= 13.10(Saucy):
+- [fzf][fzf] is my favorite fuzzy finder, before it I haved tried [ctrlp][ctrlp] and [leaderF][leaderF], neither of them was **fast** enough or bug free to use. Furthermore, `fzf` is integrated in your terminal by nature. I've mapped `<Leader>f`, `<Leader>b`, `<Leader>m` and `<Leader>g` to find in Files, Buffers, Modification history and Git files. Use `<Ctrl>X`, `<Ctrl>V`, `<Ctrl>T` to open target file in a new window or tab.
+- [vim-easymotion][easymotion] could be useful when you need quickly jump to somewhere in Vim. Take `<Leader><Leader>w` for a try.
+- [vim-bookmarks][vim-bookmarks] maps keys to mark a line (`mm`), insert some notes (`mi`), jump among markers (`mn`, `mp`) and show all markers (`ma`)
+- `<Ctrl-o>`, `<Ctrl-i>` to jump back and forth in the current buffer.
+- Window operations:
+    - `<Ctrl-w>s`, `<Ctrl-w>v` to split a window.
+    - `<Ctrl-h>`, `<Ctrl-j>`, `<Ctrl-k>`, `<Ctrl-l>` to navigate among windows.
+    - `<Ctrl-H>`, `<Ctrl-J>`, `<Ctrl-K>`, `<Ctrl-L>` to expand the current window.
+    - `<Ctrl-w>=`, `<Ctrl-w>+`, `<Ctrl-w>-`, `<Ctrl-w> <`, `<Ctrl-w> >` to adjust window size. (You can prepend a NUM like using a motion commond)
+- Tab operations:
+    - `to`, `tc` to open and close a tab.
+    - `tp`, `tn` to switch back and forth (just like `gT` and `gt`).
+    - `NUM gt` to go to the `NUM`th tab.
+- `gf` to open a path (including URL) in Vim quickly.
 
-    ```bash
-    apt-get install cmake exuberant-ctags silversearcher-ag
-    ```
+### For Developers
 
-2.  Clone this repository:
+- [YouCompleteMe][ycm]: A powerful plugin for code completion and goto function. Use `<Leader>jd` to Jump to the Definition. Sometimes `<Leader>jd` couldn't guess where the definition is for a Golang or Python project, in this case you could try `gd` instead (which has mapped to `vim-go` and `jedi-vim` plugin).
+- [ALE][ale]: A realtime linter, which benefits from the asynchronous feature of NeoVim and Vim 8.
+- [nerdcommenter][nerdcommenter]: Comment/Uncomment your code with `<Leader>cc`, `<Leader>c<Space>`, etc.
+- [vim-easy-align][easyalign]: I have mapped `ga` to align code in normal and visual mode. For example, you can align a block of JSON map with `:` via `vipga:` or `gaip:`. Check the plugin's document for details.
+- [vim-fugitive][fugitive] and [vim-signify][signify] give a git integration. You can invoke most git commands in Vim via `fugitive`'s pre-defined functions, e.g. `:Gblame`, `:Glog`, `:Gdiff`, and you can continue operating on the result interactively via some hotkeys. When you open or save a buffer (file), `vim-signify` would indicate the differences from your VCS and you can jump among them via `[c` and `]c` (just like when you use `vimdiff`).
+- `K` is the best way to check document of the current word.
+- `<Leader>t` is a convenient wrapper to grep `TODO|FIXME|XXX` in current directory.
 
-    ```bash
-    git clone https://github.com/cherrot/vimrc.git ~/.vim
-    ln -sf ~/.vim/.vimrc ~/
-    ```
+### Others
 
-3.  Run vim in your terminal. It will check and download all the plugins it needs.
-Wait for a moment and ignore the color scheme error for now (It should be fixed on your next start).
+- [vim-plug][vim-plug]: A super fast plugin manager. Run `:PlugInstall`, `:PlugUpdate` to install and update plugins in parallel.
+- [vim-airline][vim-airline] enhances Vim's status line. It also works well with other plugins.
+- `<Leader>1` to toggle tree view of project files. Check [NerdTree][nerdtree]'s manual for its usage.
+- `<Leader>2` to toggle number.
+- `<Leader>3` to toggle foldenable for the current buffer, use `<space>` to fold a single block.
+- `<Leader>4` to toggle paste mode.
+- `<Leader>5` and `<Leader>6` is used to `make` a project.
+- `<Leader>7` and `<Leader>8` to open and close quickfix window, `<Leader>p` and `<Leader>n` to jump back and forth. As for location list, just prepend another `<Leader>` key, for example: `<Leader><Leader>7` to open the location list window.
+- `<Leader>9` to toggle [Tagbar][tagbar]
+- `<Leader>0` to grep the current word and `<Leader><Leader>0` to invoke a plain grep command.
+- `<Leader>/` to disable highlight search.
 
-4.  Compile YCM, with `clang` and `Go` completer (if you need):
+Please check the `Mappings` section in `.vimrc` and plugins' manual for more information :)
 
-    ``` bash
-    cd ~/.vim/bundle/YouCompleteMe/ && ./install.py --clang-completer --gocode-completer
-    ```
+<a name="installation"></a>
+## Installation
 
-This process will take a while depending on your network bandwidth and CPU. Take some patience :)
+Before cloning this repo, you need to install some external dependencies.
+Concretely, Compiling [YCM][ycm] needs `cmake` to be installed;
+`:grep` needs either [ripgrep][ripgrep] or [the_silver_searcher][silver] for a faster grep,
+[Tagbar][tagbar] depends on `ctags` for code parsing:
 
-5. Restart your vim and **welcome to the new world!**
+```bash
+# On MacOS with Homebrew:
+brew install cmake, ctags, ripgrep
 
-### Notes
+# On Arch Linux:
+sudo pacman -S cmake ctags ripgrep
 
-- (ArchLinux) If you get an error about `libtinfo`, you may need to install `ncurses5-compat-libs` via the AUR.
+# On Ubuntu Linux >= 13.10(Saucy):
+sudo apt-get install cmake exuberant-ctags silversearcher-ag
+```
+
+(Other binary dependencies such as `vim-go` and `fzf` would be updated automatically during plugin update.)
+
+Clone this repository into `~/.vim`:
+
+```bash
+git clone https://github.com/cherrot/vimrc.git ~/.vim
+ln -sf ~/.vim/.vimrc ~/
+```
+
+If you use [NeoVim](https://neovim.io/) like me, then you may check [`:help nvim-from-vim`][nvim-from-vim] to enable this `vimrc`. (Only 3 lines config is needed!)
+
+Now you could run `vim` in your terminal. It will check and install all the plugins it needs.
+Ignore the color scheme error for now (It should be fixed on your next start). This process will take a few minutes depending on your network bandwidth and CPU. Be patient :)
+
+Now you can restart your Vim and **welcome to the new world!**
+
+<a name="additional-notes"></a>
+## Additional Notes
+
+- (ArchLinux) If you get an error about `libtinfo`, you may need to install `ncurses5-compat-libs` via AUR.
 - If you want a python PEP8 lint, you need `flake8` installed via `pip` systemwide or under your virtualenv only.
 
-## Typical workflow
 
-Read the `Mappings` section of my `.vimrc`.
-
-For further usage, check the documents of the specific plugins.
-
+<a name="faq"></a>
 ## FAQ
 
+<a name="256-color"></a>
 ### Why the color scheme looks so terrible on my terminal?
 
 Make sure your ternimal is `256-color`. Run `echo $TERM` in your terminal,
-it should either be `xterm-256color` or `screen-256color`. If not, you need set it to your 
+it should be either `xterm-256color` or `screen-256color`. If not, you need set it to your 
 terminal profile or export the environment variable.
 
+<a name="why-ycm"></a>
 ### Why switch to YouCompleteMe?
-I have been using [neocomplete][neocomplete] for a long time. I like it becauce it is simple to setup,
-and it dose not have external dependencies. But neocomplete is too slow in `Go`'s auto-completion.
-Then I find YCM is easy enough to setup and use now, so it's time to say goodbye to neocomplete.
+I have been using [neocomplete][neocomplete] for years. I like it becauce it is simple to setup,
+and it dose not have external dependencies. However, `neocomplete` is too slow in `Go`'s auto-completion.
+Then I found YCM was easy enough to setup and use now. It's time to say goodbye to `neocomplete`.
 
+<a name="cscope.vim"></a>
 ### cscope.vim?
 
 Aha, it is deprecated. Maybe I'll remove it from this repo in some day.
 
 
+[nvim-from-vim]: https://neovim.io/doc/user/nvim.html#nvim-from-vim
 [ycm]: https://github.com/Valloric/YouCompleteMe "YouCompleteMe: A code-completion engine for Vim"
 [syntastic]: https://github.com/scrooloose/syntastic
 [vim-plug]: https://github.com/junegunn/vim-plug "vim-plug: Minimalist Vim Plugin Manager"
@@ -103,3 +156,17 @@ Aha, it is deprecated. Maybe I'll remove it from this repo in some day.
 [tagbar]: https://github.com/majutsushi/tagbar
 [neocomplete]: https://github.com/Shougo/neocomplete.vim
 [ripgrep]: https://github.com/BurntSushi/ripgrep
+[vim-go]: https://github.com/fatih/vim-go
+[jedi]: https://github.com/davidhalter/jedi-vim
+[pep8]: https://github.com/hynek/vim-python-pep8-indent
+[vim-virtualenv]: https://github.com/jmcantrell/vim-virtualenv
+[vim-elixir]: https://github.com/elixir-lang/vim-elixir
+[markdown]: https://github.com/plasticboy/vim-markdown
+[emmet]: https://github.com/mattn/emmet-vim
+[wmgraphviz]: https://github.com/wannesm/wmgraphviz.vim
+[ale]: https://github.com/w0rp/ale
+[nerdtree]: https://github.com/scrooloose/nerdtree
+[fugitive]: https://github.com/tpope/vim-fugitive
+[signify]: https://github.com/mhinz/vim-signify
+[vim-bookmarks]: https://github.com/MattesGroeger/vim-bookmarks
+[nerdcommenter]: https://github.com/scrooloose/nerdcommenter
