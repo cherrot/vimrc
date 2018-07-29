@@ -449,7 +449,7 @@ Plug 'mhinz/vim-signify'
 
 " Plugins need outer world dependencies.
 "
-if(has('linux'))
+if(has('unix'))
     Plug 'lilydjwg/fcitx.vim'
 endif
 "Plug 'Yggdroot/LeaderF'
@@ -459,7 +459,7 @@ Plug 'junegunn/fzf.vim'
 
 " Plugins for specific languages
 "
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'plasticboy/vim-markdown'
 Plug 'mattn/emmet-vim', { 'for': ['html','css','scss','sass','less'] }
 Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
