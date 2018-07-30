@@ -63,7 +63,7 @@ The following languages are supported out of the box:
 
 - [vim-plug][vim-plug]: A super fast plugin manager. Run `:PlugInstall`, `:PlugUpdate` to install and update plugins in parallel.
 - [vim-airline][vim-airline] enhances Vim's status line. It also works well with other plugins.
-- `<Leader>1` to toggle tree view of project files. Check [NerdTree][nerdtree]'s manual for its usage.
+- `<Leader>1` to toggle tree view of project files. Check `:help NERDTreeMappings` for its usage.
 - `<Leader>2` to toggle number.
 - `<Leader>3` to toggle foldenable for the current buffer, use `<space>` to fold a single block.
 - `<Leader>4` to toggle paste mode.
