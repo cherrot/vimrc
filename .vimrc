@@ -425,7 +425,7 @@ Plug 'bling/vim-airline'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'altercation/vim-colors-solarized'
