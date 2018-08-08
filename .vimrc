@@ -401,6 +401,9 @@ let g:syntastic_elixir_checkers = ['elixir']
 
 let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
+"set output format for DOT graphs (default is pdf)
+let g:WMGraphviz_output="svg"
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Manager
