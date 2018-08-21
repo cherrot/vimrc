@@ -54,6 +54,14 @@ let maplocalleader = ","
 " :help readonly
 "set noro
 
+if !exists("g:os")
+    if has("win64") || has("win32") || has("win16")
+        let g:os = "Windows"
+    else
+        let g:os = substitute(system('uname'), '\n', '', '')
+    endif
+endif
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Interface
@@ -452,7 +460,8 @@ Plug 'mhinz/vim-signify'
 
 " Plugins need outer world dependencies.
 "
-if(has('unix'))
+" https://vi.stackexchange.com/a/2577
+if g:os == "Linux"
     Plug 'lilydjwg/fcitx.vim'
 endif
 "Plug 'Yggdroot/LeaderF'
