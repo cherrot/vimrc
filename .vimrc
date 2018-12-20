@@ -259,7 +259,7 @@ noremap <Down> gj
 nnoremap <silent> <Leader>1 :NERDTreeToggle<CR>
 
 " Toggle display line number
-nnoremap <Leader>2 :set number!<CR>
+nnoremap <Leader>2 :set number!<CR>:SignifyToggle<CR>:ALEToggle<CR>
 nnoremap <Leader>3 :set foldenable!<CR>
 
 " Paste toggle
