@@ -484,6 +484,7 @@ Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'wannesm/wmgraphviz.vim'
 "python.vim has mapped tooooo many keys! (even `[c`)
 "Plug 'vim-scripts/python.vim'
+Plug 'qpkorr/vim-renamer'
 
 call plug#end()
 
