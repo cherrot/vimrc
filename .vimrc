@@ -95,6 +95,7 @@ set splitbelow
 set scrolloff=2
 
 set cursorcolumn
+set cursorline
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -312,6 +313,7 @@ nnoremap <Leader>g :FzfGitFiles<CR>
 " inoremap <nique> <C-_> <C-x><C-o><C-p>
 
 nnoremap <silent> <Leader>/ :nohlsearch<CR>
+nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 
 nnoremap <leader>jd :YcmCompleter GoTo<CR>
 
