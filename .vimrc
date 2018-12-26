@@ -260,7 +260,7 @@ noremap <Down> gj
 nnoremap <silent> <Leader>1 :NERDTreeToggle<CR>
 
 " Toggle display line number
-nnoremap <Leader>2 :set number!<CR>:SignifyToggle<CR>:ALEToggle<CR>
+nnoremap <Leader>2 :set number!<CR>:call ToggleSignColumn()<CR>
 nnoremap <Leader>3 :set foldenable!<CR>
 
 " Paste toggle
@@ -530,3 +530,15 @@ endif
 command! -nargs=+ Silent
 \   execute 'silent <args>'
 \ | redraw! | copen
+
+" Toggle signcolumn. Works only on vim>=8.0 or NewVim
+" https://stackoverflow.com/questions/18319284/vim-sign-column-toggle/46636973#46636973
+function! ToggleSignColumn()
+    if !exists("b:signcolumn_on") || b:signcolumn_on
+        set signcolumn=no
+        let b:signcolumn_on=0
+    else
+        set signcolumn=auto
+        let b:signcolumn_on=1
+    endif
+endfunction
