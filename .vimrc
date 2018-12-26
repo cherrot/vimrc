@@ -28,6 +28,9 @@ set foldenable
 set foldnestmax=2
 set foldmethod=indent
 
+" Do not show vim mode in statusline
+set noshowmode
+
 " Set fileencodings
 set fileencodings=utf-8,chinese,latin-1,ucs-bom,gbk,big5
 "let $LANG="zh_CN.UTF-8"
@@ -385,13 +388,6 @@ let g:user_emmet_install_global = 0
 "let g:user_emmet_expandabbr_key = '<tab>'
 let g:user_emmet_leader_key = "<leader>"
 
-let g:airline#extensions#branch#enabled          = 1
-"It often cause syntastic not working
-let g:airline#extensions#syntastic#enabled       = 1
-let g:airline#extensions#ale#enabled             = 1
-let g:airline#extensions#tagbar#enabled          = 1
-let g:airline#extensions#virtualenv#enabled      = 1
-
 "disable folding in markdown
 "let g:vim_markdown_folding_disabled=1
 
@@ -414,6 +410,17 @@ let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cp
 "set output format for DOT graphs (default is pdf)
 let g:WMGraphviz_output="svg"
 
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Manager
@@ -434,7 +441,7 @@ call plug#begin('~/.vim/bundle')
 "
 " Match html tags using %
 Plug 'vim-scripts/matchit.zip'
-Plug 'bling/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
