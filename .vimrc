@@ -405,6 +405,9 @@ let g:syntastic_elixir_checkers = ['elixir']
 "let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 "let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
+" ale settings
+let g:ale_python_flake8_options = '--ignore=E221,E501,E241,E251'
+
 let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 "set output format for DOT graphs (default is pdf)
