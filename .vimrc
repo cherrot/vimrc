@@ -544,11 +544,11 @@ command! -nargs=+ Silent
 " Toggle signcolumn. Works only on vim>=8.0 or NewVim
 " https://stackoverflow.com/questions/18319284/vim-sign-column-toggle/46636973#46636973
 function! ToggleSignColumn()
-    if !exists("b:signcolumn_on") || b:signcolumn_on
+    if !exists("w:signcolumn_on") || w:signcolumn_on
         set signcolumn=no
-        let b:signcolumn_on=0
+        let w:signcolumn_on=0
     else
         set signcolumn=auto
-        let b:signcolumn_on=1
+        let w:signcolumn_on=1
     endif
 endfunction
