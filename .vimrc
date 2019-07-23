@@ -375,7 +375,7 @@ let g:go_auto_sameids = 1
 "let g:go_list_type = "quickfix"
 "let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 "let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-let g:go_metalinter_autosave = 1
+"let g:go_metalinter_autosave = 0
 
 "frontend development for css,html
 " use <Leader> instead of <C-y> 
