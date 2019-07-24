@@ -110,8 +110,8 @@ set cursorline
 """""""""""""""""""""""""
 " coc compatible settings
 """""""""""""""""""""""""
-" Better display for messages
-set cmdheight=2
+" Better display for messages. Don't need this any more since vim now supports floating window.
+" set cmdheight=2
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 
@@ -539,15 +539,17 @@ endif
 call plug#begin('~/.vim/bundle')
 
 """""""""""""""""""""""""""""""""""""""
-"Completion engine
+"Completion Engine
 """""""""""""""""""""""""""""""""""""""
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer' }
+"if has('nvim') || v:version >= 800
+"    Plug 'w0rp/ale'
+"else
+"    Plug 'scrooloose/syntastic'
+"endif
+let g:coc_global_extensions = ['coc-json', 'coc-python']
 Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
-if has('nvim') || v:version >= 800
-    Plug 'w0rp/ale'
-else
-    Plug 'scrooloose/syntastic'
-endif
+Plug 'w0rp/ale'
 
 " git integration
 Plug 'tpope/vim-fugitive'
@@ -582,15 +584,9 @@ Plug 'plasticboy/vim-markdown'
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 Plug 'mattn/emmet-vim', { 'for': ['html','css','scss','sass','less'] }
-
-Plug 'elixir-lang/vim-elixir', { 'for': 'elixir' }
-
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
-"Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
-
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
 " colorize terminal outputs in vim
 Plug 'powerman/vim-plugin-AnsiEsc'
 " graphviz integration to preview DOT graphs
@@ -605,8 +601,7 @@ if g:os == "Linux"
 endif
 "Plug 'Yggdroot/LeaderF'
 "Alternative to LeaderF, can be used in terminal too.
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
