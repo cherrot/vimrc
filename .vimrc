@@ -104,8 +104,9 @@ set splitbelow
 
 set scrolloff=2
 
-set cursorcolumn
-set cursorline
+" Disable cursorcolumn and cursorline by default. Toggle by <Leader>c
+"set cursorcolumn
+"set cursorline
 
 """""""""""""""""""""""""
 " coc compatible settings
