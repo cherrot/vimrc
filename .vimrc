@@ -465,6 +465,7 @@ let g:NERDDefaultAlign = 'left'
 " this is handled by LanguageClient [LC] (coc.vim)
 let g:go_def_mapping_enabled = 0
 "let g:go_code_completion_enabled = 1
+let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = "goimports"
 let go_highlight_functions = 1
 let g:go_highlight_types = 1
