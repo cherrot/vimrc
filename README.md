@@ -3,34 +3,26 @@
 This is a Vim config (`.vimrc`) for NeoVim, Vim 8 and Vim 7.3+
 
 ## Table of Contents
-1. [Supported Languages](#supported-languages)
 2. [Plugins and Custom Key Mappings](#plugins-and-custom-key-mappings)
 3. [Installation](#installation)
 4. [Additional Notes](#additional-notes)
 5. [FAQ](#faq)
     1. [Why the color scheme looks so terrible on my terminal?](#256-color)
-    2. [Why switch to YouCompleteMe?](#why-ycm)
-    3. [cscope.vim?](#cscope-vim)
-
-<a name="supported-languages"></a>
-## Supported Languages
-
-The following languages are supported out of the box:
-
-| Language  | Plugins |
-| --------- | ------- |
-| Go        | [YCM][ycm], [vim-go][vim-go] |
-| Python    | [YCM][ycm], [jedi-vim][jedi], [vim-python-pep8-indent][pep8], [vim-virtualenv][vim-virtualenv] |
-| Elixir    | [vim-elixir][vim-elixir] |
-| Markdown  | [vim-markdown][markdown] |
-| HTML, CSS | [emmet-vim][emmet] |
-| DOT graphs | [wmgraphviz.vim][wmgraphviz] |
-| Other     | Other languages supported by [YCM][ycm] or [ALE][ale] |
 
 <a name="plugins-and-custom-key-mappings"></a>
 ## Plugins and Custom Key Mappings
 
 `<Leader>` key is mapped to `,` for convenience.
+
+### For Developers
+
+- [coc.nvim][coc]: Intellisense engine for vim8 & neovim, full language server protocol support as VSCode. Check its documents to gain full power of it.
+- [ALE][ale]: A realtime linter, which benefits from the asynchronous feature of NeoVim and Vim 8. `ALE` is a helpful complement to `coc.nvim`.
+- [nerdcommenter][nerdcommenter]: Comment/Uncomment your code with `<Leader>cc`, `<Leader>c<Space>`, etc.
+- [vim-easy-align][easyalign]: I have mapped `ga` to align code in normal and visual mode. For example, you can align a block of JSON map with `:` via `vipga:` or `gaip:`. Check the plugin's document for details.
+- [vim-fugitive][fugitive] and [vim-signify][signify] give a git integration. You can invoke most git commands in Vim via `fugitive`'s pre-defined functions, e.g. `:Gblame`, `:Glog`, `:Gdiff`, and you can continue operating on the result interactively via some hotkeys. When you open or save a buffer (file), `vim-signify` would indicate the differences from your VCS and you can jump among them via `[c` and `]c` (just like when you use `vimdiff`).
+- `K` is the best way to check document of the current word.
+- `<Leader>t` is a convenient wrapper to grep `TODO|FIXME|XXX` in current directory.
 
 ### Navigation Related
 
@@ -48,16 +40,6 @@ The following languages are supported out of the box:
     - `tp`, `tn` to switch back and forth (just like `gT` and `gt`).
     - `NUM gt` to go to the `NUM`th tab.
 - `gf` to open a path (including URL) in Vim quickly.
-
-### For Developers
-
-- [YouCompleteMe][ycm]: A powerful plugin for code completion and goto function. Use `<Leader>jd` to Jump to the Definition. Sometimes `<Leader>jd` couldn't guess where the definition is for a Golang or Python project, in this case you could try `gd` instead (which has mapped to `vim-go` and `jedi-vim` plugin).
-- [ALE][ale]: A realtime linter, which benefits from the asynchronous feature of NeoVim and Vim 8.
-- [nerdcommenter][nerdcommenter]: Comment/Uncomment your code with `<Leader>cc`, `<Leader>c<Space>`, etc.
-- [vim-easy-align][easyalign]: I have mapped `ga` to align code in normal and visual mode. For example, you can align a block of JSON map with `:` via `vipga:` or `gaip:`. Check the plugin's document for details.
-- [vim-fugitive][fugitive] and [vim-signify][signify] give a git integration. You can invoke most git commands in Vim via `fugitive`'s pre-defined functions, e.g. `:Gblame`, `:Glog`, `:Gdiff`, and you can continue operating on the result interactively via some hotkeys. When you open or save a buffer (file), `vim-signify` would indicate the differences from your VCS and you can jump among them via `[c` and `]c` (just like when you use `vimdiff`).
-- `K` is the best way to check document of the current word.
-- `<Leader>t` is a convenient wrapper to grep `TODO|FIXME|XXX` in current directory.
 
 ### Others
 
@@ -78,10 +60,10 @@ Please check the `Mappings` section in `.vimrc` and plugins' manual for more inf
 <a name="installation"></a>
 ## Installation
 
-Before cloning this repo, you need to install some external dependencies.
-Concretely, Compiling [YCM][ycm] needs `cmake` to be installed;
-`:grep` needs either [ripgrep][ripgrep] or [the_silver_searcher][silver] for a faster grep,
-[Tagbar][tagbar] depends on `ctags` for code parsing:
+Before cloning this repo, you need to install some external dependencies:
+
+- `:grep` needs either [ripgrep][ripgrep] or [the_silver_searcher][silver] for a faster grep
+- [Tagbar][tagbar] depends on `ctags` for code parsing:
 
 ```bash
 # On MacOS with Homebrew:
@@ -127,28 +109,14 @@ Make sure your ternimal is `256-color`. Run `echo $TERM` in your terminal,
 it should be either `xterm-256color` or `screen-256color`. If not, you need set it to your 
 terminal profile or export the environment variable.
 
-<a name="why-ycm"></a>
-### Why switch to YouCompleteMe?
-I have been using [neocomplete][neocomplete] for years. I like it becauce it is simple to setup,
-and it dose not have external dependencies. However, `neocomplete` is too slow in `Go`'s auto-completion.
-Then I found YCM was easy enough to setup and use now. It's time to say goodbye to `neocomplete`.
-
-<a name="cscope.vim"></a>
-### cscope.vim?
-
-Aha, it is deprecated. Maybe I'll remove it from this repo in some day.
-
 
 [nvim-from-vim]: https://neovim.io/doc/user/nvim.html#nvim-from-vim
-[ycm]: https://github.com/Valloric/YouCompleteMe "YouCompleteMe: A code-completion engine for Vim"
-[syntastic]: https://github.com/scrooloose/syntastic
+[coc]: https://github.com/neoclide/coc.nvim "Intellisense engine for vim8 & neovim, full language server protocol support as VSCode"
 [vim-plug]: https://github.com/junegunn/vim-plug "vim-plug: Minimalist Vim Plugin Manager"
-[vundle]: https://github.com/gmarik/Vundle.vim
 [vim-airline]: https://github.com/bling/vim-airline
 [fzf]: https://github.com/junegunn/fzf "fzf: A command-line fuzzy finder written in Go"
 [ctrlp]: https://github.com/ctrlpvim/ctrlp.vim
 [leaderF]: https://github.com/Yggdroot/LeaderF
-[powerline]: https://github.com/powerline/powerline
 [easymotion]: https://github.com/Lokaltog/vim-easymotion
 [easyalign]: https://github.com/junegunn/vim-easy-align
 [ag]: https://github.com/rking/ag.vim
@@ -157,13 +125,6 @@ Aha, it is deprecated. Maybe I'll remove it from this repo in some day.
 [neocomplete]: https://github.com/Shougo/neocomplete.vim
 [ripgrep]: https://github.com/BurntSushi/ripgrep
 [vim-go]: https://github.com/fatih/vim-go
-[jedi]: https://github.com/davidhalter/jedi-vim
-[pep8]: https://github.com/hynek/vim-python-pep8-indent
-[vim-virtualenv]: https://github.com/jmcantrell/vim-virtualenv
-[vim-elixir]: https://github.com/elixir-lang/vim-elixir
-[markdown]: https://github.com/plasticboy/vim-markdown
-[emmet]: https://github.com/mattn/emmet-vim
-[wmgraphviz]: https://github.com/wannesm/wmgraphviz.vim
 [ale]: https://github.com/w0rp/ale
 [nerdtree]: https://github.com/scrooloose/nerdtree
 [fugitive]: https://github.com/tpope/vim-fugitive
