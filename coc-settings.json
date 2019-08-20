@@ -6,5 +6,5 @@
       "filetypes": ["go"]
     }
   },
-  "diagnostic.displayByAle": false
+  "diagnostic.displayByAle": true
 }

@@ -384,9 +384,10 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 " Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
+" https://github.com/neoclide/coc.nvim/issues/1089
+"nmap <silent> <TAB> <Plug>(coc-range-select)
+"xmap <silent> <TAB> <Plug>(coc-range-select)
+"xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
 
 " Using CocList
 " Show all diagnostics
@@ -408,6 +409,7 @@ nnoremap <silent> <leader><leader>r  :<C-u>CocListResume<CR>
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -467,6 +469,7 @@ let g:NERDDefaultAlign = 'left'
 let g:go_def_mapping_enabled = 0
 "let g:go_code_completion_enabled = 1
 let g:go_doc_keywordprg_enabled = 0
+let g:go_fmt_autosave = 0
 let g:go_fmt_command = "goimports"
 let go_highlight_functions = 1
 let g:go_highlight_types = 1
