@@ -361,8 +361,8 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Use `[v` and `]v` to navigate diagnostics
-nmap <silent> [v <Plug>(coc-diagnostic-prev)
-nmap <silent> ]v <Plug>(coc-diagnostic-next)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -406,6 +406,9 @@ nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
 nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <leader><leader>r  :<C-u>CocListResume<CR>
+" Scroll float window via ctrl-b & ctrl-f. Works in neovim only.
+" nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
+" nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -508,9 +511,6 @@ let g:syntastic_elixir_checkers = ['elixir']
 "let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 "let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
-" ale settings
-let g:ale_python_flake8_options = '--ignore=E221,E501,E241,E251'
-
 let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 "set output format for DOT graphs (default is pdf)
@@ -554,7 +554,6 @@ call plug#begin('~/.vim/bundle')
 "endif
 let g:coc_global_extensions = ['coc-json', 'coc-python']
 Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
-Plug 'w0rp/ale'
 
 " git integration
 Plug 'tpope/vim-fugitive'
