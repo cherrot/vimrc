@@ -17,7 +17,6 @@ This is a Vim config (`.vimrc`) for NeoVim, Vim 8 and Vim 7.3+
 ### For Developers
 
 - [coc.nvim][coc]: Intellisense engine for vim8 & neovim, full language server protocol support as VSCode. Check its documents to gain full power of it.
-- [ALE][ale]: A realtime linter, which benefits from the asynchronous feature of NeoVim and Vim 8. `ALE` is a helpful complement to `coc.nvim`.
 - [nerdcommenter][nerdcommenter]: Comment/Uncomment your code with `<Leader>cc`, `<Leader>c<Space>`, etc.
 - [vim-easy-align][easyalign]: I have mapped `ga` to align code in normal and visual mode. For example, you can align a block of JSON map with `:` via `vipga:` or `gaip:`. Check the plugin's document for details.
 - [vim-fugitive][fugitive] and [vim-signify][signify] give a git integration. You can invoke most git commands in Vim via `fugitive`'s pre-defined functions, e.g. `:Gblame`, `:Glog`, `:Gdiff`, and you can continue operating on the result interactively via some hotkeys. When you open or save a buffer (file), `vim-signify` would indicate the differences from your VCS and you can jump among them via `[c` and `]c` (just like when you use `vimdiff`).
