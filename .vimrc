@@ -310,7 +310,7 @@ nnoremap <Leader><Leader>p :lprevious<CR>
 nnoremap <silent> <Leader>9 :TagbarToggle<CR>
 
 " grep search tools. Use ! to prevent auto jump.
-nnoremap <Leader>0 :Silent grep! \\b<C-R>=expand("<cword>")<CR>\\b
+nnoremap <Leader>0 :Silent grep! "\\b<C-R>=expand("<cword>")<CR>\\b"
 nnoremap <Leader><Leader>0 :Silent grep!<space>
 " tasks
 nnoremap <Leader>t :Silent grep! TODO\\\|FIXME\\\|XXX<CR>
@@ -365,6 +365,9 @@ nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gs :call CocAction('jumpDefinition', 'split')<CR>
+nmap <silent> gv :call CocAction('jumpDefinition', 'vsplit')<CR>
+nmap <silent> ge :call CocAction('jumpDefinition', 'tabe')<CR>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -469,11 +472,12 @@ let g:NERDDefaultAlign = 'left'
 "
 " disable vim-go :GoDef short cut (gd)
 " this is handled by LanguageClient [LC] (coc.vim)
-let g:go_def_mapping_enabled = 0
+let g:go_def_mapping_enabled = 1
 "let g:go_code_completion_enabled = 1
 let g:go_doc_keywordprg_enabled = 0
-let g:go_fmt_autosave = 0
-let g:go_fmt_command = "goimports"
+" replaced by coc.nvim via editor.action.organizeImport
+"let g:go_fmt_autosave = 0
+"let g:go_fmt_command = "goimports"
 let go_highlight_functions = 1
 let g:go_highlight_types = 1
 let go_highlight_structs = 1
