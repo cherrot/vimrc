@@ -244,10 +244,9 @@ autocmd FileType php setl foldmethod=indent
 autocmd FileType ruby setl shiftwidth=2 softtabstop=2 foldnestmax=4
 autocmd FileType javascript setl shiftwidth=2 softtabstop=2 foldmethod=indent foldnestmax=4
 autocmd FileType go setl noexpandtab shiftwidth=4 tabstop=4
-autocmd FileType proto setl noexpandtab shiftwidth=4 tabstop=4
+autocmd FileType proto setl shiftwidth=2 softtabstop=2
 autocmd FileType cpp setl noexpandtab shiftwidth=4 tabstop=4
 autocmd FileType yaml setl shiftwidth=2 softtabstop=2
-autocmd FileType proto setlocal noexpandtab shiftwidth=4 tabstop=4
 
 " This trigger takes advantage of the fact that the quickfix window can be
 " easily distinguished by its file-type, qf. The wincmd J command is
