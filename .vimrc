@@ -414,7 +414,7 @@ nnoremap <silent> <leader><leader>r  :<C-u>CocListResume<CR>
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
-autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+" autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -469,14 +469,13 @@ let g:NERDDefaultAlign = 'left'
 
 " Vim-go plugin settings
 "
-" disable vim-go :GoDef short cut (gd)
-" this is handled by LanguageClient [LC] (coc.vim)
+" enable vim-go's `gd` in case coc.nvim sucks.
 let g:go_def_mapping_enabled = 1
 "let g:go_code_completion_enabled = 1
 let g:go_doc_keywordprg_enabled = 0
 " replaced by coc.nvim via editor.action.organizeImport
-"let g:go_fmt_autosave = 0
-"let g:go_fmt_command = "goimports"
+"let g:go_fmt_autosave = 1
+let g:go_fmt_command = "goimports"
 let go_highlight_functions = 1
 let g:go_highlight_types = 1
 let go_highlight_structs = 1
