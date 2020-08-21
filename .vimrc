@@ -1,3 +1,6 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tips
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " :%!python -m json.tool        "pretty print json:
 " C-r =                         "to insert a caculated value
 " :w !sudo tee %                "to save file with sudo
@@ -11,7 +14,10 @@
 "
 " :%!xxd     view in hex mode
 " :%!xxd -r  write back
-
+"
+" synchronous scroll
+" :set scrollbind
+"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
@@ -470,7 +476,7 @@ let g:NERDDefaultAlign = 'left'
 " Vim-go plugin settings
 "
 " enable vim-go's `gd` in case coc.nvim sucks.
-let g:go_def_mapping_enabled = 1
+let g:go_def_mapping_enabled = 0
 "let g:go_code_completion_enabled = 1
 let g:go_doc_keywordprg_enabled = 0
 " replaced by coc.nvim via editor.action.organizeImport
