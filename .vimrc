@@ -18,6 +18,8 @@
 " synchronous scroll
 " :set scrollbind
 "
+" Render OpenAPI/Swagger
+" :CocCommand swagger.render
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
@@ -347,7 +349,6 @@ nnoremap <silent> <Leader>/ :nohlsearch<CR>
 nnoremap <ESC><ESC> :nohlsearch<CR>
 nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 
-"nnoremap <leader>jd :YcmCompleter GoTo<CR>
 " Remove tralling ^M
 nmap <leader>M :%s/\r\(\n\)/\1/g<CR>
 
@@ -439,33 +440,11 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:UltiSnipsExpandTrigger="<C-j>"
-
-"use omni complete for Go is tooo slow. I'll try YCM
-"source ~/.vim/neocomplete.vim
-
 " Fzf command prefix
 let fzf_command_prefix = 'Fzf'
 
-" Python jedi plugin config
-"let g:jedi#popup_select_first = 0
-"let g:jedi#popup_on_dot = 0
-"let g:jedi#goto_command = "gd"
-"let g:jedi#goto_assignments_command = "<leader>a"
-""let g:jedi#documentation_command = "K"
-""let g:jedi#usages_command = "<leader>n"
-""let g:jedi#completions_command = "<C-Space>"
-""let g:jedi#rename_command = "<leader>r"
-"" Use YCM instead
-"let g:jedi#completions_enabled = 0
-"let g:jedi#auto_vim_configuration = 0
-
 " Set Tagbar width
 let tagbar_width = 32
-
-" Use context to decide completion type
-"let SuperTabDefaultCompletionType = "context"
-
 " Add extra spaces when (un)commenting
 let g:NERDSpaceDelims = 1
 " Otherwise in python u will get 2 spaces after #
@@ -505,22 +484,6 @@ let g:user_emmet_leader_key = "<leader>"
 "disable folding in markdown
 "let g:vim_markdown_folding_disabled=1
 
-" syntastic settings
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-let g:syntastic_python_flake8_args = '--ignore=E221,E501,E241,E251'
-let g:syntastic_enable_elixir_checker = 1
-let g:syntastic_elixir_checkers = ['elixir']
-"let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-"let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-
-let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-
 "set output format for DOT graphs (default is pdf)
 let g:WMGraphviz_output="svg"
 
@@ -554,13 +517,12 @@ call plug#begin('~/.vim/bundle')
 """""""""""""""""""""""""""""""""""""""
 "Completion Engine
 """""""""""""""""""""""""""""""""""""""
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --gocode-completer' }
-"if has('nvim') || v:version >= 800
-"    Plug 'w0rp/ale'
-"else
-"    Plug 'scrooloose/syntastic'
-"endif
-let g:coc_global_extensions = ['coc-json', 'coc-python']
+let g:coc_global_extensions = [
+    \ 'coc-json',
+    \ 'coc-python',
+    \ 'coc-imselect',
+    \ 'coc-swagger'
+    \ ]
 Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 
 " git integration
@@ -611,8 +573,6 @@ Plug 'wannesm/wmgraphviz.vim'
 if g:os == "Linux"
     Plug 'lilydjwg/fcitx.vim'
 endif
-"Plug 'Yggdroot/LeaderF'
-"Alternative to LeaderF, can be used in terminal too.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
 
 call plug#end()
