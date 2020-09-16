@@ -523,7 +523,8 @@ let g:coc_global_extensions = [
     \ 'coc-imselect',
     \ 'coc-swagger'
     \ ]
-Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
 " git integration
 Plug 'tpope/vim-fugitive'

@@ -4,6 +4,8 @@
       "command": "gopls",
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
       "filetypes": ["go"],
+      "disableWorkspaceFolders": true,
+      "trace.server": "verbose",
       "initializationOptions": {
         "usePlaceholders": true,
         "completeUnimported": true
