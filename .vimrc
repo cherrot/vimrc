@@ -550,6 +550,8 @@ Plug 'mkitt/tabline.vim'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
+"Enhanced quickfix window such as opening in new tab, vertical split.
+Plug 'yssl/QFEnter'
 
 """""""""""""""""""""""""""""""""""""""
 " Plugins for specific languages
