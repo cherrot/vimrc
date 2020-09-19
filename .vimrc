@@ -116,6 +116,8 @@ set scrolloff=2
 "set cursorcolumn
 "set cursorline
 
+set signcolumn=number
+
 """""""""""""""""""""""""
 " coc compatible settings
 """""""""""""""""""""""""
@@ -320,7 +322,7 @@ nnoremap <silent> <Leader>9 :TagbarToggle<CR>
 nnoremap <Leader>0 :Silent grep! "\\b<C-R>=expand("<cword>")<CR>\\b"
 nnoremap <Leader><Leader>0 :Silent grep!<space>
 " tasks
-nnoremap <Leader>t :Silent grep! TODO\\\|FIXME\\\|XXX<CR>
+nnoremap <Leader><Leader>t :Silent grep! TODO\\\|FIXME\\\|XXX<CR>
 
 " Use <space> to toggle fold
 nnoremap <silent> <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
@@ -382,14 +384,14 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
 " Remap for format selected region
-xmap <leader><leader>f  <Plug>(coc-format-selected)
+xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader><leader>f  <Plug>(coc-format-selected)
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 " Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>d  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 " Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
@@ -400,27 +402,28 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <leader><leader>a  :<C-u>CocList diagnostics<cr>
+nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <leader><leader>t  :<C-u>CocList extensions<cr>
+nnoremap <silent> <leader>t  :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <leader><leader>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <leader>c  :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <leader><leader>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <leader>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <leader><leader>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <leader>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <leader><leader>r  :<C-u>CocListResume<CR>
+nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
 " Scroll float window via ctrl-b & ctrl-f. Works in neovim only.
 " nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
 " nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
+" don't know why it doesn't work :(
 " autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 function! s:check_back_space() abort
@@ -523,8 +526,7 @@ let g:coc_global_extensions = [
     \ 'coc-imselect',
     \ 'coc-swagger'
     \ ]
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " git integration
 Plug 'tpope/vim-fugitive'
@@ -628,7 +630,7 @@ function! ToggleSignColumn()
         set signcolumn=no
         let w:signcolumn_on=0
     else
-        set signcolumn=auto
+        set signcolumn=number
         let w:signcolumn_on=1
     endif
 endfunction
