@@ -20,6 +20,11 @@
 "
 " Render OpenAPI/Swagger
 " :CocCommand swagger.render
+"
+" Show Language Server Output
+" :CocCommand workspace.showOutput
+"
+" C-V m to input ^M
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
@@ -153,23 +158,6 @@ endif
 
 "enable 256 colors in vim ==> To support powerline
 set t_Co=256
-
-" For MacOS users:
-" Use solarized/osx-terminal.app-colors-solarized is not enough!
-" You need modify the `ANSI color` config in Preference (listed as follows):
-" 073642 DC322F 859900 B58900 268BD2 D33682 2AA198 EEE8D5
-" 002B36 CB4B16 586E75 657B83 839496 6C71C4 93A1A1 FDF6E3
-" text: 839496 bold: 93A1A1 selected: whatever (mine: EEE8D5)
-" cursor: whatever (mine: 575757)
-" background: 002B36
-
-"if(!has('gui_running'))
-  "let g:solarized_termcolors=&t_Co
-  "let g:solarized_termtrans=1
-"endif
-
-" Set default colorscheme
-" colorscheme desert
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -490,16 +478,7 @@ let g:user_emmet_leader_key = "<leader>"
 "set output format for DOT graphs (default is pdf)
 let g:WMGraphviz_output="svg"
 
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
+let g:lightline = {'colorscheme': 'gruvbox'}
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -546,7 +525,9 @@ Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 "colorscheme
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
+Plug 'shinchu/lightline-gruvbox.vim'
 "rename files in vim
 Plug 'qpkorr/vim-renamer'
 Plug 'mkitt/tabline.vim'
@@ -587,14 +568,9 @@ call plug#end()
 " Other
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-colorscheme solarized
-" Be compatible with transparent terminals under linux (tilda).
-" If you are not using solarized theme for your terminal, comment out the
-" following lines.
-highlight Normal ctermbg=none
-highlight NonText ctermbg=none
-highlight Folded ctermbg=none
-highlight LineNr ctermbg=none
+autocmd vimenter * ++nested colorscheme gruvbox
+" Be compatible with terminals with transparency
+autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
 
 autocmd FileType html,css,scss,sass,less EmmetInstall
 
