@@ -117,7 +117,7 @@ set splitbelow
 
 set scrolloff=2
 
-" Disable cursorcolumn and cursorline by default. Toggle by <Leader>c
+" Toggle by <Leader>x
 "set cursorcolumn
 "set cursorline
 
@@ -170,6 +170,7 @@ set t_Co=256
 let &t_ZH="\e[3m"
 let &t_ZR="\e[23m"
 " let g:gruvbox_material_disable_italic_comment = 1
+" let g:palenight_terminal_italics=1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -349,7 +350,7 @@ nnoremap <Leader>g :FzfGitFiles<CR>
 
 nnoremap <silent> <Leader>/ :nohlsearch<CR>
 nnoremap <ESC><ESC> :nohlsearch<CR>
-nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+nnoremap <Leader>x :set cursorline! cursorcolumn!<CR>
 
 " Remove tralling ^M
 nmap <leader>M :%s/\r\(\n\)/\1/g<CR>
@@ -406,7 +407,7 @@ nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
 nnoremap <silent> <leader>t  :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <leader>c  :<C-u>CocList commands<cr>
+nnoremap <silent> <leader>e  :<C-u>CocList commands<cr>
 " Find symbol of current document
 nnoremap <silent> <leader>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
@@ -478,11 +479,12 @@ let go_highlight_build_constraints = 1
 " ,/ comment html,css,scss,sass,less
 " More :help emmet-customize 
 "emmet mapping.
-let g:user_emmet_mode='a'
-let g:user_emmet_install_global = 0
+"let g:user_emmet_mode='a'
+"let g:user_emmet_install_global = 0
 "let g:user_emmet_expandabbr_key = '<tab>'
 "let g:user_emmet_expandabbr_key = '<c-e>'
-let g:user_emmet_leader_key = "<leader>"
+"let g:user_emmet_leader_key = "<leader>"
+" autocmd FileType html,css,scss,sass,less EmmetInstall
 
 "disable folding in markdown
 "let g:vim_markdown_folding_disabled=1
@@ -492,7 +494,7 @@ let g:WMGraphviz_output="svg"
 
 let g:lightline = {'colorscheme': 'gruvbox_material'}
 " Available values: 'hard', 'medium'(default), 'soft'
-" let g:gruvbox_material_background = 'soft'
+let g:gruvbox_material_background = 'hard'
 " let g:gruvbox_material_palette = 'original'
 
 
@@ -540,8 +542,10 @@ Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 "colorscheme
-"Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
 Plug 'sainnhe/gruvbox-material'
+" Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'arcticicestudio/nord-vim'
 "rename files in vim
 Plug 'qpkorr/vim-renamer'
 Plug 'mkitt/tabline.vim'
@@ -555,9 +559,9 @@ Plug 'yssl/QFEnter'
 " Plugins for specific languages
 """""""""""""""""""""""""""""""""""""""
 Plug 'plasticboy/vim-markdown'
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'mattn/emmet-vim', { 'for': ['html','css','scss','sass','less'] }
+" Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+" Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+" Plug 'mattn/emmet-vim', { 'for': ['html','css','scss','sass','less'] }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -594,8 +598,9 @@ colorscheme gruvbox-material
 " https://stackoverflow.com/questions/37712730/set-vim-background-transparent
 hi Normal guibg=NONE ctermbg=NONE
 hi EndOfBuffer guibg=NONE ctermbg=NONE
-
-autocmd FileType html,css,scss,sass,less EmmetInstall
+" CocHilightText links to CurrentWord
+" give a higher contrast (default guibg=#32302f)
+hi CurrentWord ctermbg=236 guibg=#3f464a
 
 
 " When editing a file, always jump to the last known cursor position.
