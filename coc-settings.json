@@ -11,5 +11,6 @@
         "completeUnimported": true
       }
     }
-  }
+  },
+  "imselect.enableFloating": false
 }

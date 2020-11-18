@@ -133,7 +133,7 @@ set shortmess+=c
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colors
+" Colors & Style
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Enable syntax highlight
@@ -143,6 +143,11 @@ set shortmess+=c
 " defaults, use: ':syntax on'
 " syntax on
 syntax enable
+
+" enable true color in vim
+if has('termguicolors')
+    set termguicolors
+endif
 
 "Use black background 
 if has('gui_running')
@@ -158,6 +163,13 @@ endif
 
 "enable 256 colors in vim ==> To support powerline
 set t_Co=256
+
+" support italic font
+" set t_ZH=[3m
+" set t_ZR=[23m
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
+" let g:gruvbox_material_disable_italic_comment = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -478,7 +490,10 @@ let g:user_emmet_leader_key = "<leader>"
 "set output format for DOT graphs (default is pdf)
 let g:WMGraphviz_output="svg"
 
-let g:lightline = {'colorscheme': 'gruvbox'}
+let g:lightline = {'colorscheme': 'gruvbox_material'}
+" Available values: 'hard', 'medium'(default), 'soft'
+" let g:gruvbox_material_background = 'soft'
+" let g:gruvbox_material_palette = 'original'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -526,8 +541,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
 "colorscheme
 "Plug 'altercation/vim-colors-solarized'
-Plug 'morhetz/gruvbox'
-Plug 'shinchu/lightline-gruvbox.vim'
+Plug 'sainnhe/gruvbox-material'
 "rename files in vim
 Plug 'qpkorr/vim-renamer'
 Plug 'mkitt/tabline.vim'
@@ -551,6 +565,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'powerman/vim-plugin-AnsiEsc'
 " graphviz integration to preview DOT graphs
 Plug 'wannesm/wmgraphviz.vim'
+" A collection of language packs for Vim.
+" Plug 'sheerun/vim-polyglot'
 
 """""""""""""""""""""""""""""""""""""""
 " Plugins need outer world dependencies.
@@ -568,11 +584,19 @@ call plug#end()
 " Other
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-autocmd vimenter * ++nested colorscheme gruvbox
+" using autocmd may cause a `flick` in switching colorschemes
+" autocmd vimenter * ++nested colorscheme gruvbox-material
+" autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
+" autocmd vimenter * hi EndOfBuffer guibg=NONE ctermbg=NONE
+"
+colorscheme gruvbox-material
 " Be compatible with terminals with transparency
-autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
+" https://stackoverflow.com/questions/37712730/set-vim-background-transparent
+hi Normal guibg=NONE ctermbg=NONE
+hi EndOfBuffer guibg=NONE ctermbg=NONE
 
 autocmd FileType html,css,scss,sass,less EmmetInstall
+
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
