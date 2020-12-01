@@ -599,8 +599,8 @@ colorscheme gruvbox-material
 hi Normal guibg=NONE ctermbg=NONE
 hi EndOfBuffer guibg=NONE ctermbg=NONE
 " CocHilightText links to CurrentWord
-" give a higher contrast (default guibg=#32302f)
-hi CurrentWord ctermbg=236 guibg=#3f464a
+" give a higher contrast
+hi CurrentWord guifg=#7daea3
 
 
 " When editing a file, always jump to the last known cursor position.
