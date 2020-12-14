@@ -440,6 +440,18 @@ function! s:show_documentation()
   endif
 endfunction
 
+" Toggle signcolumn. Works only on vim>=8.0 or NewVim
+" https://stackoverflow.com/questions/18319284/vim-sign-column-toggle/46636973#46636973
+function! ToggleSignColumn()
+    if !exists("w:signcolumn_on") || w:signcolumn_on
+        set signcolumn=no
+        let w:signcolumn_on=0
+    else
+        set signcolumn=number
+        let w:signcolumn_on=1
+    endif
+endfunction
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Settings
@@ -496,6 +508,17 @@ let g:lightline = {'colorscheme': 'gruvbox_material'}
 " Available values: 'hard', 'medium'(default), 'soft'
 let g:gruvbox_material_background = 'hard'
 " let g:gruvbox_material_palette = 'original'
+let g:gruvbox_material_transparent_background = 1
+" Available values: 'grey background', 'green background', 'blue background', 'red background', 'reverse'
+let g:gruvbox_material_visual = 'reverse'
+" Available values: 'grey', 'red', 'orange', 'yellow', 'green', 'aqua', 'blue', 'purple'
+let g:gruvbox_material_menu_selection_background = 'green'
+let g:gruvbox_material_diagnostic_line_highlight = 1
+" Available values: `'grey background'`, `'bold'`, `'underline'`, `'italic'`
+" Default value: `'grey background'` when not in transparent mode, `'bold'`
+" when in transparent mode.
+" let g:gruvbox_material_current_word = 'bold'
+let g:gruvbox_material_better_performance = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -594,13 +617,15 @@ call plug#end()
 " autocmd vimenter * hi EndOfBuffer guibg=NONE ctermbg=NONE
 "
 colorscheme gruvbox-material
-" Be compatible with terminals with transparency
-" https://stackoverflow.com/questions/37712730/set-vim-background-transparent
-hi Normal guibg=NONE ctermbg=NONE
-hi EndOfBuffer guibg=NONE ctermbg=NONE
-" CocHilightText links to CurrentWord
-" give a higher contrast
-hi CurrentWord guifg=#7daea3
+"" Be compatible with terminals with transparency
+"" https://stackoverflow.com/questions/37712730/set-vim-background-transparent
+" This is now handled by via `let g:gruvbox_material_transparent_background = 1`
+"hi Normal guibg=NONE ctermbg=NONE
+"hi EndOfBuffer guibg=NONE ctermbg=NONE
+
+"" CocHilightText links to CurrentWord
+"" give a higher contrast
+" hi CurrentWord guifg=#7daea3
 
 
 " When editing a file, always jump to the last known cursor position.
@@ -627,15 +652,3 @@ endif
 command! -nargs=+ Silent
 \   execute 'silent <args>'
 \ | redraw! | copen
-
-" Toggle signcolumn. Works only on vim>=8.0 or NewVim
-" https://stackoverflow.com/questions/18319284/vim-sign-column-toggle/46636973#46636973
-function! ToggleSignColumn()
-    if !exists("w:signcolumn_on") || w:signcolumn_on
-        set signcolumn=no
-        let w:signcolumn_on=0
-    else
-        set signcolumn=number
-        let w:signcolumn_on=1
-    endif
-endfunction
