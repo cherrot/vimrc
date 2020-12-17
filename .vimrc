@@ -576,6 +576,7 @@ Plug 'MattesGroeger/vim-bookmarks'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 "Enhanced quickfix window such as opening in new tab, vertical split.
+"<Leader><Enter> vopen, <Leader><Space> hopen, <Leader><Tab> topen
 Plug 'yssl/QFEnter'
 
 """""""""""""""""""""""""""""""""""""""
