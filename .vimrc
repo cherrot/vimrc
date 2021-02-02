@@ -51,7 +51,7 @@ set termencoding=utf-8
 set encoding=utf-8
 
 " Set complete options
-set completeopt=longest,menuone
+set completeopt=longest,menuone,popup
 
 " Set wild menu & mode
 set wildmenu
@@ -550,6 +550,12 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " git integration
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
+" <Leader>gm to show popup window
+" let g:git_messenger_close_on_cursor_moved = v:false
+let g:git_messenger_always_into_popup = v:true
+" does not work for git-messenger, (pedit / pclose is ok)
+set previewpopup=height:10,width:60,border:off
+Plug 'rhysd/git-messenger.vim'
 
 """""""""""""""""""""""""""""""""""""""
 "Common vim plugins
@@ -578,6 +584,9 @@ Plug 'nathanaelkane/vim-indent-guides'
 "Enhanced quickfix window such as opening in new tab, vertical split.
 "<Leader><Enter> vopen, <Leader><Space> hopen, <Leader><Tab> topen
 Plug 'yssl/QFEnter'
+if !has('nvim')
+    Plug 'rhysd/vim-healthcheck'
+endif
 
 """""""""""""""""""""""""""""""""""""""
 " Plugins for specific languages
@@ -588,7 +597,7 @@ Plug 'plasticboy/vim-markdown'
 " Plug 'mattn/emmet-vim', { 'for': ['html','css','scss','sass','less'] }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " colorize terminal outputs in vim
 Plug 'powerman/vim-plugin-AnsiEsc'
 " graphviz integration to preview DOT graphs
