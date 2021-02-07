@@ -319,9 +319,6 @@ nnoremap <Leader><Leader>p :lprevious<CR>
 " Toggle Tagbar, more convenient than TList
 nnoremap <silent> <Leader>9 :TagbarToggle<CR>
 
-" grep search tools. Use ! to prevent auto jump.
-nnoremap <Leader>0 :Silent grep! "\\b<C-R>=expand("<cword>")<CR>\\b"
-nnoremap <Leader><Leader>0 :Silent grep!<space>
 " tasks
 nnoremap <Leader><Leader>t :Silent grep! TODO\\\|FIXME\\\|XXX<CR>
 
@@ -348,12 +345,24 @@ nnoremap <Leader>g :FzfGitFiles<CR>
 " invoke omni completion by pressing ctrl+/ (ctrl+/ is recognized as C-_)        
 " inoremap <nique> <C-_> <C-x><C-o><C-p>
 
-nnoremap <silent> <Leader>/ :nohlsearch<CR>
 nnoremap <ESC><ESC> :nohlsearch<CR>
 nnoremap <Leader>x :set cursorline! cursorcolumn!<CR>
 
 " Remove tralling ^M
 nmap <leader>M :%s/\r\(\n\)/\1/g<CR>
+
+""""""""""""""""""""""""""
+" CtrlSF search plugin setting
+""""""""""""""""""""""""""
+nmap     <C-F>f <Plug>CtrlSFPrompt
+vmap     <C-F>f <Plug>CtrlSFVwordPath
+vmap     <C-F>F <Plug>CtrlSFVwordExec
+nmap     <C-F>n <Plug>CtrlSFCwordPath
+nmap     <C-F>p <Plug>CtrlSFPwordPath
+nnoremap <C-F>o :CtrlSFOpen<CR>
+nnoremap <C-F>t :CtrlSFToggle<CR>
+inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+
 
 """"""""""""""""""""""""""
 " coc completion settings
@@ -440,6 +449,9 @@ function! s:show_documentation()
   endif
 endfunction
 
+""""""""""""""""""""""""""""""""
+"" Others
+""""""""""""""""""""""""""""""""
 " Toggle signcolumn. Works only on vim>=8.0 or NewVim
 " https://stackoverflow.com/questions/18319284/vim-sign-column-toggle/46636973#46636973
 function! ToggleSignColumn()
@@ -459,6 +471,7 @@ endfunction
 " Fzf command prefix
 let fzf_command_prefix = 'Fzf'
 
+
 " Set Tagbar width
 let tagbar_width = 32
 " Add extra spaces when (un)commenting
@@ -468,8 +481,8 @@ let g:NERDCustomDelimiters = {'python': {'left': '#'}}
 " Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
 
+
 " Vim-go plugin settings
-"
 " enable vim-go's `gd` in case coc.nvim sucks.
 let g:go_def_mapping_enabled = 0
 "let g:go_code_completion_enabled = 1
@@ -485,6 +498,7 @@ let go_highlight_build_constraints = 1
 "let go_highlight_methods = 1
 "let go_fmt_fail_silently = 1
 
+
 "frontend development for css,html
 " use <Leader> instead of <C-y> 
 " ,, expand html,css etc.
@@ -498,12 +512,16 @@ let go_highlight_build_constraints = 1
 "let g:user_emmet_leader_key = "<leader>"
 " autocmd FileType html,css,scss,sass,less EmmetInstall
 
+
 "disable folding in markdown
 "let g:vim_markdown_folding_disabled=1
+
 
 "set output format for DOT graphs (default is pdf)
 let g:WMGraphviz_output="svg"
 
+
+" colorscheme settings
 let g:lightline = {'colorscheme': 'gruvbox_material'}
 " Available values: 'hard', 'medium'(default), 'soft'
 let g:gruvbox_material_background = 'hard'
@@ -613,6 +631,9 @@ if g:os == "Linux"
     Plug 'lilydjwg/fcitx.vim'
 endif
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+" Awesome search plugin using ag/rg/ack
+Plug 'dyng/ctrlsf.vim'
+
 
 call plug#end()
 
@@ -645,20 +666,3 @@ autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
-
-" Configure default command used by :grep
-if executable('rg')
-    set grepprg=rg\ --vimgrep\ -g\ \'!*.min.js\'
-    set grepformat=%f:%l:%c:%m
-elseif executable('ag')
-    set grepprg=ag\ --vimgrep\ --ignore=\"**.min.js\"
-    set grepformat=%f:%l:%c:%m,%f:%l:%m
-elseif executable('ack')
-    set grepprg=ack\ --nogroup\ --nocolor\ --ignore-case\ --column
-    set grepformat=%f:%l:%c:%m,%f:%l:%m
-endif
-
-" Open search results in quickfix and highlight matches
-command! -nargs=+ Silent
-\   execute 'silent <args>'
-\ | redraw! | copen
