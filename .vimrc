@@ -319,9 +319,6 @@ nnoremap <Leader><Leader>p :lprevious<CR>
 " Toggle Tagbar, more convenient than TList
 nnoremap <silent> <Leader>9 :TagbarToggle<CR>
 
-" tasks
-nnoremap <Leader><Leader>t :Silent grep! TODO\\\|FIXME\\\|XXX<CR>
-
 " Use <space> to toggle fold
 nnoremap <silent> <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 
@@ -363,6 +360,8 @@ nnoremap <C-F>o :CtrlSFOpen<CR>
 nnoremap <C-F>t :CtrlSFToggle<CR>
 inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 
+" tasks grep. '-R' to enable regex search
+nnoremap <Leader><Leader>t :CtrlSF -R TODO\|FIXME\|XXX
 
 """"""""""""""""""""""""""
 " coc completion settings
