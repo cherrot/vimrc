@@ -7,10 +7,19 @@
       "disableWorkspaceFolders": true,
       "trace.server": "verbose",
       "initializationOptions": {
-        "usePlaceholders": true,
-        "completeUnimported": true
+        "usePlaceholders": true
       }
     }
   },
-  "imselect.enableFloating": false
+  "imselect.enableFloating": false,
+  "list.normalMappings": {
+    "t": "action:tabe",
+    "v": "action:vsplit",
+    "s": "action:split",
+    "d": "expr:GetDeleteAction"
+  },
+  "list.insertMappings": {
+    "<C-t>": "action:tabe",
+    "<C-w>": "command:wincmd k"
+  }
 }

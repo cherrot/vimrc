@@ -432,8 +432,7 @@ nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
-" don't know why it doesn't work :(
-" autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 function! s:check_back_space() abort
   let col = col('.') - 1
