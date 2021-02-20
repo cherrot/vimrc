@@ -337,7 +337,7 @@ nmap ga <Plug>(EasyAlign)
 nnoremap <Leader>f :FzfFiles<CR>
 nnoremap <Leader>b :FzfBuffers<CR>
 nnoremap <Leader>h :FzfHistory<CR>
-nnoremap <Leader>g :FzfGitFiles<CR>
+nnoremap <Leader>v :FzfGitFiles<CR>
 
 " invoke omni completion by pressing ctrl+/ (ctrl+/ is recognized as C-_)        
 " inoremap <nique> <C-_> <C-x><C-o><C-p>
