@@ -351,14 +351,14 @@ nmap <leader>M :%s/\r\(\n\)/\1/g<CR>
 """"""""""""""""""""""""""
 " CtrlSF search plugin setting
 """"""""""""""""""""""""""
-nmap     <C-F>f <Plug>CtrlSFPrompt
-vmap     <C-F>f <Plug>CtrlSFVwordPath
-vmap     <C-F>F <Plug>CtrlSFVwordExec
-nmap     <C-F>n <Plug>CtrlSFCwordPath
-nmap     <C-F>p <Plug>CtrlSFPwordPath
-nnoremap <C-F>o :CtrlSFOpen<CR>
-nnoremap <C-F>t :CtrlSFToggle<CR>
-inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
+nmap     <C-S>f <Plug>CtrlSFPrompt
+vmap     <C-S>f <Plug>CtrlSFVwordPath
+vmap     <C-S>F <Plug>CtrlSFVwordExec
+nmap     <C-S>n <Plug>CtrlSFCwordPath
+nmap     <C-S>p <Plug>CtrlSFPwordPath
+nnoremap <C-S>o :CtrlSFOpen<CR>
+nnoremap <C-S>t :CtrlSFToggle<CR>
+inoremap <C-S>t <Esc>:CtrlSFToggle<CR>
 
 " tasks grep. '-R' to enable regex search
 nnoremap <Leader><Leader>t :CtrlSF -R TODO\|FIXME\|XXX
