@@ -614,6 +614,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
 " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'mattn/vim-goimports'
 " colorize terminal outputs in vim
 Plug 'powerman/vim-plugin-AnsiEsc'
 " graphviz integration to preview DOT graphs
