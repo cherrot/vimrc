@@ -351,9 +351,9 @@ nmap <leader>M :%s/\r\(\n\)/\1/g<CR>
 """"""""""""""""""""""""""
 " CtrlSF search plugin setting
 """"""""""""""""""""""""""
-nmap     <C-S>f <Plug>CtrlSFPrompt
-vmap     <C-S>f <Plug>CtrlSFVwordPath
-vmap     <C-S>F <Plug>CtrlSFVwordExec
+nmap     <C-S>s <Plug>CtrlSFPrompt
+vmap     <C-S>s <Plug>CtrlSFVwordPath
+vmap     <C-S>f <Plug>CtrlSFVwordExec
 nmap     <C-S>n <Plug>CtrlSFCwordPath
 nmap     <C-S>p <Plug>CtrlSFPwordPath
 nnoremap <C-S>o :CtrlSFOpen<CR>
