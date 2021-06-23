@@ -25,6 +25,9 @@
 " :CocCommand workspace.showOutput
 "
 " C-V m to input ^M
+"
+" Examine specific key mapping in vim:
+" verbose map <leader>s
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General
@@ -334,6 +337,9 @@ endif
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Most commands support CTRL-T / CTRL-X / CTRL-V key bindings to open in a new
+"   tab, a new split, or in a new vertical split
 nnoremap <Leader>f :FzfFiles<CR>
 nnoremap <Leader>b :FzfBuffers<CR>
 nnoremap <Leader>h :FzfHistory<CR>
@@ -469,7 +475,6 @@ endfunction
 " Fzf command prefix
 let fzf_command_prefix = 'Fzf'
 
-
 " Set Tagbar width
 let tagbar_width = 32
 " Add extra spaces when (un)commenting
@@ -479,45 +484,8 @@ let g:NERDCustomDelimiters = {'python': {'left': '#'}}
 " Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
 
-
-" Vim-go plugin settings
-" enable vim-go's `gd` in case coc.nvim sucks.
-let g:go_def_mapping_enabled = 0
-"let g:go_code_completion_enabled = 1
-let g:go_doc_keywordprg_enabled = 0
-" replaced by coc.nvim via editor.action.organizeImport
-"let g:go_fmt_autosave = 1
-let g:go_fmt_command = "goimports"
-let go_highlight_functions = 1
-let g:go_highlight_types = 1
-let go_highlight_structs = 1
-let go_highlight_operators = 1
-let go_highlight_build_constraints = 1
-"let go_highlight_methods = 1
-"let go_fmt_fail_silently = 1
-
-
-"frontend development for css,html
-" use <Leader> instead of <C-y> 
-" ,, expand html,css etc.
-" ,/ comment html,css,scss,sass,less
-" More :help emmet-customize 
-"emmet mapping.
-"let g:user_emmet_mode='a'
-"let g:user_emmet_install_global = 0
-"let g:user_emmet_expandabbr_key = '<tab>'
-"let g:user_emmet_expandabbr_key = '<c-e>'
-"let g:user_emmet_leader_key = "<leader>"
-" autocmd FileType html,css,scss,sass,less EmmetInstall
-
-
-"disable folding in markdown
-"let g:vim_markdown_folding_disabled=1
-
-
 "set output format for DOT graphs (default is pdf)
 let g:WMGraphviz_output="svg"
-
 
 " colorscheme settings
 let g:lightline = {'colorscheme': 'gruvbox_material'}
@@ -536,6 +504,8 @@ let g:gruvbox_material_diagnostic_line_highlight = 1
 " let g:gruvbox_material_current_word = 'bold'
 let g:gruvbox_material_better_performance = 1
 
+" Disable AnsiEsc's key mapping (<leader>s)
+let g:no_cecutil_maps = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins Manager
@@ -557,7 +527,7 @@ call plug#begin('~/.vim/bundle')
 """""""""""""""""""""""""""""""""""""""
 let g:coc_global_extensions = [
     \ 'coc-json',
-    \ 'coc-python',
+    \ 'coc-pyright',
     \ 'coc-imselect',
     \ 'coc-swagger'
     \ ]
@@ -618,19 +588,13 @@ endif
 " Plugins for specific languages
 """""""""""""""""""""""""""""""""""""""
 Plug 'plasticboy/vim-markdown'
-" Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-" Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-" Plug 'mattn/emmet-vim', { 'for': ['html','css','scss','sass','less'] }
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'mattn/vim-goimports'
 " colorize terminal outputs in vim
 Plug 'powerman/vim-plugin-AnsiEsc'
 " graphviz integration to preview DOT graphs
 Plug 'wannesm/wmgraphviz.vim'
-" A collection of language packs for Vim.
-" Plug 'sheerun/vim-polyglot'
 
 """""""""""""""""""""""""""""""""""""""
 " Plugins need outer world dependencies.
