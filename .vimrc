@@ -567,10 +567,20 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 " <Leader>gm to show popup window
+" | Mapping | Description                                                  |
+" | ------- | ------------------------------------------------------------ |
+" |    q    | Close the popup window                                       |
+" |    o    | 'o'lder. Back to older commit at the line                    |
+" |    O    | Opposite to older. Forward to newer commit at the line       |
+" |    d    | Toggle unified diff hunks only in current file of the commit |
+" |    D    | Toggle all unified diff hunks of the commit                  |
+" |    r    | Toggle word diff hunks only in current file of the commit    |
+" |    R    | Toggle all word diff hunks of the commit                     |
+" |    ?    | Show mappings help                                           |
 " let g:git_messenger_close_on_cursor_moved = v:false
 let g:git_messenger_always_into_popup = v:true
 " does not work for git-messenger, (pedit / pclose is ok)
-set previewpopup=height:10,width:60,border:off
+" set previewpopup=height:10,width:60,border:off
 Plug 'rhysd/git-messenger.vim'
 
 """""""""""""""""""""""""""""""""""""""
