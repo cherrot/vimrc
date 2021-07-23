@@ -268,6 +268,8 @@ autocmd FileType yaml setl shiftwidth=2 softtabstop=2
 " the very bottom (see :help :wincmd and :help ^WJ).
 autocmd FileType qf wincmd J
 
+" Treat starlark files as python
+autocmd BufRead,BufNewFile *.star set filetype=python
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
