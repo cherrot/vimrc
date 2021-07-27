@@ -104,6 +104,7 @@ set title
 
 " Display line number
 set number
+set relativenumber
 
 " Always have a status line
 set laststatus=2
@@ -301,7 +302,7 @@ noremap <Down> gj
 nnoremap <silent> <Leader>1 :NERDTreeToggle<CR>
 
 " Toggle display line number
-nnoremap <Leader>2 :set number!<CR>:call ToggleSignColumn()<CR>
+nnoremap <Leader>2 :set number!<CR>:set relativenumber!<CR>:call ToggleSignColumn()<CR>
 nnoremap <Leader>3 :set foldenable!<CR>
 
 " Paste toggle
