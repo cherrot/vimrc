@@ -532,6 +532,7 @@ let g:coc_global_extensions = [
     \ 'coc-json',
     \ 'coc-pyright',
     \ 'coc-imselect',
+    \ 'coc-tsserver',
     \ 'coc-swagger'
     \ ]
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -559,8 +560,7 @@ Plug 'rhysd/git-messenger.vim'
 """""""""""""""""""""""""""""""""""""""
 "Common vim plugins
 """""""""""""""""""""""""""""""""""""""
-" Match html tags using %
-Plug 'vim-scripts/matchit.zip'
+packadd! matchit
 Plug 'itchyny/lightline.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
