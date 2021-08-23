@@ -75,7 +75,14 @@ sudo pacman -S cmake ctags ripgrep
 sudo apt-get install cmake exuberant-ctags silversearcher-ag
 ```
 
-(Other binary dependencies such as `vim-go` and `fzf` would be updated automatically during plugin update.)
+For Golang developers, install `gopls` and `gofumpt`:
+
+```bash
+GO111MODULE=on go get golang.org/x/tools/gopls@latest
+GO111MODULE=on go get mvdan.cc/gofumpt
+```
+
+(Other binary dependencies such as `fzf` would be updated automatically during plugin update.)
 
 Clone this repository into `~/.vim`:
 
