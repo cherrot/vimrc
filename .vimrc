@@ -295,22 +295,28 @@ nnoremap gf <C-W>gf
 noremap <Up> gk
 noremap <Down> gj
 
-" NERDTreeTabsToggle
-" This need nerdtree and nerdtreetabs both installed, press t to open the file
-" in a new tab, press ENTER to open in the current window.
-"nnoremap <silent> <F2> :NERDTreeTabsToggle<CR>
-nnoremap <silent> <Leader>1 :NERDTreeToggle<CR>
-
 " Toggle display line number
 nnoremap <Leader>2 :set number!<CR>:set relativenumber!<CR>:call ToggleSignColumn()<CR>
+    " Toggle signcolumn. Works only on vim>=8.0 or NewVim
+    " https://stackoverflow.com/questions/18319284/vim-sign-column-toggle/46636973#46636973
+    function! ToggleSignColumn()
+        if !exists("w:signcolumn_on") || w:signcolumn_on
+            set signcolumn=no
+            let w:signcolumn_on=0
+        else
+            set signcolumn=number
+            let w:signcolumn_on=1
+        endif
+    endfunction
+
 nnoremap <Leader>3 :set foldenable!<CR>
 
 " Paste toggle
 set pastetoggle=<Leader>4
 
 " Save & Make 
-nnoremap <Leader>5 :w<CR>:make!<CR>
-nnoremap <Leader>6 :w<CR>:make! %< CC=gcc CFLAGS="-g -Wall"<CR>:!./%<<CR>
+" nnoremap <Leader>5 :w<CR>:make!<CR>
+" nnoremap <Leader>6 :w<CR>:make! %< CC=gcc CFLAGS="-g -Wall"<CR>:!./%<<CR>
 
 " Quickfix and Location window
 nnoremap <Leader>7 :botright copen<CR>
@@ -321,9 +327,6 @@ nnoremap <Leader>n :cnext<CR>
 nnoremap <Leader>p :cprevious<CR>
 nnoremap <Leader><Leader>n :lnext<CR>
 nnoremap <Leader><Leader>p :lprevious<CR>
-
-" Toggle Tagbar, more convenient than TList
-nnoremap <silent> <Leader>9 :TagbarToggle<CR>
 
 " Use <space> to toggle fold
 nnoremap <silent> <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
@@ -336,18 +339,6 @@ if $DISPLAY != '' && executable('xsel')
     nnoremap <silent> "+p :r!xsel -b<CR>
 endif
 
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-" Most commands support CTRL-T / CTRL-X / CTRL-V key bindings to open in a new
-"   tab, a new split, or in a new vertical split
-nnoremap <Leader>f :FzfFiles<CR>
-nnoremap <Leader>b :FzfBuffers<CR>
-nnoremap <Leader>h :FzfHistory<CR>
-nnoremap <Leader>v :FzfGitFiles<CR>
-
 " invoke omni completion by pressing ctrl+/ (ctrl+/ is recognized as C-_)        
 " inoremap <nique> <C-_> <C-x><C-o><C-p>
 
@@ -357,172 +348,12 @@ nnoremap <Leader>x :set cursorline! cursorcolumn!<CR>
 " Remove tralling ^M
 nmap <leader>M :%s/\r\(\n\)/\1/g<CR>
 
-""""""""""""""""""""""""""
-" CtrlSF search plugin setting
-""""""""""""""""""""""""""
-nmap     <C-S>s <Plug>CtrlSFPrompt
-vmap     <C-S>s <Plug>CtrlSFVwordPath
-vmap     <C-S>f <Plug>CtrlSFVwordExec
-nmap     <C-S>n <Plug>CtrlSFCwordPath
-nmap     <C-S>p <Plug>CtrlSFPwordPath
-nnoremap <C-S>o :CtrlSFOpen<CR>
-nnoremap <C-S>t :CtrlSFToggle<CR>
-inoremap <C-S>t <Esc>:CtrlSFToggle<CR>
-
-" tasks grep. '-R' to enable regex search
-nnoremap <Leader><Leader>t :CtrlSF -R TODO\|FIXME\|XXX
-
-""""""""""""""""""""""""""
-" coc completion settings
-""""""""""""""""""""""""""
-"
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Use `[v` and `]v` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gs :call CocAction('jumpDefinition', 'split')<CR>
-nmap <silent> gv :call CocAction('jumpDefinition', 'vsplit')<CR>
-nmap <silent> ge :call CocAction('jumpDefinition', 'tabe')<CR>
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader><leader>f  <Plug>(coc-format-selected)
-
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-" Remap for do codeAction of current line
-nmap <leader>d  <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
-" Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-" https://github.com/neoclide/coc.nvim/issues/1089
-"nmap <silent> <TAB> <Plug>(coc-range-select)
-"xmap <silent> <TAB> <Plug>(coc-range-select)
-"xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
-
-" Using CocList
-" Show all diagnostics
-nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <leader>t  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent> <leader>e  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <leader>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <leader>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
-
-" Scroll float window via ctrl-b & ctrl-f.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-    nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-    inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-    vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-""""""""""""""""""""""""""""""""
-"" Others
-""""""""""""""""""""""""""""""""
-" Toggle signcolumn. Works only on vim>=8.0 or NewVim
-" https://stackoverflow.com/questions/18319284/vim-sign-column-toggle/46636973#46636973
-function! ToggleSignColumn()
-    if !exists("w:signcolumn_on") || w:signcolumn_on
-        set signcolumn=no
-        let w:signcolumn_on=0
-    else
-        set signcolumn=number
-        let w:signcolumn_on=1
-    endif
-endfunction
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins Settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Fzf command prefix
-let fzf_command_prefix = 'Fzf'
-
-" Set Tagbar width
-let tagbar_width = 32
-" Add extra spaces when (un)commenting
-let g:NERDSpaceDelims = 1
-" Otherwise in python u will get 2 spaces after #
-let g:NERDCustomDelimiters = {'python': {'left': '#'}}
-" Align line-wise comment delimiters flush left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
-"set output format for DOT graphs (default is pdf)
-let g:WMGraphviz_output="svg"
-
-" colorscheme settings
-let g:lightline = {'colorscheme': 'gruvbox_material'}
-" Available values: 'hard', 'medium'(default), 'soft'
-let g:gruvbox_material_background = 'hard'
-" let g:gruvbox_material_palette = 'original'
-let g:gruvbox_material_transparent_background = 1
-" Available values: 'grey background', 'green background', 'blue background', 'red background', 'reverse'
-let g:gruvbox_material_visual = 'reverse'
-" Available values: 'grey', 'red', 'orange', 'yellow', 'green', 'aqua', 'blue', 'purple'
-let g:gruvbox_material_menu_selection_background = 'green'
-let g:gruvbox_material_diagnostic_line_highlight = 1
-" Available values: `'grey background'`, `'bold'`, `'underline'`, `'italic'`
-" Default value: `'grey background'` when not in transparent mode, `'bold'`
-" when in transparent mode.
-" let g:gruvbox_material_current_word = 'bold'
-let g:gruvbox_material_better_performance = 1
-
-" Disable AnsiEsc's key mapping (<leader>s)
-let g:no_cecutil_maps = 1
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins Manager
+" Plugins
+" call :g/^Plug to filter plugins installed
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"vim-pathogen plugin 
-"Vundle plugin manager
 "vim-plug plugin manager
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -533,77 +364,247 @@ endif
 call plug#begin('~/.vim/bundle')
 
 """""""""""""""""""""""""""""""""""""""
-"Completion Engine
+" coc.nvim completion engine
 """""""""""""""""""""""""""""""""""""""
-let g:coc_global_extensions = [
-    \ 'coc-json',
-    \ 'coc-pyright',
-    \ 'coc-imselect',
-    \ 'coc-tsserver',
-    \ 'coc-swagger'
-    \ ]
+    let g:coc_global_extensions = [
+        \ 'coc-json',
+        \ 'coc-pyright',
+        \ 'coc-imselect',
+        \ 'coc-tsserver',
+        \ 'coc-swagger'
+        \ ]
+
+    " Use tab for trigger completion with characters ahead and navigate.
+    " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+    inoremap <silent><expr> <TAB>
+          \ pumvisible() ? "\<C-n>" :
+          \ <SID>check_back_space() ? "\<TAB>" :
+          \ coc#refresh()
+    inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+    " Coc only does snippet and additional edit on confirm.
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    " Use `[v` and `]v` to navigate diagnostics
+    nmap <silent> [g <Plug>(coc-diagnostic-prev)
+    nmap <silent> ]g <Plug>(coc-diagnostic-next)
+    " Remap keys for gotos
+    nmap <silent> gd <Plug>(coc-definition)
+    nmap <silent> gs :call CocAction('jumpDefinition', 'split')<CR>
+    nmap <silent> gv :call CocAction('jumpDefinition', 'vsplit')<CR>
+    nmap <silent> ge :call CocAction('jumpDefinition', 'tabe')<CR>
+    nmap <silent> gy <Plug>(coc-type-definition)
+    nmap <silent> gi <Plug>(coc-implementation)
+    nmap <silent> gr <Plug>(coc-references)
+    " Use K to show documentation in preview window
+    nnoremap <silent> K :call <SID>show_documentation()<CR>
+    " Remap for rename current word
+    nmap <leader>rn <Plug>(coc-rename)
+    " Remap for format selected region
+    xmap <leader>f  <Plug>(coc-format-selected)
+    nmap <leader><leader>f  <Plug>(coc-format-selected)
+
+    " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+    xmap <leader>a  <Plug>(coc-codeaction-selected)
+    nmap <leader>a  <Plug>(coc-codeaction-selected)
+    " Remap for do codeAction of current line
+    nmap <leader>d  <Plug>(coc-codeaction)
+    " Fix autofix problem of current line
+    nmap <leader>qf  <Plug>(coc-fix-current)
+    " Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+    " https://github.com/neoclide/coc.nvim/issues/1089
+    "nmap <silent> <TAB> <Plug>(coc-range-select)
+    "xmap <silent> <TAB> <Plug>(coc-range-select)
+    "xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
+
+    " Using CocList
+    " Show all diagnostics
+    nnoremap <silent> <leader>a  :<C-u>CocList diagnostics<cr>
+    " Manage extensions
+    nnoremap <silent> <leader>t  :<C-u>CocList extensions<cr>
+    " Show commands
+    nnoremap <silent> <leader>e  :<C-u>CocList commands<cr>
+    " Find symbol of current document
+    nnoremap <silent> <leader>o  :<C-u>CocList outline<cr>
+    " Search workspace symbols
+    nnoremap <silent> <leader>s  :<C-u>CocList -I symbols<cr>
+    " Do default action for next item.
+    nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
+    " Do default action for previous item.
+    nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
+    " Resume latest coc list
+    nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
+
+    " Scroll float window via ctrl-b & ctrl-f.
+    if has('nvim-0.4.0') || has('patch-8.2.0750')
+        nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+        nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+        inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+        inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+        vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+        vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    endif
+
+    " Highlight symbol under cursor on CursorHold
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+    autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~# '\s'
+    endfunction
+
+    function! s:show_documentation()
+      if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+      else
+        call CocAction('doHover')
+      endif
+    endfunction
+
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" git integration
+"""""""""""""""""""""""""""""""""""""""
+" Fzf fuzzy finder
+"""""""""""""""""""""""""""""""""""""""
+    let fzf_command_prefix = 'Fzf'
+    " Most commands support CTRL-T / CTRL-X / CTRL-V key bindings to open in a new
+    "   tab, a new split, or in a new vertical split
+    nnoremap <Leader>f :FzfFiles<CR>
+    nnoremap <Leader>b :FzfBuffers<CR>
+    nnoremap <Leader>h :FzfHistory<CR>
+    nnoremap <Leader>v :FzfGitFiles<CR>
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
+
+    " Awesome search plugin using ag/rg/ack
+    nmap     <C-S>s <Plug>CtrlSFPrompt
+    vmap     <C-S>s <Plug>CtrlSFVwordPath
+    vmap     <C-S>f <Plug>CtrlSFVwordExec
+    nmap     <C-S>n <Plug>CtrlSFCwordPath
+    nmap     <C-S>p <Plug>CtrlSFPwordPath
+    nnoremap <C-S>o :CtrlSFOpen<CR>
+    nnoremap <C-S>t :CtrlSFToggle<CR>
+    inoremap <C-S>t <Esc>:CtrlSFToggle<CR>
+
+    " tasks grep. '-R' to enable regex search
+    nnoremap <Leader><Leader>t :CtrlSF -R TODO\|FIXME\|XXX
+Plug 'dyng/ctrlsf.vim'
+
+""""""""""""""""""""""""""""""""""""""
+" Git integration
+""""""""""""""""""""""""""""""""""""""
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
-" <Leader>gm to show popup window
-" | Mapping | Description                                                  |
-" | ------- | ------------------------------------------------------------ |
-" |    q    | Close the popup window                                       |
-" |    o    | 'o'lder. Back to older commit at the line                    |
-" |    O    | Opposite to older. Forward to newer commit at the line       |
-" |    d    | Toggle unified diff hunks only in current file of the commit |
-" |    D    | Toggle all unified diff hunks of the commit                  |
-" |    r    | Toggle word diff hunks only in current file of the commit    |
-" |    R    | Toggle all word diff hunks of the commit                     |
-" |    ?    | Show mappings help                                           |
-" let g:git_messenger_close_on_cursor_moved = v:false
-let g:git_messenger_always_into_popup = v:true
-" does not work for git-messenger, (pedit / pclose is ok)
-" set previewpopup=height:10,width:60,border:off
+
+    " <Leader>gm to show popup window
+    " | Mapping | Description                                                  |
+    " | ------- | ------------------------------------------------------------ |
+    " |    q    | Close the popup window                                       |
+    " |    o    | 'o'lder. Back to older commit at the line                    |
+    " |    O    | Opposite to older. Forward to newer commit at the line       |
+    " |    d    | Toggle unified diff hunks only in current file of the commit |
+    " |    D    | Toggle all unified diff hunks of the commit                  |
+    " |    r    | Toggle word diff hunks only in current file of the commit    |
+    " |    R    | Toggle all word diff hunks of the commit                     |
+    " |    ?    | Show mappings help                                           |
+    " let g:git_messenger_close_on_cursor_moved = v:false
+    let g:git_messenger_always_into_popup = v:true
+    " does not work for git-messenger, (pedit / pclose is ok)
+    " set previewpopup=height:10,width:60,border:off
 Plug 'rhysd/git-messenger.vim'
 
-"""""""""""""""""""""""""""""""""""""""
-"Common vim plugins
-"""""""""""""""""""""""""""""""""""""""
-packadd! matchit
-Plug 'itchyny/lightline.vim'
-Plug 'Lokaltog/vim-easymotion'
-Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
-"Sorry I've never used this...
-"Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'majutsushi/tagbar'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'scrooloose/nerdcommenter'
-"colorscheme
-" Plug 'altercation/vim-colors-solarized'
+
+""""""""""""""""""""""""""""""""""""""
+" colorscheme and statusline
+""""""""""""""""""""""""""""""""""""""
+    " Available values: 'hard', 'medium'(default), 'soft'
+    let g:gruvbox_material_background = 'hard'
+    " let g:gruvbox_material_palette = 'original'
+    let g:gruvbox_material_transparent_background = 1
+    " Available values: 'grey background', 'green background', 'blue background', 'red background', 'reverse'
+    let g:gruvbox_material_visual = 'reverse'
+    " Available values: 'grey', 'red', 'orange', 'yellow', 'green', 'aqua', 'blue', 'purple'
+    let g:gruvbox_material_menu_selection_background = 'green'
+    let g:gruvbox_material_diagnostic_line_highlight = 1
+    " Available values: `'grey background'`, `'bold'`, `'underline'`, `'italic'`
+    " Default value: `'grey background'` when not in transparent mode, `'bold'`
+    " when in transparent mode.
+    " let g:gruvbox_material_current_word = 'bold'
+    let g:gruvbox_material_better_performance = 1
 Plug 'sainnhe/gruvbox-material'
+" Plug 'altercation/vim-colors-solarized'
 " Plug 'drewtempelmeyer/palenight.vim'
 " Plug 'arcticicestudio/nord-vim'
-"rename files in vim
+
+    " colorscheme settings
+    let g:lightline = {'colorscheme': 'gruvbox_material'}
+Plug 'itchyny/lightline.vim'
+
+"""""""""""""""""""""""""""""""""""""""
+" other plugins
+"""""""""""""""""""""""""""""""""""""""
+packadd! matchit
+Plug 'Lokaltog/vim-easymotion'
+
+    " Start interactive EasyAlign in visual mode (e.g. vipga)
+    xmap ga <Plug>(EasyAlign)
+    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+    nmap ga <Plug>(EasyAlign)
+Plug 'junegunn/vim-easy-align', { 'on': '<Plug>(EasyAlign)' }
+
+    " Set Tagbar width
+    let tagbar_width = 32
+    " Toggle Tagbar, more convenient than TList
+    nnoremap <silent> <Leader>9 :TagbarToggle<CR>
+Plug 'majutsushi/tagbar'
+
+    " NERDTreeTabsToggle
+    " This need nerdtree and nerdtreetabs both installed, press t to open the file
+    " in a new tab, press ENTER to open in the current window.
+    "nnoremap <silent> <F2> :NERDTreeTabsToggle<CR>
+    nnoremap <silent> <Leader>1 :NERDTreeToggle<CR>
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+
+    " Add extra spaces when (un)commenting
+    let g:NERDSpaceDelims = 1
+    " Otherwise in python u will get 2 spaces after #
+    let g:NERDCustomDelimiters = {'python': {'left': '#'}}
+    " Align line-wise comment delimiters flush left instead of following code indentation
+    let g:NERDDefaultAlign = 'left'
+Plug 'scrooloose/nerdcommenter'
+
+" rename files in vim
 Plug 'qpkorr/vim-renamer'
 Plug 'mkitt/tabline.vim'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nathanaelkane/vim-indent-guides'
+
 "Enhanced quickfix window such as opening in new tab, vertical split.
 "<Leader><Enter> vopen, <Leader><Space> hopen, <Leader><Tab> topen
 Plug 'yssl/QFEnter'
+
 if !has('nvim')
-    Plug 'rhysd/vim-healthcheck'
+Plug 'rhysd/vim-healthcheck'
 endif
 
 """""""""""""""""""""""""""""""""""""""
 " Plugins for specific languages
 """""""""""""""""""""""""""""""""""""""
+    let g:vim_markdown_no_default_key_mappings = 1
 Plug 'plasticboy/vim-markdown'
+
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
 Plug 'mattn/vim-goimports'
+
 " colorize terminal outputs in vim
+    " Disable AnsiEsc's key mapping (<leader>s)
+    let g:no_cecutil_maps = 1
 Plug 'powerman/vim-plugin-AnsiEsc'
+
 " graphviz integration to preview DOT graphs
+    "set output format for DOT graphs (default is pdf)
+    let g:WMGraphviz_output="svg"
 Plug 'wannesm/wmgraphviz.vim'
 
 """""""""""""""""""""""""""""""""""""""
@@ -611,11 +612,8 @@ Plug 'wannesm/wmgraphviz.vim'
 """""""""""""""""""""""""""""""""""""""
 " https://vi.stackexchange.com/a/2577
 if g:os == "Linux"
-    Plug 'lilydjwg/fcitx.vim'
+Plug 'lilydjwg/fcitx.vim'
 endif
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } | Plug 'junegunn/fzf.vim'
-" Awesome search plugin using ag/rg/ack
-Plug 'dyng/ctrlsf.vim'
 
 
 call plug#end()
