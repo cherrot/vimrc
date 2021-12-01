@@ -597,6 +597,21 @@ Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 Plug 'jmcantrell/vim-virtualenv', { 'for': 'python' }
 Plug 'mattn/vim-goimports'
 
+    " Vim-go plugin settings
+    let g:go_def_mapping_enabled = 0
+    let g:go_code_completion_enabled = 0
+    let g:go_doc_keywordprg_enabled = 0
+    " replaced by coc.nvim via editor.action.organizeImport
+    "let g:go_fmt_autosave = 1
+    let g:go_fmt_command = "goimports"
+    let go_highlight_functions = 1
+    let g:go_highlight_types = 1
+    let go_highlight_structs = 1
+    let go_highlight_operators = 1
+    let go_highlight_build_constraints = 1
+    "let go_fmt_fail_silently = 1
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 " colorize terminal outputs in vim
     " Disable AnsiEsc's key mapping (<leader>s)
     let g:no_cecutil_maps = 1
