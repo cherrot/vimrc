@@ -12,7 +12,9 @@
       }
     }
   },
+  "imselect.defaultInput": "com.apple.keylayout.ABC",
   "imselect.enableFloating": false,
+  "imselect.enableStatusItem": true,
   "list.normalMappings": {
     "t": "action:tabe",
     "v": "action:vsplit",

@@ -122,8 +122,8 @@ set splitbelow
 set scrolloff=2
 
 " Toggle by <Leader>x
-"set cursorcolumn
-"set cursorline
+set cursorcolumn
+set cursorline
 
 set signcolumn=number
 
