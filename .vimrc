@@ -627,7 +627,8 @@ Plug 'wannesm/wmgraphviz.vim'
 """""""""""""""""""""""""""""""""""""""
 " https://vi.stackexchange.com/a/2577
 if g:os == "Linux"
-Plug 'lilydjwg/fcitx.vim'
+    let g:fcitx5_remote = 'fcitx5-remote'
+    Plug 'lilydjwg/fcitx.vim'
 endif
 
 
