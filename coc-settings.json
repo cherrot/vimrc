@@ -19,10 +19,12 @@
     "t": "action:tabe",
     "v": "action:vsplit",
     "s": "action:split",
-    "d": "expr:GetDeleteAction"
+    "d": "expr:GetDeleteAction",
+    "<ESC>": "do:exit"
   },
   "list.insertMappings": {
     "<C-t>": "action:tabe",
-    "<C-w>": "command:wincmd k"
+    "<C-w>": "command:wincmd k",
+    "<ESC>": "do:exit"
   }
 }
