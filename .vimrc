@@ -148,25 +148,14 @@ set shortmess+=c
 " syntax on
 syntax enable
 
+" set t_Co=256
 " enable true color in vim
 if has('termguicolors')
     set termguicolors
 endif
 
 "Use black background 
-if has('gui_running')
-    set background=light
-else
-    set background=dark
-endif
-
-if &t_Co != 256 && ! has("gui_running")  
-  echomsg "Please use GUI or a 256-color terminal (so that t_Co=256 could be set)"
-  finish
-endif
-
-"enable 256 colors in vim ==> To support powerline
-set t_Co=256
+set background=dark
 
 " support italic font
 " set t_ZH=[3m
@@ -533,10 +522,13 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'sainnhe/gruvbox-material'
 " Plug 'altercation/vim-colors-solarized'
 " Plug 'drewtempelmeyer/palenight.vim'
-" Plug 'arcticicestudio/nord-vim'
+"
+    let g:nord_cursor_line_number_background = 1
+Plug 'arcticicestudio/nord-vim'
 
     " colorscheme settings
-    let g:lightline = {'colorscheme': 'gruvbox_material'}
+    " let g:lightline = {'colorscheme': 'gruvbox_material'}
+    let g:lightline = {'colorscheme': 'nord'}
 Plug 'itchyny/lightline.vim'
 
 """""""""""""""""""""""""""""""""""""""
@@ -644,12 +636,13 @@ call plug#end()
 " autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE
 " autocmd vimenter * hi EndOfBuffer guibg=NONE ctermbg=NONE
 "
-colorscheme gruvbox-material
+" colorscheme gruvbox-material
+colorscheme nord
 "" Be compatible with terminals with transparency
 "" https://stackoverflow.com/questions/37712730/set-vim-background-transparent
 " This is now handled by via `let g:gruvbox_material_transparent_background = 1`
-"hi Normal guibg=NONE ctermbg=NONE
-"hi EndOfBuffer guibg=NONE ctermbg=NONE
+hi Normal guibg=NONE ctermbg=NONE
+hi EndOfBuffer guibg=NONE ctermbg=NONE
 
 "" CocHilightText links to CurrentWord
 "" give a higher contrast
