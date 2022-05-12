@@ -645,6 +645,14 @@ call plug#end()
 " autocmd vimenter * hi EndOfBuffer guibg=NONE ctermbg=NONE
 "
 " colorscheme gruvbox-material
+augroup nord-theme-overrides
+  autocmd!
+  " `:hi Comment` to check current color for Comment (default is #616e88)
+  " 5% brighter #6d7a96, 10% brighter #7b88a1 from https://github.com/arcticicestudio/nord-emacs/issues/43
+  autocmd ColorScheme nord highlight Comment cterm=italic ctermfg=14 guifg=#6d7a96
+  " Folded by default is #4C566A, which is too dark to recognize.
+  autocmd ColorScheme nord highlight Folded cterm=italic,bold guifg=#576279
+augroup END
 colorscheme nord
 "" Be compatible with terminals with transparency
 "" https://stackoverflow.com/questions/37712730/set-vim-background-transparent
